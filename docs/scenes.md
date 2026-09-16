@@ -347,3 +347,33 @@ Sukavia Gorge (1191):
 - Weapon Type: Sorcerer
 
 - Released location: House, Solde (0049)
+
+### Main Story Characters
+
+Rufus => 1197
+
+Dylan => 1223
+
+Lezard => 1239 and 1307
+
+Leone => 1245
+
+Arngrim => 1245 and 1303
+
+Hrist => 1313
+
+Brahms => 1313
+
+Lenneth => 1315
+
+Silmeria => 1317
+
+### Main Story Items
+
+Antique Pendant => 1223
+
+Ghoul Powder => 1233
+
+Dragon Orb => 1313
+
+Water Mirror => 1313
