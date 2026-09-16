@@ -1,15 +1,45 @@
 resource,message_id,translated,notes
-1183,45,,
-1183,85,,
-1183,125,,
-1183,165,,
-1183,205,,
-1183,245,,
-1183,333,,
-1183,373,,
+1183,45,"Falta-lhe força para enfrentar os deuses, mas
+você facilita a nossa ação. <PART>
+---
+Pegue sua espadinha fofa e
+vá encarar os deuses.",
+1183,85,"Vá. Lute. Debata-se. Talvez então
+surja uma oportunidade para agirmos.",
+1183,125,"Os deuses não são vencidos pela força física.
+É preciso agarrar o âmago da religião. <PART>
+---
+Controlar as preces aos deuses pode ser
+a chance de controlar os caminhos deles.",
+1183,165,"Os deuses precisam de um motivo para se meter
+nos assuntos de Midgard. <PART>
+---
+Só saber disso já pode ser a chance
+de alguém reinar sobre Midgard.",
+1183,205,"Que patético. Os deuses não conseguem nem
+massacrar uma Donzela de Batalha. <PART>
+---
+Os poderes deles não são nada
+do que eu imaginava...",
+1183,245,"O deus de corpo mortal <PART> ---- <PART>
+a Donzela de Batalha <PART> ---- <PART> é um estorvo. <PART>
+---
+Não fosse por ela, tanto na minha
+vida passada quanto nesta, <PART>
+---
+eu poderia ter sido o senhor do mundo!",
+1183,333,"Leve isto com você. <PART>
+---
+Use com boas ou más intenções.
+A escolha é sua.",
+1183,373,"Ainda está lutando contra os deuses?
+Acha mesmo que tem essa força? Tola. <PART>
+---
+Ainda assim, a desordem nos céus também é meu
+desejo. Suponho que devo lhe desejar sorte.",
 1183,380,,
 1183,381,,
 1183,382,,
 1183,385,Desfiladeiro de Sukavia,not displayed by the event script
-1183,386,,
-1183,420,,
+1183,386,Adquirido <PART> Elíxir Nobre,
+1183,420,Khanon,

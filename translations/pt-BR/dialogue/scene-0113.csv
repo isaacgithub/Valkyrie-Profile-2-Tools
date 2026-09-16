@@ -1,28 +1,95 @@
 resource,message_id,translated,notes
-113,5,,
-113,4,,
+113,5,Vou usar com sabedoria.,
+113,4,"Está cheio de bebida <PART> ---- <PART>
+o sonho de Arngrim realizado.",
 113,395,,
 113,396,,
 113,397,,
-113,2268,,
-113,2270,,
-113,2308,,
-113,2310,,
-113,2348,,
-113,2350,,
-113,2388,,
-113,2390,,
-113,2428,,
-113,2430,,
-113,2468,,
-113,2470,,
-113,2556,,
-113,2558,,
-113,2596,,
-113,2598,,
+113,2268,"Nunca levei uma vida normal.
+Minha vida passada foi cheia de extremos.",
+113,2270,"Esta cidade não vai durar muito,
+e a nossa história também não...",
+113,2308,"A vida é boa quando é normal ou cheia de
+extremos, mas não quando fica no meio-termo.",
+113,2310,"Se a destruição vier da natureza,
+que venha. <PART>
+---
+O importante é conviver com a natureza,
+não se render a ela.",
+113,2348,"Não faço ideia de quando ou
+onde eu morri. <PART>
+---
+Um dia simplesmente acordei trancada num
+quarto sem janelas...",
+113,2350,"Protegi esta cidade junto com dois
+amigos de infância. <PART>
+---
+Por que será que eles não foram
+escolhidos como einherjar? <PART>
+---
+Eu fui escolhido, e eles também
+deveriam ter sido. <PART>
+---
+O que será que faltou neles?
+Estilo, talvez?",
+113,2388,"Fui criada pela guilda de ladrões desde
+pequena, então não tinha medo da morte. <PART>
+---
+Comparado ao treino por que passei,
+o trabalho de um amador não é nada.",
+113,2390,"Tem gente que se esforça a vida toda
+e nunca recebe o que merece. <PART>
+---
+Uma amiga de infância minha era assim.",
+113,2428,"Eu vivia só para mim.
+Depois que me casei, vivi para ele. <PART>
+---
+Eu faria qualquer coisa pelo homem que
+lutou comigo, que morreu por mim, <PART>
+---
+e que precisava de mim mais do que
+de qualquer outra coisa no mundo.",
+113,2430,"O fluxo da árvore do mundo
+voltou ao normal. <PART>
+---
+No futuro, esta terra talvez
+fique cheia de natureza e vida.",
+113,2468,"Já lhe contei que fui criada
+pela guilda de ladrões? <PART>
+---
+O homem que viria a ser meu marido
+era, na verdade, um dos meus alvos. <PART>
+---
+Era um homem confiante e honesto demais.
+Contei a ele quem eu era e, mesmo assim... <PART>
+---
+Me apaixonei na hora.
+Foi aí que a minha vida virou.",
+113,2470,"O fluxo da árvore do mundo voltou
+ao normal. No entanto... <PART>
+---
+O mundo vai demorar a se recuperar.
+Não dá para salvar esta cidade da destruição.",
+113,2556,"Deixe-me lhe dar algo. Espero
+que seja de alguma ajuda.",
+113,2558,"Por que não leva isto? Você veio
+de tão longe só para me ver.",
+113,2596,"Ninguém me conhecia e ninguém me traiu.
+Consegui escapar da escuridão. <PART>
+---
+Foi relaxante, mas levei um tempo
+para me acostumar.",
+113,2598,"Esta cidade não vai durar muito,
+e a nossa história também não... <PART>
+---
+No entanto, o povo desta terra
+continua existindo. <PART>
+---
+Que o povo desta cidade espalhe
+o jeito de Kalstad pelo mundo!",
 113,1,Sair,not displayed by the event script
-113,2,,
-113,3,,
+113,2,Verificar,
+113,3,Adquirido <PART> Frasco Vagabundo,
 113,2610,Kalstad,not displayed by the event script
-113,2829,,
-113,2831,,
+113,2829,Sophalla,
+113,2831,Arcana,

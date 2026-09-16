@@ -18,6 +18,7 @@ PAYLOAD_TREES = (
     ("data", "**/*.md"),
     ("translations", "**/*.csv"),
     ("translations", "*/fis-image-layouts.json"),
+    ("translations", "*/images/*.png"),
     ("translations", "**/*.toml"),
     ("tools/scripts", "*.csv"),
 )

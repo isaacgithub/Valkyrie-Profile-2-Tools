@@ -1,20 +1,91 @@
 resource,message_id,translated,notes
-571,51,,
-571,54,,
-571,91,,
-571,94,,
-571,131,,
-571,134,,
-571,171,,
-571,174,,
-571,211,,
-571,214,,
-571,251,,
-571,254,,
-571,339,,
-571,342,,
-571,379,,
-571,382,,
+571,51,"Paltierre foi destruído, e Dipan segue de pé.
+Acho que Paltierre precisava de mim, afinal. <PART>
+---
+A velha senhora de Dipan é astuta,
+não é mesmo?",
+571,54,"Não passo de um investigador. Percebi
+que me falta a força de um lutador.",
+571,91,"Depois da minha morte, Dipan passou a bancar
+a ""líder"" do continente. Que piada.",
+571,94,"Não sou herói nem vilão.
+Foi o que aprendi na minha jornada.",
+571,131,"Sei quem eu sou.
+Sei que não tenho o carisma do meu irmão. <PART>
+---
+Mesmo quando a guerra começou,
+fui deixado para trás no meu país. <PART>
+---
+Meu pai e meu irmão viraram heróis, e eu nem
+tive a chance de provar meu valor. <PART>
+---
+Foi aí que bolei o plano perfeito.
+Saí para massacrar os mortos-vivos. <PART>
+---
+Cheguei a chamar monstros de Nifleheim
+só para matar o máximo que pudesse. <PART>
+---
+Alguns diriam que foi
+um ato ridículo. <PART>
+---
+Mas por causa disso fui escolhido einherjar
+em vez do meu pai e do meu irmão. <PART>
+---
+Os deuses me escolheram porque viram
+que eu era mais capaz do que os dois.",
+571,134,"Ser einherjar não é tarefa fácil.
+A gente vive comparado aos heróis atuais. <PART>
+---
+Heróis lendários viram simples soldados.
+Com os feiticeiros é igual. <PART>
+---
+Não quero me meter nisso.
+Quero ter uma morte comum nesta vida.",
+571,171,"Meu pai e meu irmão não foram
+escolhidos einherjar. <PART>
+---
+Eu tinha provado aos deuses que valia
+mais do que os dois. <PART>
+---
+Rá-rá-rá!",
+571,174,"Só fui escolhido einherjar
+por capricho dos deuses. <PART>
+---
+Não precisa se preocupar em ter alguém
+como eu a lhe servir de novo.",
+571,211,"Só porque nasci com uma deformidade,
+não quis viver à sombra do meu irmão. <PART>
+---
+Só eu podia manter Paltierre de pé.
+Só eu. <PART>
+---
+Foi por isso...",
+571,214,"Meu lugar é num lugar assim. <PART>
+---
+Alguém como eu não deveria buscar
+a glória como buscou na vida passada.",
+571,251,"Paltierre não existe mais. Nem na memória
+das pessoas, nem na história. <PART>
+---
+Pelo que eu estava lutando?
+Me sinto tão... vazio.",
+571,254,"Até a luz mais deslumbrante na escuridão
+acaba desaparecendo, <PART>
+---
+e provavelmente não deixa nada para trás...",
+571,339,"Leve isto.
+Use como bem entender.",
+571,342,Acho que você pode aproveitar isto.,
+571,379,"Enfim estou livre de você, mas o tempo
+passou e o meu país não existe mais. <PART>
+---
+Se ao menos eu tivesse sobrevivido a tudo,
+Dipan não teria conseguido fazer o que fez...",
+571,382,"Não sou como os outros.
+Sou apenas um investigador da magia. <PART>
+---
+Pouco tenho a oferecer em batalha.
+Duvido que lutemos juntos no futuro.",
 571,383,,
 571,384,,
 571,385,,
@@ -23,7 +94,7 @@ resource,message_id,translated,notes
 571,6,Não,not displayed by the event script
 571,7,Chateau Obsession,not displayed by the event script
 571,8,Saída,not displayed by the event script
-571,388,,
-571,389,,
-571,426,,
-571,429,,
+571,388,Chateau Obsession,
+571,389,Adquirido <PART> Talismã Infalível,
+571,426,Alm,
+571,429,Woltar,

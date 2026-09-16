@@ -228,8 +228,32 @@ def _checked_profile(path: Path) -> list[dict[str, str]]:
 
 
 def check_pack_profile(pack: str | os.PathLike[str]) -> int:
-    """Validate one pack's build profile on its own, and count its rows."""
-    return len(_checked_profile(resolve_pack(pack) / PACK_PROFILE))
+    """Validate one pack's build profile and its named assets; count rows."""
+    pack_path = resolve_pack(pack)
+    profile_path = pack_path / PACK_PROFILE
+    rows = _checked_profile(profile_path)
+    for line, row in enumerate(rows, 2):
+        where = f"{profile_path}:{line}"
+        kind = row["kind"]
+        if kind == "image":
+            folder = pack_path / (row.get("sheet") or IMAGE_DIRECTORY)
+            if not folder.is_dir():
+                raise PackError(
+                    f"{where}: image directory {folder} is not there")
+            resource = int(row["resource"], 0)
+            prefix = f"fis-{resource:04d}-"
+            if not any(path.is_file() and path.name.startswith(prefix)
+                       and path.suffix.lower() == ".png"
+                       for path in folder.iterdir()):
+                raise PackError(
+                    f"{where}: image directory {folder} has no {prefix}*.png")
+        elif kind in PACK_FILE_ROWS:
+            filename = PACK_FILE_ROWS[kind][0]
+            path = pack_path / filename
+            if not path.is_file():
+                raise PackError(
+                    f"{where}: required pack file {path} is not there")
+    return len(rows)
 
 
 def _input_sheet(records: Path, row: dict[str, str]) -> Path:

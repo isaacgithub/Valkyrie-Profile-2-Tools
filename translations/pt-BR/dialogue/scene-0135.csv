@@ -1,30 +1,79 @@
 resource,message_id,translated,notes
-135,4,,
-135,3,,
-135,5,,
-135,6,,
+135,4,Há algo escrito na borda de uma página.,
+135,3,"C <PART> ravando seu rastro no tempo,
+ <PART> A <PART> s emoções revisitam uma era que passou.
+
+",
+135,5,Parece um rascunho.,
+135,6,"Pensando bem, havia uma
+mensagem parecida em Solde...",
 135,351,,
 135,352,,
 135,353,,
-135,2451,,
-135,2454,,
-135,2491,,
-135,2494,,
-135,2531,,
-135,2534,,
-135,2571,,
-135,2574,,
-135,2611,,
-135,2614,,
-135,2651,,
-135,2654,,
-135,2739,,
-135,2742,,
-135,2779,,
-135,2782,,
+135,2451,"Meu desejo é viver uma vida plena e
+descansar para sempre nesta cidade. <PART>
+---
+Não tenho coragem de recomeçar
+numa terra nova.",
+135,2454,"Não confiarei em ninguém nesta vida.
+Cansei de ser usada e enganada. <PART>
+---
+Quero poder encarar minha querida irmã,
+se algum dia voltar a vê-la.",
+135,2491,"Falta-me coragem para recomeçar
+numa terra nova.",
+135,2494,"As pessoas só decepcionam.
+É melhor não confiar em ninguém.",
+135,2531,"No passado, eu via esta cidade apenas
+como um ninho de monstros. <PART>
+---
+Fui trazida para cá pelo rei atual,
+que gostava de mim. <PART>
+---
+Meus pais tinham me vendido.
+Eu não tinha para onde fugir.",
+135,2534,"Sacrificaria a minha vida para dar à minha
+querida irmã e ao marido dela outra chance. <PART>
+---
+Seria o mínimo que eu poderia fazer
+por ela...",
+135,2571,"Olhando agora, acho uma cidade linda,
+cheia de gente comum, sem presas nem chifres.",
+135,2574,"E agora, o que eu faço?
+Foi muito bom lutar ao seu lado....",
+135,2611,"Há uma coisa de que ainda me arrependo...
+Tirei a própria vida e deixei minha filha para trás. <PART>
+---
+Não há palavras de desculpa que
+compensem o que eu fiz.",
+135,2614,"Quero poder encarar minha irmã
+da próxima vez que a vir. <PART>
+---
+Para isso, preciso escolher um caminho
+e trilhá-lo com orgulho.",
+135,2651,"Na minha vida passada, tirei a própria vida
+e deixei minha filha para trás. <PART>
+---
+Não há palavras de desculpa que
+compensem o que eu fiz.",
+135,2654,"Quero fazer algo que torne
+o mundo melhor. <PART>
+---
+O que você acha que eu deveria fazer?",
+135,2739,"Tenho algo para você.
+Espero que aceite.",
+135,2742,"Quero lhe agradecer por me dar esperança.
+Isto é apenas uma lembrança da minha gratidão.",
+135,2779,"Depois de muito pensar, decidi
+buscar uma vida nova nesta cidade. <PART>
+---
+Embora ela esteja cheia de lembranças dolorosas,
+é tudo o que me restou do passado...",
+135,2782,"Nunca pensei que nos veríamos de novo.
+O destino é uma coisa estranha.",
 135,1,Sair,not displayed by the event script
-135,2,,
+135,2,Verificar,
 135,2795,Crell Monferaigne,not displayed by the event script
-135,2796,,
-135,2821,,
-135,2824,,
+135,2796,Adquirido <PART> Gema da Terra,
+135,2821,Lylia,
+135,2824,Millidia,

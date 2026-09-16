@@ -97,7 +97,12 @@ would refuse is refused here. A heading the English writes inside angle
 brackets, such as `<Making Valued Customer Items>`, is drawn inside them
 whatever the translation says, so write the brackets too:
 `<Criando Itens Valorizados pelos Clientes>`. Only tags such as `<PART>`,
-`<CONT>` and `<0042>` are markup; any other `<...>` is text.
+`<BR>`, `<CONT>` and `<0042>` are markup; any other `<...>` is text.
+
+Dialogue is wrapped to fit the box, so a line break copied from the English is
+reflowed away. Write `<BR>` where the break is part of what the line says --
+two speakers sharing one box, one row each. Both sides of a `<BR>` are still
+measured, so it does not make a long line fit.
 
 This checks whether the text fits. Whether a scene plays correctly is only
 answered by playing it.

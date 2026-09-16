@@ -93,9 +93,10 @@ Solde - Dipan in flames => scene-1199
 Royal Underground Path - Ull fight => scene-1227
 
 Dipan Castle 1 - Before mages battle => scene-1337\
-Dipan Castle 2 - Back to the castle => scene-1285\
-Dipan Castle 3 - Before Hrist battle => scene-1283\
-Dipan Castle 4 - After Hrist battle => scene-1337 and scene-1299
+Dipan Castle 2 - After mages battle => scene-1281\
+Dipan Castle 3 - Back to the castle => scene-1285\
+Dipan Castle 4 - Before Hrist battle => scene-1283\
+Dipan Castle 5 - After Hrist battle => scene-1337 and scene-1299
 
 ### Chapter 5 Cutscenes
 

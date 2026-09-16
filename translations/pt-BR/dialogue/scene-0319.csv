@@ -1,11 +1,11 @@
 resource,message_id,translated,notes
 319,2750,Jessica <PART> entrou para o grupo.,
-319,2759,,
-319,2764,,
+319,2759,Falx <PART> entrou para o grupo.,
+319,2764,Adonis <PART> entrou para o grupo.,
 319,2546,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-319,2555,,
-319,2560,,
+319,2555,"Claro, vou lhe dar uma mão.",
+319,2560,Hmpf! Já não era sem tempo!,
 319,2586,A alma de um guerreiro pesado emana da espada.,
 319,2592,"A materialização é impossível
 sem a Silmeria...",
@@ -13,8 +13,8 @@ sem a Silmeria...",
 319,2590,Sim,not displayed by the event script
 319,2591,Não,not displayed by the event script
 319,2593,Ruínas da Floresta Crawsus,not displayed by the event script
-319,2747,,
-319,2748,,
-319,2790,,
-319,2799,,
-319,2804,,
+319,2747,Adquirido <PART> Tintura Anão,
+319,2748,Adquirido <PART> Elmo de Prata,
+319,2790,Jessica,
+319,2799,Falx,
+319,2804,Adonis,

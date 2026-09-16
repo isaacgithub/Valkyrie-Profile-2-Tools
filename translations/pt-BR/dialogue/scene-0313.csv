@@ -1,13 +1,14 @@
 resource,message_id,translated,notes
 313,2753,Jessica <PART> entrou para o grupo.,
-313,2755,,
-313,2760,,
-313,2761,,
+313,2755,Fraudir <PART> entrou para o grupo.,
+313,2760,Circe <PART> entrou para o grupo.,
+313,2761,Rasheeka <PART> entrou para o grupo.,
 313,2548,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-313,2550,,
-313,2555,,
-313,2556,,
+313,2550,"Então precisa da minha força, é?
+Tudo bem, acho que vou ajudar.",
+313,2555,"Quer que eu lute? Por mim, tudo bem.",
+313,2556,"Se me julgar digna, eu ajudarei.",
 313,2587,A alma de um guerreiro leve emana da espada.,
 313,2594,"A materialização é impossível
 sem a Silmeria...",
@@ -15,10 +16,10 @@ sem a Silmeria...",
 313,2592,Sim,not displayed by the event script
 313,2593,Não,not displayed by the event script
 313,2595,Ruínas da Floresta Crawsus,not displayed by the event script
-313,2749,,
-313,2750,,
-313,2751,,
-313,2793,,
-313,2795,,
-313,2800,,
-313,2801,,
+313,2749,Adquirido <PART> Apotecário Arcano,
+313,2750,Adquirido <PART> Vestido Miragem,
+313,2751,Adquirido <PART> Amuleto Antiraio,
+313,2793,Jessica,
+313,2795,Fraudir,
+313,2800,Circe,
+313,2801,Rasheeka,

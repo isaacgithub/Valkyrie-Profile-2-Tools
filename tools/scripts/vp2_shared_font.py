@@ -182,7 +182,8 @@ def shared_glyph_for(font, layout, character, donors):
             subtitles.glyph_metric(font, layout, base_slot))
 
 
-def patch_shared_font(archive, characters, accent_tokens=None):
+def patch_shared_font(archive, characters, accent_tokens=None,
+                      allow_growth=False):
     """Install ``characters`` into globally-unused slots of shared font"""
     accent_tokens = accent_tokens or SHARED_EXTENSION_TOKENS
     unknown = set(characters) - set(accent_tokens)
@@ -228,12 +229,15 @@ def patch_shared_font(archive, characters, accent_tokens=None):
     new_span = max(span, _round_up(0x10 + new_outer_size, 128))
     suffix = archive[at + span:]
     used = len(suffix.rstrip(b"\0"))
-    if at + new_span + used > len(archive):
-        raise ValueError("shared font needs a %d-byte ZLS span but entry 8 "
-                         "has only %d bytes of trailing slack" %
-                         (new_span, len(archive) - at - span - used))
+    size = len(archive)
+    if at + new_span + used > size:
+        if not allow_growth:
+            raise ValueError("shared font needs a %d-byte ZLS span but entry 8 "
+                             "has only %d bytes of trailing slack" %
+                             (new_span, len(archive) - at - span - used))
+        size = _round_up(at + new_span + used, triace.SECTOR)
 
-    rebuilt = bytearray(len(archive))
+    rebuilt = bytearray(size)
     rebuilt[:at + 0x10] = archive[:at + 0x10]
     inner_at = at + 0x10
     rebuilt[inner_at:inner_at + len(packed)] = packed
@@ -250,6 +254,7 @@ def patch_shared_font(archive, characters, accent_tokens=None):
     if check != bytes(rebuilt_font):
         raise ValueError("rebuilt shared font did not read back")
     return bytes(rebuilt), {
+        "grown_sectors": -(-(len(rebuilt) - len(archive)) // triace.SECTOR),
         "wrapper_offset": at,
         "span": span,
         "span_after": new_span,
@@ -267,7 +272,8 @@ def patch_shared_font(archive, characters, accent_tokens=None):
     }
 
 
-def install_glyphs(archive, characters, accent_tokens=None):
+def install_glyphs(archive, characters, accent_tokens=None,
+                   allow_growth=False):
     """Idempotent installer."""
     accent_tokens = accent_tokens or SHARED_EXTENSION_TOKENS
     unknown = set(characters) - set(accent_tokens)
@@ -301,7 +307,8 @@ def install_glyphs(archive, characters, accent_tokens=None):
             "already_installed": True,
             "no_op": True,
         }
-    rebuilt, info = patch_shared_font(archive, needed, accent_tokens)
+    rebuilt, info = patch_shared_font(archive, needed, accent_tokens,
+                                      allow_growth=allow_growth)
     info["no_op"] = False
     return rebuilt, info
 
@@ -350,10 +357,12 @@ def describe_install(info):
     installed = ", ".join(
         "%s=0x%02X" % (char, token)
         for char, token, _ in info["installed"])
-    return ("entry #%d: installed %s; SLZ %d -> %d bytes; suffix shift %d"
+    grown = info.get("grown_sectors") or 0
+    return ("entry #%d: installed %s; SLZ %d -> %d bytes; suffix shift %d%s"
             % (SHARED_FONT_ENTRY, installed,
                info["stored_before"], info["stored_after"],
-               info["suffix_shift"]))
+               info["suffix_shift"],
+               "; entry grew by %d sector(s)" % grown if grown else ""))
 
 
 def _cmd_install(args):

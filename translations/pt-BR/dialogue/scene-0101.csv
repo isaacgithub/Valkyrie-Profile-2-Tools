@@ -8,31 +8,86 @@ Mês X, Dia O
 ...os caras não podem ser contidos.
 As baixas são...não sei o que...",
 101,4,"Parece ser uma página de diário, mas está ilegível em alguns pontos.",
-101,391,Adquirido <PART> OTH,
-101,392,Perdido <PART> OTH,
-101,393,"Dinheiro
-<PART> OUT",
-101,2503,,
-101,2508,,
-101,2543,,
-101,2548,,
-101,2583,,
-101,2588,,
-101,2623,,
-101,2628,,
-101,2663,,
-101,2668,,
-101,2703,,
-101,2708,,
-101,2791,,
-101,2796,,
-101,2831,,
-101,2836,,
+101,391,,
+101,392,,
+101,393,,
+101,2503,"Ei, vamos lá. Você devia treinar
+no seu tempo livre! <PART>
+---
+Como não posso mais ajudar, você mesma
+tem que ficar mais forte.",
+101,2508,"O que você quer?
+Tire essa cara triste daqui!",
+101,2543,"Se tiver tempo, treine.
+Cada pouquinho ajuda.",
+101,2548,"Ainda está aqui? <PART>
+---
+Eu mandei você sumir!
+Tola!",
+101,2583,"Pesquisei um pouco e descobri que ainda
+não estou pronto para encarar o Lorde dos Mortos Vivos. <PART>
+---
+Talvez eu desse conta se ele fosse
+só um barão ou um visconde...",
+101,2588,"Por que você luta?
+É por vingança, não é? <PART>
+---
+Essa é uma boa motivação para matar!
+Não ceda a súplicas nem a choro. <PART>
+---
+Não há razão para hesitar em matar alguém.
+Ainda mais quando a culpa é dele!",
+101,2623,"Há armadilhas espalhadas por aí, então
+olhe onde pisa! <PART>
+---
+São para os mortos-vivos e não ferem humanos,
+mas não quero ter que armar tudo de novo.",
+101,2628,"Não se sinta culpada.
+Não foi você que começou isto. <PART>
+---
+Você está dando a eles o que merecem.",
+101,2663,"Os mortos-vivos ferem as pessoas, mas
+monstros e feras também. <PART>
+---
+É natural que criaturas opostas <PART> ---- <PART>
+humanos e mortos-vivos <PART> ---- <PART> lutem. <PART>
+---
+Até os deuses ferem humanos.
+O mundo é assim mesmo.",
+101,2668,"O que houve com você?
+Cansada de matar? <PART>
+---
+Se não matar, será morta.
+Quem ia querer ficar do lado que morre?",
+101,2703,"Humanos e mortos-vivos vão continuar
+lutando até um dos dois perecer. <PART>
+---
+Juro ficar ao lado das pessoas até
+meu corpo não aguentar mais.",
+101,2708,"Se caírem, apunhale.
+Depois disso, perfure e enterre a lâmina. <PART>
+---
+Lembre-se: um instante de hesitação
+pode custar a sua vida.",
+101,2791,"Leve isto com você.
+Deve ser útil.",
+101,2796,Leve isto e suma daqui!,
+101,2831,"Ora, veja quem está aqui.
+Tão entediada assim? <PART>
+---
+Se tem tempo sobrando,
+use para treinar. <PART>
+---
+",
+101,2836,"Hã? Ah, é você. Veio me pedir
+alguma coisa? <PART>
+---
+Suma daqui!",
 101,1,Sair,not displayed by the event script
 101,2,Verificar,
 101,5,Adquirido <PART> Amuleto à Prova de Terra,
 101,2861,Villnore,not displayed by the event script
 101,2863,Adquiriudo <PART> Inteligência do Guerreiro,
 101,2864,Adquirida <PART> Experiência de Especialista,
-101,2875,,
-101,2880,,
+101,2875,Falx,
+101,2880,Adonis,

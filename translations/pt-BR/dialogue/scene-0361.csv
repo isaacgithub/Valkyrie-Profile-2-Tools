@@ -1,13 +1,14 @@
 resource,message_id,translated,notes
 361,387,Jessica <PART> entrou para o grupo.,
-361,397,,
-361,398,,
-361,400,,
+361,397,Gerald <PART> entrou para o grupo.,
+361,398,Guilm <PART> entrou para o grupo.,
+361,400,Ehlen <PART> entrou para o grupo.,
 361,253,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-361,263,,
-361,264,,
-361,266,,
+361,263,Usarei meus poderes para lhe servir.,
+361,264,"Pegarei em armas de bom grado,
+se a princesa de Dipan assim desejar.",
+361,266,"Se eu puder ajudar, ajudarei sem falta.",
 361,293,A alma de um guerreiro pesado emana da espada.,
 361,299,"A materialização é impossível
 sem a Silmeria...",
@@ -15,7 +16,7 @@ sem a Silmeria...",
 361,297,Sim,not displayed by the event script
 361,298,Não,not displayed by the event script
 361,300,Palácio do Dragão Venerado,not displayed by the event script
-361,427,,
-361,437,,
-361,438,,
-361,440,,
+361,427,Jessica,
+361,437,Gerald,
+361,438,Guilm,
+361,440,Ehlen,

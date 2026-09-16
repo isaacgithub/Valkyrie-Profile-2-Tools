@@ -14,6 +14,7 @@ from .paths import TOOLS_DIR
 HERE = TOOLS_DIR
 
 from . import vp2_iso_buffer as iso_buffer
+from . import vp2_iso_space as iso_space
 from . import vp2_shared_font as shared_font
 
 
@@ -130,7 +131,8 @@ def get_or_build_preinstall(
         with iso_buffer.IsoFile(str(source_iso_path), "rb") as iso:
             original = iso.read_entry(shared_font.SHARED_FONT_ENTRY)
         rebuilt, info = shared_font.install_glyphs(
-            original, needed, shared_font.SHARED_EXTENSION_TOKENS
+            original, needed, shared_font.SHARED_EXTENSION_TOKENS,
+            allow_growth=True,
         )
         if not info.get("no_op"):
             entries[shared_font.SHARED_FONT_ENTRY] = bytes(rebuilt)
@@ -145,6 +147,29 @@ def get_or_build_preinstall(
     for resource, data in entries.items():
         (entries_dir / f"{resource}.bin").write_bytes(data)
     return entries
+
+
+def relocate_grown_preinstall(source_iso_path, output_iso_path, entries, *,
+                              verbose=True):
+    if not entries:
+        return str(source_iso_path), entries
+    with iso_buffer.IsoFile(str(source_iso_path), "rb") as iso:
+        grown = {resource: data for resource, data in entries.items()
+                 if len(data) > iso.entry_outer_allocation(resource)}
+    if not grown:
+        return str(source_iso_path), entries
+    output_path = Path(output_iso_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(str(source_iso_path), str(output_path))
+    for resource, data in sorted(grown.items()):
+        summary = iso_space.relocate(str(output_path), resource, data)
+        if verbose:
+            print(f"preinstall: relocated entry #{resource}: "
+                  f"{summary['old_sectors']} -> {summary['new_sectors']} "
+                  f"sector(s), now at lba {summary['new_lba']}")
+    return str(output_path), {resource: data
+                              for resource, data in entries.items()
+                              if resource not in grown}
 
 
 def apply_preinstall(iso, entries):
@@ -197,7 +222,8 @@ def merge_writes(
     """Stream the source to ``output_path`` and lay every write over it."""
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(str(source_path), str(output_path))
+    if Path(source_path).resolve() != output_path.resolve():
+        shutil.copyfile(str(source_path), str(output_path))
     writes_applied = 0
     with iso_buffer.IsoFile(str(output_path)) as iso:
         apply_preinstall(iso, preinstall_entries)
@@ -242,9 +268,12 @@ def run_parallel(
         verbose=verbose,
     )
 
+    worker_source, preinstall_entries = relocate_grown_preinstall(
+        source_iso_path, output_iso_path, preinstall_entries, verbose=verbose)
+
     slices = partition_rows_round_robin(rows, jobs)
     if not slices:
-        merge_writes(source_iso_path, preinstall_entries, [], rows,
+        merge_writes(worker_source, preinstall_entries, [], rows,
                      output_path=output_iso_path, verbose=False)
         if verbose:
             print("parallel: empty manifest; copied source -> output")
@@ -266,7 +295,7 @@ def run_parallel(
         async_results = [
             pool.apply_async(
                 _worker_process,
-                (str(source_iso_path), preinstall_entries, slice_,
+                (str(worker_source), preinstall_entries, slice_,
                  primary_lookup)
             )
             for slice_ in slices
@@ -286,7 +315,7 @@ def run_parallel(
                 ) from exc
 
     writes_applied = merge_writes(
-        source_iso_path, preinstall_entries, worker_results, rows,
+        worker_source, preinstall_entries, worker_results, rows,
         output_path=output_iso_path, verbose=verbose,
     )
 

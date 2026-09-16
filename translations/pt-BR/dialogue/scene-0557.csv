@@ -1,34 +1,124 @@
 resource,message_id,translated,notes
-557,30,,
-557,31,,
-557,33,,
-557,70,,
-557,71,,
-557,73,,
-557,110,,
-557,111,,
-557,113,,
-557,150,,
-557,151,,
-557,153,,
-557,190,,
-557,191,,
-557,193,,
-557,230,,
-557,231,,
-557,233,,
-557,318,,
-557,319,,
-557,321,,
-557,358,,
-557,359,,
-557,361,,
+557,30,"Parece que meu destino é ser guerreiro. <PART>
+---
+Uso minhas habilidades para livrar
+a região dos monstros.",
+557,31,"Entristece-me ter perdido minha força
+de einherjar. <PART>
+---
+Lembre-se: estarei sempre
+rezando pela sua segurança.",
+557,33,"Com a força que tenho agora, eu seria
+apenas um peso para você. <PART>
+---
+Mas lembre-se de que estarei sempre
+com você em espírito.",
+557,70,"Falta-me força para lutar ao seu lado,
+mas seguirei lutando pela humanidade.",
+557,71,"Poucos lutaram ao lado das
+três rainhas de uma nação.",
+557,73,Estarei sempre com você em espírito.,
+557,110,"Tornei-me guerreira para limpar o nome
+manchado da minha mãe. <PART>
+---
+Diziam que ela havia rompido o selo
+que prendia um dragão maligno. <PART>
+---
+Descobri depois que o dragão fora
+solto pelo próprio senhor Odin. <PART>
+---
+Foi tudo um plano dos deuses
+para destruir a cidade de Nethov.",
+557,111,"Escolhi o caminho de proteger o castelo,
+a cidade, o povo e a minha própria alma. <PART>
+---
+Decidi isso há muito tempo, mas só
+agora comecei a agir.",
+557,113,"Ser mais um entre muitos por uma vida cômoda, ou
+ser um indivíduo para escapar da prisão... <PART>
+---
+Quem tem o poder de escolher
+é você mesma. <PART>
+---
+Embora os deuses de Valhalla devam se ressentir
+da independência da raça humana.",
+557,150,"Não sou responsável por todo o caos em Midgard.
+A maior parte é culpa do senhor Odin. <PART>
+---
+A senhora Silmeria foi aprisionada por se opor
+aos métodos dele quando soube da verdade. <PART>
+---
+É tudo o que sei.",
+557,151,"Escolhi o caminho de proteger o castelo,
+a cidade, o povo e a minha própria alma. <PART>
+---
+É por isso que vou me empenhar.",
+557,153,"Ser mais um entre muitos garante estabilidade,
+mas tira a individualidade. <PART>
+---
+Ser um indivíduo garante instabilidade.
+Mas garante também liberdade.",
+557,190,"O treino diário me ajudou a recuperar
+minhas habilidades de guerreiro. <PART>
+---
+Agora eu poderia ser de grande ajuda.",
+557,191,"Os caminhos que as pessoas escolhem são apenas
+seus modos de viver. <PART>
+---
+Ninguém precisa ficar preso ao seu caminho,
+desde que não se afaste demais dele.",
+557,193,"Não tenho filhos. No entanto,
+há alguém que amo como uma filha... <PART>
+---
+Perdoe-me... Não queria ficar falando
+do passado.",
+557,230,"Os monstros andam estranhos ultimamente.
+Será um presságio de mudança?",
+557,231,"Não pense demais nisso.
+Você deve fazer o que desejar.",
+557,233,"Posso perguntar o que você pensava de mim,
+Princesa Alicia? <PART>
+---
+Uma boa amiga? Alguém da família?
+Ou apenas um estorvo...?",
+557,318,"Tenho algo para você. Aceite, por favor,
+como sinal da minha gratidão.",
+557,319,"Leve isto com você, por favor.
+Será de alguma ajuda na sua jornada.",
+557,321,"Faria a gentileza de aceitar isto?
+Dinheiro nunca é demais. <PART>
+---
+Aprendi isso há muito tempo.",
+557,358,"Nunca pensei que nos veríamos de novo.
+Está com boa aparência, como sempre. <PART>
+---
+Continuo guerreiro, como pode ver.
+Descobri que não sirvo para mais nada.",
+557,359,"Ora, se não é a princesa de Dipan.
+Sou eu, Guilm. <PART>
+---
+Nunca pensei que voltaria a encontrar alguém
+da realeza de Dipan. O destino é curioso. <PART>
+---
+Com a vida que me foi dada, decidi
+ajudar o povo empunhando minha espada.",
+557,361,"Não esqueci os dias em que lutei
+ao seu lado. <PART>
+---
+Lutar contra os deuses deve significar
+tempos difíceis pela frente. <PART>
+---
+Bem que eu queria ter algo para lhe
+dar para a jornada. <PART>
+---
+Terei alguma coisa da próxima vez
+que nos encontrarmos.",
 557,387,,
 557,388,,
 557,389,,
 557,392,Floresta Antiga,not displayed by the event script
-557,393,,
-557,394,,
-557,406,,
-557,407,,
-557,409,,
+557,393,Adquirido <PART> Gema Prisma,
+557,394,Adquirido <PART> Tintura da Deusa,
+557,406,Gerald,
+557,407,Guilm,
+557,409,Ehlen,

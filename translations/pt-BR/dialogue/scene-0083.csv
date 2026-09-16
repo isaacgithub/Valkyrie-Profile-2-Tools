@@ -9,30 +9,122 @@ Quem quer que tenha construído aquele lugar com certeza sabia o que estava faze
 83,400,,
 83,401,,
 83,402,,
-83,2263,,
-83,2264,,
-83,2266,,
-83,2303,,
-83,2304,,
-83,2306,,
-83,2343,,
-83,2344,,
-83,2346,,
-83,2383,,
-83,2384,,
-83,2386,,
-83,2423,,
-83,2424,,
-83,2426,,
-83,2463,,
-83,2464,,
-83,2466,,
-83,2551,,
-83,2552,,
-83,2554,,
-83,2591,,
-83,2592,,
-83,2594,,
+83,2263,"Depois de tanto tempo juntos,
+é estranho estar sozinha. <PART>
+---
+Como estão os outros?",
+83,2264,"Entre deuses e humanos,
+nenhum dos dois é bom ou mau. <PART>
+---
+Há bons e maus entre os humanos,
+assim como há entre os deuses.",
+83,2266,"Estou muito bem, como pode ver!
+Sinto que este lugar é a minha casa agora. <PART>
+---
+Todo mundo na vila me adora!
+Sou sempre o assunto da conversa!",
+83,2303,"Hum... Er...
+...Deixa para lá. Não tem importância.",
+83,2304,"Há bons e maus entre os humanos,
+assim como há entre os deuses.",
+83,2306,"Eu ia levar uma vida tranquila, mas...
+Acho que ser popular tem suas vantagens.",
+83,2343,"Há quem esteja tentando conter
+o caos em Midgard. <PART>
+---
+No entanto, são todos fracos demais
+para encarar o que existe por aí. <PART>
+---
+Você acha que seria capaz de lutar
+pela paz de Midgard?",
+83,2344,"Midgard não passa de um campo de colheita
+para Nifleheim e Valhalla. <PART>
+---
+Quando as almas humanas transmigram, os deuses
+escolhem as melhores e o submundo fica com o resto. <PART>
+---
+Só quero salvar Midgard desse destino.
+Não desejo tomar partido de nenhum dos lados.",
+83,2346,"Precisa da minha ajuda de novo?
+Pode contar comigo! <PART>
+---
+Só preciso terminar umas tarefas.
+Matar kobolds na floresta aqui perto, <PART>
+---
+goblins na caverna perto da vila,
+homens-lagarto no rio, e... <PART>
+---
+Não deve demorar... muito...",
+83,2383,"Acredito que você dá conta de qualquer
+situação que apareça.",
+83,2384,"Só quero salvar Midgard das mãos
+de Valhalla e de Nifleheim. <PART>
+---
+Não desejo tomar partido de nenhum dos lados.",
+83,2386,"Terei prazer em ajudar assim que
+eu terminar as coisas por aqui.",
+83,2423,"É importante viver sem pressa. No entanto,
+não estou acostumada a esse tipo de vida. <PART>
+---
+O que eu faço?
+Viver assim não combina comigo.",
+83,2424,"Se as almas humanas transmigrarem para sempre,
+o mundo vai estagnar. <PART>
+---
+As almas que fogem dos limites de Valhalla
+e de Nifleheim precisam de um destino.",
+83,2426,"Viva cada dia como se fosse o último.
+Agarre a vida! <PART>
+---
+Hã? E eu?
+Claro que aproveito cada dia da minha vida! <PART>
+---
+Vamos, repita comigo:
+A vida é fantástica!",
+83,2463,"Prefiro me manter ocupada a passar
+os dias sem fazer nada. <PART>
+---
+Suponho que eu deva agradecer
+por ter um trabalho.",
+83,2464,"Poucos conseguem seguir sem um propósito. <PART>
+---
+Sem os céus, nasceria a desigualdade,
+e ela só cresceria. <PART>
+---
+O mesmo vale para o submundo.
+Os dois mundos são, na verdade, essenciais.",
+83,2466,"Não esqueça as minhas palavras!
+Agarre todas as oportunidades! <PART>
+---
+Corra rumo ao seu futuro!
+Não olhe para trás! Entendido?",
+83,2551,"Não é grande coisa, mas leve isto.",
+83,2552,"Não sei se vai ser útil,
+mas por favor, leve isto.",
+83,2554,"Tome, leve isto! Vai deixar você
+cheia de energia como eu!",
+83,2591,"É estranho estar sozinha.
+Como estão os outros? <PART>
+---
+Principalmente... Hum... Como está...?
+D-deixa para lá! Esqueça o que eu disse.",
+83,2592,"A senhora Silmeria salvou a minha alma de uma
+eternidade de mortes em Nifleheim, nas mãos de Hel. <PART>
+---
+Assim como as pessoas, há deuses confiáveis
+e deuses traiçoeiros. <PART>
+---
+Não concorda?",
+83,2594,"Ei! É você! <PART>
+---
+Como vai?
+Lembra de mim, não é? <PART>
+---
+Estou ótimo, como pode ver.
+Sinto que esta cidade é a minha casa agora. <PART>
+---
+Ainda há monstros por aqui, mas
+não tema! Zunde está aqui!",
 83,2809,"Vai ficar?
 Temos um quarto com vista disponível.",
 83,2810,Bem-vindo. Gostaria de um quarto?,
@@ -89,9 +181,9 @@ para alocar os quartos.",
 83,2807,Sim,not displayed by the event script
 83,2808,Não,not displayed by the event script
 83,2839,Coriander,not displayed by the event script
-83,2956,,
-83,2957,,
+83,2956,Adquirido <PART> Pingente da Deusa,
+83,2957,Adquirido <PART> Gema da Terra,
 83,2958,Dono da Pousada,not displayed by the event script
-83,2975,,
-83,2976,,
-83,2978,,
+83,2975,Aaron,
+83,2976,Dyn,
+83,2978,Zunde,

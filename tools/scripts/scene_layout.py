@@ -6,7 +6,8 @@ import textwrap
 from .scene_codec import pack_tokens
 from .vp2_scene_fingerprint import PAGE_BREAK_TEXT
 from .vp2_cutscene_subtitles import (
-    CODEPAGE_TOKENS, FRAGMENT_MARKER, RECORD_PARAMETERS, TEXT_BREAKS,
+    CODEPAGE_TOKENS, FRAGMENT_MARKER, HARD_BREAK_TEXT, RECORD_PARAMETERS,
+    TEXT_BREAKS, apply_hard_breaks,
 )
 
 
@@ -146,7 +147,10 @@ def wrap_between_breaks(text, advances, limit=SUBTITLE_MAX_WIDTH,
     return joined
 
 def soften_dialogue_breaks(text):
-    """Turn inherited interior line wrapping back into ordinary spaces."""
+    """Turn inherited interior line wrapping back into ordinary spaces.
+
+    A break marked ``<BR>`` is the translator's own and is kept.
+    """
     softened = []
     for index, character in enumerate(text):
         if character != "\n":
@@ -162,7 +166,7 @@ def soften_dialogue_breaks(text):
                                      else following_at)].strip()
         softened.append("\n" if PAGE_BREAK_TEXT.strip() in (before, following)
                         else " ")
-    return "".join(softened)
+    return apply_hard_breaks("".join(softened))
 
 def wrap_translation(text, source_tokens, advances=None,
                      max_lines=SUBTITLE_MAX_LINES, auto_paginate=False):
@@ -170,6 +174,7 @@ def wrap_translation(text, source_tokens, advances=None,
         return wrap_between_breaks(
             soften_dialogue_breaks(text), advances, max_lines=max_lines,
             auto_paginate=auto_paginate)
+    text = apply_hard_breaks(text)
     if "\n" in text:
         return text
     source_lines = 1 + source_tokens.count(0x8080)

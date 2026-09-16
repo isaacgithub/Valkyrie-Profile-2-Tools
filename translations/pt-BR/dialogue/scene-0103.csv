@@ -20,29 +20,82 @@ Ao encontrar uma em um campo de batalha desconhecido,
 pegue-a sem receio.
 O posicionamento de uma pedra-selo transforma um lugar, abertando novos caminhos. <PART>
 ---",
-103,393,Adquirido <PART> OTH,
-103,394,Perdido <PART> OTH,
+103,393,,
+103,394,,
 103,395,,
-103,2508,,
-103,2513,,
-103,2548,,
-103,2553,,
-103,2588,,
-103,2593,,
-103,2628,,
-103,2633,,
-103,2668,,
-103,2673,,
-103,2708,,
-103,2713,,
-103,2796,,
-103,2801,,
-103,2836,,
-103,2841,,
+103,2508,"Quando tudo acabar, permita-me
+tornar-me seu vassalo e servi-la.",
+103,2513,"Como você se sentiria se desse um presente
+especial a alguém e a pessoa o repassasse? <PART>
+---
+Não que... isso já tenha acontecido comigo.
+Claro, eu falava hipoteticamente.",
+103,2548,"Caos nos céus e
+tumulto nas terras mortais... <PART>
+---
+A perturbação precisa cessar para que
+Midgard alcance a paz.",
+103,2553,"Como está a espada que lhe dei?
+Está fazendo bom uso dela? <PART>
+---
+Não estou pedindo de volta...
+mas a minha esposa... hum...",
+103,2588,"Ouvi a história de Dipan. <PART>
+---
+Enquanto você viver, Princesa Alicia,
+a família real de Dipan seguirá no poder. <PART>
+---
+É o que o falecido Rei Barbarossa
+teria desejado.",
+103,2593,"Temos que mostrar a eles quanta
+força os humanos têm. <PART>
+---
+Temos que mostrar que somos
+tão importantes quanto eles.",
+103,2628,"No momento, tudo corre conforme
+os planos deles. Se você desistir agora... <PART>
+---
+Eles não podem vencer! Você tem
+que ficar viva, custe o que custar.",
+103,2633,"Nada vai mudar enquanto eles
+continuarem a nos olhar de cima, <PART>
+---
+ainda mais com pena e superioridade.
+Essa é a verdade.",
+103,2668,"Parece que não lhe interessa deter
+o poder sobre toda Midgard, Princesa Alicia. <PART>
+---
+Midgard precisa de um líder forte para
+alcançar a paz. <PART>
+---
+Esperarei o tempo que for preciso
+pela sua decisão.",
+103,2673,"Estou fora de forma. Acho que ando
+me mexendo bem menos.",
+103,2708,"Pela paz em Midgard...
+Pelo povo que sofre... <PART>
+---
+Princesa Alicia, peço que passe o resto
+da sua vida mudando o mundo. <PART>
+---
+Só você tem o poder de fazer isso.
+E serei insistente, se for preciso.",
+103,2713,"Isso não pode ser bom para mim.
+É melhor eu voltar a treinar.",
+103,2796,"Leve isto. Acho que vai ajudar
+um pouco na sua jornada.",
+103,2801,Isto há de ser útil uma hora dessas.,
+103,2836,"Quando tudo acabar, permita-me
+tornar-me seu vassalo e servi-la. <PART>
+---
+Sei que você é a única digna
+de ser servida nestes tempos.",
+103,2841,"Você está viva! ...Acho que não deveria me
+surpreender, já que até eu sobrevivo neste mundo.",
 103,1,Sair,not displayed by the event script
-103,2,,
-103,5,,
+103,2,Verificar,
+103,5,Verificar,
 103,2863,Villnore,not displayed by the event script
-103,2864,,
-103,2878,,
-103,2883,,
+103,2864,Adquirido <PART> Kraadicador,
+103,2878,Roland,
+103,2883,Kraad,

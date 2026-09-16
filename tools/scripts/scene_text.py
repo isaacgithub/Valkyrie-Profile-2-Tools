@@ -24,8 +24,9 @@ from .vp2_scene_fingerprint import PAGE_BREAK, PAGE_BREAK_TEXT, render_tokens
 from .vp2_cutscene_subtitles import (
     ACCENT_DONORS_DEFAULT, ALLOWED_SUBSTITUTIONS, CODEPAGE_ONLY,
     CODEPAGE_TOKENS, CONTROL_SPELLING, EN_NAMES_DEFAULT, EventTextOverflow,
-    FRAGMENT_MARKER, PAGE_BREAK_SPELLING, RAW_TOKEN, SCENE_COLUMNS,
-    SPLIT_SUBTITLE_AUDIO, canonical_page_breaks, visible_characters,
+    FRAGMENT_MARKER, HARD_BREAK_TEXT, PAGE_BREAK_SPELLING, RAW_TOKEN,
+    SCENE_COLUMNS, SPLIT_SUBTITLE_AUDIO, apply_hard_breaks,
+    canonical_page_breaks, visible_characters,
 )
 
 
@@ -307,6 +308,9 @@ def visible_text_tokens(text, alphabet, glyph_base, codepage=False,
                         materialize_blank_rows=False, char_tokens=None):
     """The inverse of ``render_tokens`` for one run of text."""
     text = canonical_page_breaks(text)
+    if HARD_BREAK_TEXT in text:
+        raise ValueError(
+            "%s reached the encoder unresolved" % HARD_BREAK_TEXT)
     if char_tokens is not None:
         char_to_token = char_tokens
     elif codepage:
@@ -542,7 +546,59 @@ def is_scene_sheet(path):
     return all(name in fields for name in SCENE_COLUMNS) \
         and "record_byte_offset" not in fields
 
-def read_scene_rows(path, resource=None, *, primary_lookup=None):
+CRLF = chr(13) + chr(10)
+NEWLINE = chr(10)
+UNDRAWN_MARK = "-"
+
+
+def undrawn_placeholder(english, mark=UNDRAWN_MARK):
+    out = []
+    for line in english.replace(CRLF, NEWLINE).split(NEWLINE):
+        if line.strip() == "---":
+            out.append(line)
+            continue
+        out.append("<PART>".join(
+            (" %s " % mark if piece.strip() else piece)
+            for piece in line.split("<PART>")))
+    return NEWLINE.join(out)
+
+
+def undrawn_mark(english):
+    words = english.replace("<PART>", " ")
+    for character in words:
+        if character.isascii() and character.isalpha():
+            return character.lower()
+    return None
+
+
+def reclaim_undrawn_rows(rows, mark=None):
+    from . import einherjar_roster
+
+    hidden = einherjar_roster.hidden_message_ids(rows)
+    if not hidden:
+        return rows, 0
+    reclaimed = 0
+    for row in rows:
+        if row.get("message_id") not in hidden:
+            continue
+        if (row.get("translated") or "").strip():
+            continue
+        english = row.get("original_en") or ""
+        if not english.strip():
+            continue
+        chosen = mark or undrawn_mark(english)
+        if chosen is None:
+            continue
+        held = undrawn_placeholder(english, chosen)
+        if len(held) >= len(english):
+            continue  # a record too short to be worth holding
+        row["translated"] = held
+        reclaimed += 1
+    return rows, reclaimed
+
+
+def read_scene_rows(path, resource=None, *, primary_lookup=None,
+                    reclaim_undrawn=False):
     """Read a scene sheet into the shape the patcher works in."""
     from . import normalize_sheet_newlines
     rows, _, _ = normalize_sheet_newlines.read_rows(path)
@@ -551,6 +607,10 @@ def read_scene_rows(path, resource=None, *, primary_lookup=None):
         from .vp2_build import sheet_kind
         rows, _ = resolve_duplicates(rows, primary_lookup=primary_lookup,
                                      kind=sheet_kind(path))
+    if reclaim_undrawn:
+        rows, reclaimed = reclaim_undrawn_rows(rows)
+        if reclaimed:
+            print("  reclaimed %d record(s) this scene never draws" % reclaimed)
     rows = [row for row in rows
             if row.get("message_id") and row.get("translated", "").strip()]
     from .vp2_title_face import CHAPTER_RECORDS
@@ -795,7 +855,7 @@ def run_replacements(expanded, metadata, alphabet, glyph_base, rows,
             wrapped_runs = []
             for (_run, target, from_codepage) in prepared:
                 if from_codepage or codepage_layout:
-                    wrapped = target
+                    wrapped = apply_hard_breaks(target)
                 else:
                     wrapped = wrap_translation(
                         target, _run[4], advances, max_lines=max_lines,

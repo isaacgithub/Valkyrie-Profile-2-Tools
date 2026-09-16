@@ -164,7 +164,7 @@ Usada em cerimônias místicas.",
 641,942,"Cajado em forma de serpente gigante.
 Permite a Grande Magia Ignição Pálida.",
 641,943,"Cajado imbuído de sabedoria infinita.
-Permite a Grande Magia Destruição Fantasmagórica.",
+Permite a Grande Magia Destruição Fantasma.",
 641,946,"Garra que amplia o poder de Brahms, Lorde dos Mortos Vivos.
 Dizem que suga o sangue de suas vítimas.",
 641,947,"Arma temível que amplia muito as habilidades de Brahms,
@@ -519,7 +519,7 @@ Em dobro contra inimigos do tipo Divino.",
 641,1795,Os números oficiais saíram!,
 641,1796,"A Barra de Combo sobe 1,5 vez mais que o normal.",
 641,1797,Golpeia duas vezes a cada ataque.,
-643,10,Items,
+643,10,Itens,
 643,11,Equip,
 643,72,ATQ,
 643,73,MAG,
@@ -584,41 +584,61 @@ Em dobro contra inimigos do tipo Divino.",
 645,1865,Medida Extrema,
 645,1866,Aparo Preciso,
 645,1868,Contra-Ataque,
-647,818,,
-647,845,,
-647,846,,
-647,847,,
-647,848,,
-647,849,,
-647,894,,
-647,895,,
-647,896,,
-647,897,,
-647,898,,
-647,974,,
-647,980,,
-647,981,,
-647,1064,,
-647,1086,,
-647,1087,,
-647,1090,,
-647,1091,,
-647,1092,,
-647,1094,,
-647,1121,,
-647,1156,,
-647,1175,,
-647,1182,,
-647,1183,,
-647,1185,,
-647,1186,,
-647,1187,,
-647,1190,,
-647,1191,,
-647,1234,,
-647,1237,,
-647,1238,,
-647,1239,,
+647,818,Queda Trovão,
+647,845,Ventania,
+647,846,Golpe Torcido,
+647,847,Soco Giratório,
+647,848,Fim Total,
+647,849,Lâmina da Tormenta,
+647,894,Disparo Furacão,
+647,895,Prova da Existência,
+647,896,Corte Descendente,
+647,897,Armadilha,
+647,898,Avanço Furioso,
+647,974,Ataque de Flanco,
+647,980,Tiro Explosivo,
+647,981,Espada da Vitória,
+647,1064,Tiro Único,
+647,1086,"Dispara dois projéteis em velocidade divina.
+Barra de ataque especial: 6 <0065> 2 golpes",
+647,1087,"Lança uma onda de choque com a luz das estrelas.
+Barra de ataque especial: 3 <0065> 4 golpes",
+647,1090,"Prende o inimigo numa distorção do próprio espaço.
+Barra de ataque especial: 3 <0065> número de golpes",
+647,1091,"Dispara uma flecha que explode ao acertar.
+Barra de ataque especial: 16 <0065> 1 golpe",
+647,1092,"Libera energia concentrada.
+Barra de ataque especial: 9 <0065> 2 golpes",
+647,1094,"Um ataque que mira direto na garganta.
+Barra de ataque especial: 10 <0065> 1 golpe",
+647,1121,"Uma chuva incontável de projéteis à frente.
+Barra de ataque especial: 3 <0065> 8 golpes",
+647,1156,"Um golpe descendente do alto.
+Barra de ataque especial: 5 <0065> 2 golpes",
+647,1175,"Um chute lateral que arremessa o inimigo.
+Barra de ataque especial: 12 <0065> 1 golpe",
+647,1182,"Um ataque descendente do alto.
+Barra de ataque especial: 9 <0065> 1 golpe",
+647,1183,"Uma estocada com o corpo abaixado.
+Barra de ataque especial: 3 <0065> 2 golpes",
+647,1185,"Um chute giratório com toda a força.
+Barra de ataque especial: 13 <0065> 1 golpe",
+647,1186,"Um ataque veloz como uma serpente.
+Barra de ataque especial: 2 <0065> 4 golpes",
+647,1187,"Ataque surpresa com uma faca escondida.
+Barra de ataque especial: 6 <0065> 2 golpes",
+647,1190,"Um golpe no ponto fraco do inimigo.
+Barra de ataque especial: 8 <0065> 1 golpe",
+647,1191,"Uma avalanche avassaladora de golpes de espada.
+Barra de ataque especial: 2 <0065> 6 golpes",
+647,1234,"Uma rasteira giratória.
+Barra de ataque especial: 11 <0065> 1 golpe",
+647,1237,"O primeiro corte ergue o inimigo; o segundo o derruba.
+Barra de ataque especial: 3 <0065> 3 golpes",
+647,1238,"Um ataque que atravessa a defesa do inimigo.
+Barra de ataque especial: 11 <0065> 1 golpe",
+647,1239,"Corte lateral brutal. Segure o botão para arremessar.
+Barra de ataque especial: 3 <0065> 2 golpes",
 650,1708,23,
 650,1709,27,
 24,30,%,

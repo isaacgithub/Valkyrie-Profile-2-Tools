@@ -1,11 +1,12 @@
 resource,message_id,translated,notes
 283,2743,Jessica <PART> entrou para o grupo.,
-283,2774,,
-283,2776,,
+283,2774,Psoron <PART> entrou para o grupo.,
+283,2776,Farant <PART> entrou para o grupo.,
 283,2588,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-283,2619,,
-283,2621,,
+283,2619,Quanto tempo se passou? E a minha pesquisa?,
+283,2621,"Se quer ver a extensão dos meus poderes,
+ponha um inimigo à minha frente!",
 283,2630,A alma de um feiticeiro emana do cajado.,
 283,2634,"A materialização é impossível
 sem a Silmeria...",
@@ -13,6 +14,6 @@ sem a Silmeria...",
 283,2632,Sim,not displayed by the event script
 283,2633,Não,not displayed by the event script
 283,2635,Cavernas do Vulcão Surts,not displayed by the event script
-283,2783,,
-283,2814,,
-283,2816,,
+283,2783,Jessica,
+283,2814,Psoron,
+283,2816,Farant,

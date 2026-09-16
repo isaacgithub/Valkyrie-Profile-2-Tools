@@ -8,61 +8,77 @@ O nascimento dela trouxe tanta alegria que muitas pessoas nomearam suas filhas d
 ---
 Para ela morrer tão jovem... A vida pode ser tão cruel...",
 73,7,A princesa Alicia era uma garotinha muito fofa. Seu amigo Dallas se tornou um dos magos! <PART> ---,
-73,9,"<Guia Tático>
+73,9,"<Manual Tático>
  <PART>
-Em batalha, a vida dos aliados está nas
+Na batalha, a vida dos aliados está nas
 mãos do comandante.
-Vós que desejais comandar, conhecei de
-coração estes segredos... <PART>
----",
+Vós que desejais comandar, gravai na
+memória estes segredos... <PART>
+---
+",
 73,10,"<Manual Tático>
-<PART>
-Lembre-se sempre:
-A capacidade de comandar alguém determina
+ <PART>
+Lembrai-vos sempre:
+a capacidade de comandar determina
 se os companheiros vivem ou morrem.",
-73,19,"<Guia Tático>
+73,19,"<Manual Tático>
  <PART> Elementos <PART>
-Existem quatro elementos naturais: fogo, gelo, relâmpago e terra. Além desses, também existem os elementos mágicos, sagrado e sombrio. <PART>
+Existem quatro elementos naturais:
+fogo, gelo, trovão e terra.
+Além desses, existem também os
+elementos mágicos, luz e sombra. <PART>
 ---
- <PART> <Guia Tático>
+ <PART> <Manual Tático>
  <PART> Elementos <PART>
-As técnicas de fogo são eficazes contra monstros fracos ao calor, enquanto o gelo funciona bem contra monstros de elemento fogo. Técnicas de terra com veneno são poderosas contra organismos vivos, enquanto relâmpagos atingem monstros de metal duramente. <PART>
+As técnicas de fogo são eficazes contra
+monstros fracos ao calor, enquanto o gelo
+funciona bem contra monstros de fogo.
+Técnicas de terra com veneno são poderosas
+contra organismos vivos, e o trovão atinge
+com força os monstros de metal. <PART>
 ---
- <PART> <Guia Tático>
+ <PART> <Manual Tático>
  <PART> Elementos <PART>
-Conhecer as características do seu inimigo e os elementos apropriados para atacar pode ser uma grande vantagem na batalha.",
+Conhecer as características do inimigo e os
+elementos adequados para atacá-lo pode ser
+uma grande vantagem em batalha.",
 73,17,"<Manual Tático>
  <PART> Desviar <PART>
-Desviar é a chave para o combate.
-Dominar ou não o <PART> Desvio <PART> pode decidir
+Movimento rápido é a chave do combate.
+Dominar ou não o <PART> desvio <PART> pode decidir
 o resultado da batalha.
 
-Desviar <PART> . <PART>
+Desvie usando <PART> . <PART>
 ---
  <PART> <Manual Tático>
  <PART> Desviar <PART>
-Existem três tipos de Desviar. Pressione rapidamente <PART> para se Desviar uma curta distância, segure para se Desviar uma longa distância oupressione duas vezes para se Desviar uma distância média. <PART>
+Existem três tipos de desvio.
+Pressione <PART> rapidamente para uma
+distância curta, segure para uma distância
+longa, ou pressione duas vezes para uma
+distância média. <PART>
 ---
  <PART> <Manual Tático>
- <PART> Corrida Rápida <PART>
-Você pode eliminar o tempo de recuperação do Desvio
-atacando enquanto ainda estiver em movimento.
-Isso é chamado de <PART> cancelamento de Desvio <PART>.",
+ <PART> Desviar <PART>
+Você pode eliminar o tempo de recuperação
+do desvio atacando ainda em movimento.
+
+Isso é chamado de <PART> cancelamento de desvio <PART> .",
 73,18,"<Manual Tático>
  <PART> Alterações de Estado <PART>
-Qualquer coisa pode acontecer em batalha, incluindo
-alterações de estado. Lembre-se de que elas podem ser fatais
-se não forem tratadas. <PART>
+Tudo pode acontecer em batalha, inclusive
+alterações de estado. Saiba que elas podem
+ser fatais se não forem tratadas. <PART>
 ---
  <PART> <Manual Tático>
  <PART> Alterações de Estado <PART>
-As alterações de estado abaixo ocorrem apenas
-em batalha.
+As alterações de estado abaixo ocorrem
+apenas em batalha.
 
 <Confusão>
-A confusão impede o personagem de pensar
+A Confusão impede o personagem de pensar
 corretamente e, portanto, de atacar.
-Use Normalize ou um item adequado
+Use Normalizar ou um item adequado
 para curar essa condição.
 Se não tiver meios de curá-la,
 terá de esperar o efeito passar. <PART>
@@ -70,108 +86,118 @@ terá de esperar o efeito passar. <PART>
  <PART> <Manual Tático>
  <PART> Alterações de Estado <PART>
 <Paralisia>
-A paralisia causa dormência em todo
-o corpo, impossibilitando o movimento.
-Use Normalize ou um item adequado
+A Paralisia causa dormência em todo o
+corpo, impossibilitando o movimento.
+Use Normalizar ou um item adequado
 para curar essa condição.
 Se não tiver meios de curá-la,
 terá de esperar o efeito passar. <PART>
 ---
  <PART> <Manual Tático>
  <PART> Alterações de Estado <PART>
-<Petrificação>
-As vítimas da petrificação tornam-se como estátuas,
+<Pedra>
+As vítimas de Pedra tornam-se estátuas,
 totalmente incapazes de agir.
-Use Normalize ou um item adequado
+Use Normalizar ou um item adequado
 para curar essa condição.
 Se não tiver meios de curá-la,
 terá de esperar o efeito passar. <PART>
 ---
  <PART> <Manual Tático>
  <PART> Alterações de Estado <PART>
-<Desmaio>
-O desmaio causa perda de consciência,
+<Sono>
+O Sono causa perda de consciência,
 deixando o personagem incapaz de agir.
-Use Normalize ou um item adequado
-para curar essa condição. Receber
-um ataque também fará o personagem despertar. <PART>
+Use Normalizar ou um item adequado
+para curar essa condição. Absorver um
+ataque inimigo também o desperta. <PART>
 ---
  <PART> <Manual Tático>
  <PART> Alterações de Estado <PART>
 <Transferência>
-A transferência o expulsa à força do
-campo de batalha, impedindo-o de se juntar aos
-seus companheiros por certo tempo.
-Não pode ser curada por Normalize.
+A Transferência o expulsa à força do campo
+de batalha, impedindo-o de se juntar aos
+companheiros por certo tempo.
+Não pode ser curada com Normalizar.
 Use um item adequado para curá-la. <PART>
 ---
  <PART> <Manual Tático>
- <PART> Alterações de Status <PART>
-As alterações de status abaixo persistem mesmo
-após a batalha.
+ <PART> Alterações de Estado <PART>
+As alterações de estado abaixo persistem
+mesmo após a batalha.
 
 <Veneno>
-O veneno reduz o HP em intervalos
-regulares.
-Use Normalize ou um item adequado
+O Veneno reduz o HP em certos
+intervalos.
+Use Normalizar ou um item adequado
 para curar essa condição. <PART>
 ---
  <PART> <Manual Tático>
- <PART> Alterações de Status <PART>
+ <PART> Alterações de Estado <PART>
 <Silêncio>
-O Silêncio impede o uso de magia, e certos
-ataques inimigos também podem ser neutralizados.
-Use Normalize ou um item adequado para curar
-essa condição. <PART>
----
- <PART> <Manual Tático>
- <PART> Alterações de Status <PART>
-<Maldição>
-A Maldição impede a troca de equipamentos.
-Use Normalize ou um item adequado para
+O Silêncio proíbe o uso de magia, e certos
+ataques inimigos também podem ser
+neutralizados.
+Use Normalizar ou um item adequado para
 curar essa condição. <PART>
 ---
  <PART> <Manual Tático>
- <PART> Alterações de Status <PART>
-<Fragilidade>
-A Fragilidade inibe a capacidade de
-recuperação do corpo, tornando a cura impossível.
-Não pode ser curada com Normalize.
-Use um item adequado para curá-la. <PART>
+ <PART> Alterações de Estado <PART>
+<Praga>
+A Praga impede a troca de equipamentos.
+Use Normalizar ou um item adequado para
+curar essa condição. <PART>
 ---
  <PART> <Manual Tático>
- <PART> Alterações de Status <PART>
+ <PART> Alterações de Estado <PART>
+<Fraco>
+Fraco inibe a capacidade de recuperação
+do corpo, tornando a cura impossível.
+Não pode ser curado com Normalizar.
+Use um item adequado para curá-lo. <PART>
+---
+ <PART> <Manual Tático>
+ <PART> Alterações de Estado <PART>
 <Inconsciente>
-Personagens inconscientes estão à
-beira da morte. Use Invoke Feather
-ou um item adequado para curar essa condição.
+Personagens inconscientes estão à beira
+da morte. Use Invocar Pluma ou um item
+adequado para curar essa condição.
 
 
-Certos acessórios podem prevenir essas alterações
-de status, se você conseguir encontrá-los.",
-73,16,"<Guia Tático>
+Certos acessórios previnem essas alterações
+de estado, se você conseguir encontrá-los.",
+73,16,"<Manual Tático>
  <PART> Lançando Feitiços <PART>
-Um verdadeiro feiticeiro sabe quando e onde lançar
-feitiços,. <PART>
+Um verdadeiro feiticeiro sabe não apenas como
+lançar feitiços, mas também quando e onde. <PART>
 ---
- <PART> <Guia Tático>
+ <PART> <Manual Tático>
  <PART> Lançando Feitiços <PART>
-Normalmente, um personagem vai lançar um feitiço pré-definido para
-agilizar ataques e integrar com
-os aliados. No entanto, sem concentração espiritual, os alcances e efeitos
-desses feitiços não atingem seu pleno potencial. <PART>
+Normalmente, o personagem lança um feitiço
+pré-definido para agilizar ataques e se
+integrar aos aliados. Sem tempo para a devida
+concentração espiritual, porém, o alcance e o
+efeito desses feitiços não atingem seu pleno
+potencial. <PART>
 ---
-<PART> <Manual Tático>
-<PART> Lançando Feitiços <PART>
-Para aumentar a força da própria magia, deve-se permanecer parado, abrir o livro de feitiços com <PART> e
-examinar a invocação a ser realizada. No entanto, isso impede de se combinar com aliados.
-Quanto ao método de ataque a usar, você precisará aplicar seu conhecimento a cada situação. <PART>
+ <PART> <Manual Tático>
+ <PART> Lançando Feitiços <PART>
+Para aumentar a força da magia, deve-se
+permanecer parado, abrir o livro de feitiços
+com <PART> e examinar a invocação a realizar.
+Isso, porém, impede a combinação com aliados.
+Quanto ao método de ataque a usar, aplique
+seu conhecimento a cada situação. <PART>
 ---
-<PART> <Manual Tático>
-<PART> Lançando Feitiços <PART>
-Existem Grandes Magias neste mundo que superam feitiços comuns. A Grande Magia pode aniquilar
-vários inimigos de uma vez.
-Mas os inimigos também podem usá-la. Quando atacado com Grande Magia, mantenha em mente o estado daqueles ao lado do personagem alvo.",
+ <PART> <Manual Tático>
+ <PART> Lançando Feitiços <PART>
+Existem Grandes Magias neste mundo que
+superam os feitiços comuns. A Grande Magia
+pode aniquilar vários inimigos de uma vez.
+
+Mas os inimigos também podem usá-la. Ao ser
+atingido por uma Grande Magia, atente para o
+estado de quem está ao lado do alvo.",
 73,1,Sair,not displayed by the event script
 73,2,Ler,
 73,8,Ler,

@@ -1,11 +1,11 @@
 resource,message_id,translated,notes
-371,389,,
+371,389,Lwyn <PART> entrou para o grupo.,
 371,390,Jessica <PART> entrou para o grupo.,
-371,394,,
-371,252,,
+371,394,Crescent <PART> entrou para o grupo.,
+371,252,É a minha vez? Esperei uma eternidade.,
 371,253,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-371,257,,
+371,257,Ehlen... onde está Ehlen?,
 371,292,A alma de um guerreiro leve emana da espada.,
 371,299,"A materialização é impossível
 sem a Silmeria...",
@@ -13,9 +13,9 @@ sem a Silmeria...",
 371,297,Sim,not displayed by the event script
 371,298,Não,not displayed by the event script
 371,300,Palácio do Dragão Venerado,not displayed by the event script
-371,386,,
+371,386,Adquirido <PART> Apotecário Arcano,
 371,387,Adquirido <PART> Union Plume,not displayed by the event script
-371,388,,
-371,429,,
-371,430,,
-371,434,,
+371,388,Adquirido <PART> Tintura de Fada,
+371,429,Lwyn,
+371,430,Jessica,
+371,434,Crescent,

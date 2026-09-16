@@ -2,25 +2,77 @@ resource,message_id,translated,notes
 39,336,,
 39,337,,
 39,338,,
-39,2187,,
-39,2190,,
-39,2227,,
-39,2230,,
-39,2267,,
-39,2270,,
-39,2307,,
-39,2310,,
-39,2347,,
-39,2350,,
-39,2387,,
-39,2390,,
-39,2475,,
-39,2478,,
-39,2515,,
-39,2518,,
+39,2187,"Só você pode escolher o próprio destino.
+E é isso que você precisa fazer agora.",
+39,2190,"Fiquei fora por tanto tempo que estou
+tendo dificuldade para me acostumar.",
+39,2227,"Há coisas que só você pode fazer.
+Tenha coragem para encará-las.",
+39,2230,"Não consigo acompanhar as ideias do povo
+desta época. Me sinto antiga!",
+39,2267,"Embora eu esteja viva agora,
+sou uma pessoa do passado. <PART>
+---
+Não tenho sabedoria alguma para ensinar
+ao povo desta época. <PART>
+---
+Afinal, a rainha é você.",
+39,2270,"Não consigo me empolgar em ficar famosa
+ou ganhar dinheiro. <PART>
+---
+Já fiz isso na minha vida passada.
+Só deixa a gente com um vazio.",
+39,2307,"Você precisa pensar e escolher qual caminho
+é o certo para você. <PART>
+---
+Esse é o seu dever, e também um dos poucos
+direitos que você pode exercer.",
+39,2310,"Por que não deixar a vida levar?
+Eu quero me divertir nesta vida!",
+39,2347,"É estranho ler sobre si mesma
+em livros de história. <PART>
+---
+Mas confesso que é uma sensação boa.",
+39,2350,"Ter um ofício ajuda a se virar
+por este mundo. <PART>
+---
+Embora eu não saiba quanto ofício existe
+em sair balançando uma espada...",
+39,2387,"Vejo traços do meu irmão mais velho
+em você. <PART>
+---
+Eu só te dei trabalho.
+Espero que ele não esteja bravo por isso.",
+39,2390,"Hã?
+Estou ganhando a vida muito bem. <PART>
+---
+Mas talvez eu devesse me casar
+enquanto ainda tenho beleza.",
+39,2475,"Tome, fique com isto.
+Deve ser útil na sua jornada.",
+39,2478,"Já que veio até aqui,
+leve isto de lembrança.",
+39,2515,"Estou aqui agora, mas continuo sendo
+uma pessoa do passado. <PART>
+---
+Não há nada que eu possa ensinar
+ao povo desta época. <PART>
+---
+O caminho que você escolher é seu,
+seja ele certo ou errado.",
+39,2518,"Olá! Como vão vocês?
+Não parecem muito bem. <PART>
+---
+Eu também estou tendo dificuldade
+para ganhar a vida direito. <PART>
+---
+E ainda tenho dificuldade de convencer
+as pessoas de que estou nos livros de história. <PART>
+---
+Ah, paciência. Pelo menos estou me divertindo!",
 39,1,Sair,not displayed by the event script
-39,2,,
+39,2,Adquirido <PART> Arcano do Guerreiro,
 39,2551,Solde,not displayed by the event script
-39,2744,,
-39,2749,,
-39,2752,,
+39,2744,Adquirido <PART> Berloque Infalível,
+39,2749,Celes,
+39,2752,Tyrith,

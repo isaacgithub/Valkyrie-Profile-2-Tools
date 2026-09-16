@@ -77,6 +77,43 @@ class PackProfileTests(unittest.TestCase):
                 check_pack_profile(pack)
             self.assertIn("build-profile.csv", str(raised.exception))
 
+    def test_a_profile_cannot_name_pack_assets_that_are_missing(self):
+        import tempfile
+        from tools.scripts.public_build import check_pack_profile
+        from tools.scripts.translation_pack import PackError
+        with tempfile.TemporaryDirectory() as elsewhere:
+            pack = Path(elsewhere) / "xx-XX"
+            pack.mkdir()
+            (pack / "pack.toml").write_text(
+                'format = 2\nlocale = "xx-XX"\nname = "Test"\n',
+                encoding="utf-8")
+            (pack / "build-profile.csv").write_text(
+                "kind,resource,sheet,flags,verify,subresource\n"
+                "image,1781,images,,,,\n"
+                "misc,1781,misc.csv,,,,\n",
+                encoding="utf-8")
+            with self.assertRaises(PackError) as raised:
+                check_pack_profile(pack)
+            self.assertIn("images", str(raised.exception))
+
+    def test_a_profile_cannot_name_a_missing_misc_file(self):
+        import tempfile
+        from tools.scripts.public_build import check_pack_profile
+        from tools.scripts.translation_pack import PackError
+        with tempfile.TemporaryDirectory() as elsewhere:
+            pack = Path(elsewhere) / "xx-XX"
+            pack.mkdir()
+            (pack / "pack.toml").write_text(
+                'format = 2\nlocale = "xx-XX"\nname = "Test"\n',
+                encoding="utf-8")
+            (pack / "build-profile.csv").write_text(
+                "kind,resource,sheet,flags,verify,subresource\n"
+                "misc,1781,misc.csv,,,,\n",
+                encoding="utf-8")
+            with self.assertRaises(PackError) as raised:
+                check_pack_profile(pack)
+            self.assertIn("misc.csv", str(raised.exception))
+
     def test_a_language_that_is_not_installed_lists_the_ones_that_are(self):
         from tools.scripts.public_build import resolve_pack
         from tools.scripts.translation_pack import PackError
@@ -126,7 +163,7 @@ class UnlistedFolderTests(unittest.TestCase):
             self.assertEqual(
                 [], [name for name in bundled if "/_draft/" in name])
 
-    def test_translation_pack_image_layout_json_is_bundled(self):
+    def test_translation_pack_assets_are_bundled_but_replacements_are_not(self):
         import tempfile
         from tools.scripts import public_release
         with tempfile.TemporaryDirectory() as elsewhere:
@@ -139,6 +176,13 @@ class UnlistedFolderTests(unittest.TestCase):
             layout = pack / "fis-image-layouts.json"
             layout.write_text('{"version": 1, "images": {}}',
                               encoding="utf-8")
+            misc = pack / "misc.csv"
+            misc.write_text(
+                "key,translated,notes\nbattle_target,Target,Label\n",
+                encoding="utf-8")
+            image = pack / "images" / "fis-1781-raw-0.png"
+            image.parent.mkdir()
+            image.write_bytes(b"authored image")
             generated = pack / "replacements" / "manifest.json"
             generated.parent.mkdir()
             generated.write_text("{}", encoding="utf-8")
@@ -146,6 +190,9 @@ class UnlistedFolderTests(unittest.TestCase):
                        in public_release.payload_members(root)]
             self.assertIn(
                 "translations/xx-XX/fis-image-layouts.json", bundled)
+            self.assertIn("translations/xx-XX/misc.csv", bundled)
+            self.assertIn("translations/xx-XX/images/fis-1781-raw-0.png",
+                          bundled)
             self.assertNotIn(
                 "translations/xx-XX/replacements/manifest.json", bundled)
 

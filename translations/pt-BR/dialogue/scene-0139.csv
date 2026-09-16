@@ -1,28 +1,115 @@
 resource,message_id,translated,notes
-139,4,,
+139,4,Vou usar com sabedoria.,
 139,349,,
 139,350,,
 139,351,,
-139,2445,,
-139,2450,,
-139,2485,,
-139,2490,,
-139,2525,,
-139,2530,,
-139,2565,,
-139,2570,,
-139,2605,,
-139,2610,,
-139,2645,,
-139,2650,,
-139,2733,,
-139,2738,,
-139,2773,,
-139,2778,,
+139,2445,"Era vantajoso para os deuses serem
+os protetores dos humanos. <PART>
+---
+Foi por isso que deuses e humanos
+conseguiram coexistir. <PART>
+---
+Pouca gente se dá conta disso.",
+139,2450,"Onde este mundo foi parar, deixando
+de pé um país como este? <PART>
+---
+Não passa de um ponto de encontro para
+tolos superficiais e sem requinte.",
+139,2485,"É por isso que os deuses protegem Midgard
+e os humanos. <PART>
+---
+Imagino que continuarão assim
+até não haver mais vantagem nisso.",
+139,2490,"Só sentirei felicidade
+se este país for destruído!",
+139,2525,"Soube da situação em Dipan.
+Deve ser algum tipo de aviso. <PART>
+---
+Os deuses estão mostrando seu poder para
+intimidar quem os desobedece. <PART>
+---
+Os métodos deles são muito piores
+que os de Nifleheim.",
+139,2530,"Dizem que meu irmão Cain morreu de doença;
+ou seja, foi preso por incompetência. <PART>
+---
+Não me espanta muito, pois já havia boatos...
+e cela de sobra para mantê-lo.",
+139,2565,"Os de Nifleheim tentam arrastar
+almas isoladas para baixo. <PART>
+---
+Os deuses agarram tudo, e massacram
+quem resiste. <PART>
+---
+Os métodos dos deuses são mais perversos
+que os dos mortos-vivos.",
+139,2570,"Eu era querida pelo povo e, embora fosse
+só uma figura de fachada, era a sucessora. <PART>
+---
+Por minha causa eles não foram atrás
+do meu irmão antes. <PART>
+---
+Se Cain fosse morto, eu viraria rainha.
+Vivo, ele seria o sucessor. <PART>
+---
+Provocaram Cain a me matar
+e o prenderam pelo crime. <PART>
+---
+Ainda não sei se foi o general ou
+o primeiro-ministro que tramou tudo...",
+139,2605,"Minha tribo era protegida pelos deuses em troca
+de virarmos einherjar quando morrêssemos. <PART>
+---
+No entanto, tentei trocar meu filho por nascer
+para entrar em Nifleheim. <PART>
+---
+Os deuses se iraram e destruíram minha tribo.
+A culpa é só minha...",
+139,2610,"Na minha vida passada, eu vivia sozinha.
+É estranho estar acompanhada.",
+139,2645,"Não foi obra dos mortos-vivos
+a destruição da minha tribo. <PART>
+---
+Aquela magia poderosa só podia vir
+dos nossos protetores, os deuses. <PART>
+---
+Mesmo assim, sou grata por uma coisa <PART> ---- <PART>
+deixaram meu filho viver.",
+139,2650,"Na minha vida passada, eu vivia sozinha.
+Já me acostumei com isso.",
+139,2733,"Guardei algo para você, caso nos
+encontrássemos de novo. Aceite, por favor.",
+139,2738,"Parece que você ainda está passando
+por maus bocados. Leve isto.",
+139,2773,"Em muitos casos, era vantajoso para os
+deuses serem os protetores dos humanos. <PART>
+---
+Por outro lado, era vantajoso para os
+monstros ferirem os humanos. <PART>
+---
+Há momentos em que não vejo diferença
+entre os dois. <PART>
+---
+Uma coisa que aprendi na vida passada é que
+só os fracos dependem demais dos deuses. <PART>
+---
+Se eu soubesse disso, teria repensado
+o meu próprio valor...",
+139,2778,"Antes, eu só treinava para
+provar meu valor aos outros. <PART>
+---
+Acabei percebendo que a minha presença
+incomodava o país. <PART>
+---
+Quanto mais eu fazia pelo meu país,
+mais as autoridades se irritavam. <PART>
+---
+Talvez eu tivesse conseguido me salvar
+se não tivesse feito nada.",
 139,1,Sair,not displayed by the event script
-139,2,,
-139,3,,
+139,2,Verificar,
+139,3,Adquirido <PART> Cristal de Gelo,
 139,2793,Crell Monferaigne,not displayed by the event script
-139,2795,,
-139,2816,,
-139,2821,,
+139,2795,Adquirido <PART> Gema da Terra,
+139,2816,Atrasia,
+139,2821,Lydia,

@@ -105,6 +105,8 @@ SPLIT_SUBTITLE_SOURCE = ("Don't worry about it",
                          "just do as I say for a while.")
 FRAGMENT_MARKER = "<PART>"
 
+HARD_BREAK_TEXT = "<BR>"
+
 def area_banner_visible_text(text):
     """Drop the source sheet's opaque leading area-banner placeholder."""
     parts = text.split(FRAGMENT_MARKER)
@@ -135,6 +137,9 @@ RAW_TOKEN = re.compile(r"<([0-9A-Fa-f]{4})>")
 
 PAGE_BREAK_SPELLING = re.compile(r"(?:\n|\A)[ \t]*---(?!-)[ \t]*(?:\n|\Z)")
 
+HARD_BREAK_SPELLING = re.compile(
+    r"[ \t]*\n?[ \t]*" + re.escape(HARD_BREAK_TEXT) + r"[ \t]*\n?[ \t]*")
+
 CONTROL_SPELLING = re.compile(
     r"<[0-9A-Fa-f]{4}>|" + PAGE_BREAK_SPELLING.pattern)
 
@@ -142,13 +147,17 @@ def canonical_page_breaks(text):
     """Text with every page break spelled the way ``render_tokens`` spells it."""
     return PAGE_BREAK_SPELLING.sub(PAGE_BREAK_TEXT, text)
 
+def apply_hard_breaks(text):
+    """Text with every authored hard-break marker turned into a line break."""
+    return HARD_BREAK_SPELLING.sub("\n", text)
+
 def strip_raw_tokens(text):
     """Text with the raw-token tags removed, for anything counting glyphs."""
     return RAW_TOKEN.sub("", text)
 
 def visible_characters(text):
     """The characters a translation actually asks the font to draw."""
-    return CONTROL_SPELLING.sub("", text)
+    return CONTROL_SPELLING.sub("", apply_hard_breaks(text))
 
 def _codepage_tokens():
     """``character -> token`` for the shared code page, minus the slots the"""
@@ -1151,6 +1160,17 @@ def patch_resource_in_memory(iso, resource_index, args, rows,
                 print("streamed archive kept in place by reusing released "
                       "glyph slots")
             info = compact
+        if not args.full_font and info.get("grown_sectors") and streamed:
+            args.full_font = True
+            try:
+                recut = patch_resource_bytes(
+                    raw, resource_index, args, rows, iso, reference=reference)
+            except ValueError:
+                args.full_font = False
+            else:
+                info = recut
+                print("streamed archive re-cut in full after a sector "
+                      "shortfall")
         if (args.full_font and not args.use_vacated
                 and info.get("grown_sectors") and streamed):
             args.use_vacated = True

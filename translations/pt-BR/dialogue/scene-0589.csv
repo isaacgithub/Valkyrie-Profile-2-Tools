@@ -1,20 +1,97 @@
 resource,message_id,translated,notes
-589,47,,
-589,49,,
-589,87,,
-589,89,,
-589,127,,
-589,129,,
-589,167,,
-589,169,,
-589,207,,
-589,209,,
-589,247,,
-589,249,,
-589,335,,
-589,337,,
-589,375,,
-589,377,,
+589,47,"A arte da magia não avança com
+a interferência da ética! <PART>
+---
+Até a arte da cura trai a providência.",
+589,49,"Um sonho. A realidade. Uma visão. A solidez.
+Um sonho é um sonho; uma visão é uma visão. <PART>
+---
+Às vezes um sonho se realiza; uma visão se solidifica.
+Logo, esta vida nova também é um pedaço de sonho.",
+589,87,"Suponho que terei de ser eu
+a fazer isso. Os outros são inúteis!",
+589,89,"Que olhar é esse? Não se aflija.
+Nem eu compreendo tudo sozinho.",
+589,127,"Pesquisei bastante sobre as fórmulas
+das magias comuns, <PART>
+---
+e descobri que as teorias que criei
+na minha vida passada estavam certas. <PART>
+---
+Sou grato por ter renascido,
+ainda que só para constatar isso.",
+589,129,"Ao experimentar a morte, meu espírito chegou mais perto
+da verdade. Minha alma eterna escolheu o caminho dos deuses. <PART>
+---
+Estou perto de decifrar a base da vida,
+a pergunta que ocupa todo feiticeiro.",
+589,167,"Uma vida mortal é curta demais para investigar a verdade.
+Agora entendo por que alguns desejam virar mortos-vivos.",
+589,169,"Manter a ligação entre corpo e espírito até a morte
+é semelhante a um espírito eternamente vazio. <PART>
+---
+Se o espírito humano é eterno, alguém com alma,
+corpo e espírito seria um ser completo. <PART>
+---
+Mantendo o espírito enquanto se repete o ciclo de
+degradação e reconstrução do corpo <PART>
+---
+e da alma, é possível se aproximar da verdade, não?",
+589,207,"O futuro dos deuses e dos mortos-vivos guarda
+apenas a decadência do espírito com o tempo. <PART>
+---
+Sem as maçãs de Idun, nem mesmo os deuses
+enganam o tempo. <PART>
+---
+Os espíritos humanos são bem mais fracos que
+os dos deuses e dos mortos-vivos. <PART>
+---
+Uma vida eterna para um mortal só terminaria
+em enorme sofrimento.",
+589,209,"Corpo, alma e espírito são tudo.
+É disso que o mundo é feito. <PART>
+---
+Um deus é um ser sem corpo, mas com
+alma e espírito eternos unidos. <PART>
+---
+Um morto-vivo é um ser sem alma, apenas
+um corpo movido por um espírito forte. <PART>
+---
+Um humano é um ser insignificante cujo corpo abriga
+uma alma, e cujo espírito frágil se apaga na morte. <PART>
+---
+Isso eu posso afirmar com... com... convicção...!",
+589,247,"Os humanos acharam o caminho para virar mortos-vivos.
+Deve existir também um caminho para virar deus. <PART>
+---
+No entanto, nenhum dos dois me agrada. <PART>
+---
+...O quê? Esta é a minha verdade.
+Por que você ri?",
+589,249,"Corpo, alma e espírito não existem sozinhos.
+Nenhum ser reúne os três. <PART>
+---
+Um humano com espírito verdadeiro, um morto-vivo com
+alma, e um deus com corpo... <PART>
+---
+Nenhum deles existe, pois contradizem
+a própria existência. <PART>
+---
+Eu e você, Princesa Alicia, somos
+as únicas exceções.",
+589,335,"Isto é para você. É graças a você
+que posso seguir com minha pesquisa.",
+589,337,"Quase esqueci.
+Isto é para você.",
+589,375,"Nada avançou desde a minha vida passada.
+Houve pouquíssimo progresso. <PART>
+---
+O que os outros andam fazendo!?",
+589,377,"Meus dias como einherjar me levaram
+a certa hipótese. <PART>
+---
+Se ela se provar, a relação entre deuses
+e humanos vai mudar. Fique viva até lá.",
 589,383,,
 589,384,,
 589,385,,
@@ -23,7 +100,7 @@ resource,message_id,translated,notes
 589,6,,
 589,7,Sim,not displayed by the event script
 589,8,Não,not displayed by the event script
-589,388,,
-589,389,,
-589,422,,
-589,424,,
+589,388,Mina de Turgen,
+589,389,Adquirido <PART> Sobrecarga,
+589,422,Psoron,
+589,424,Farant,

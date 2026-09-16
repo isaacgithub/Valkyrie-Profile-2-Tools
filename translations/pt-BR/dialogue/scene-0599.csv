@@ -1,11 +1,12 @@
 resource,message_id,translated,notes
 599,393,Jessica <PART> entrou para o grupo.,
-599,416,,
-599,419,,
+599,416,Lylia <PART> entrou para o grupo.,
+599,419,Millidia <PART> entrou para o grupo.,
 599,258,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-599,281,,
-599,284,,
+599,281,"Nunca pensei que teria outra chance
+de andar por estas terras.",
+599,284,Batalha? Não tenho medo!,
 599,299,A alma de uma arqueira emana do arco.,
 599,304,"A materialização é impossível
 sem a Silmeria...",
@@ -14,6 +15,6 @@ sem a Silmeria...",
 599,303,Não,not displayed by the event script
 599,305,Mina de Turgen,not displayed by the event script
 599,391,Adquirido <PART> Tônico de Anão,
-599,433,,
-599,456,,
-599,459,,
+599,433,Jessica,
+599,456,Lylia,
+599,459,Millidia,

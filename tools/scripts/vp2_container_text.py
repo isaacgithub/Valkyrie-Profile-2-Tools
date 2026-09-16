@@ -262,7 +262,7 @@ def codepage_font_cuts(blob, meta, alphabet):
                 if first != other:
                     parent[first] = other
     cut_of_slot = [find(slot) for slot in range(count)]
-    cuts = {}
+    cuts = {cut: {} for cut in cut_of_slot}
     for slot in range(count):
         character = alphabet.get(slot)
         if character:
@@ -685,7 +685,8 @@ def grow_codepage_font(blob, meta, alphabet, replacements, resource):
             out.append(last)
         return out
 
-    drawn_locally = {offset: codepage_record_is_local(blob, meta, offset)
+    drawn_locally = {offset: (codepage_record_is_local(blob, meta, offset)
+                              and any(record_runs[offset]))
                      for offset in record_runs}
 
     kept, wanted = set(), {}

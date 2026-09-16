@@ -1,21 +1,79 @@
 resource,message_id,translated,notes
 423,3,,
-423,13,,
-423,18,,
-423,53,,
-423,58,,
-423,93,,
-423,98,,
-423,133,,
-423,138,,
-423,173,,
-423,178,,
-423,213,,
-423,218,,
-423,301,,
-423,306,,
-423,341,,
-423,346,,
+423,13,"Está passando por maus bocados? <PART>
+---
+A vida é feita de altos e baixos.
+Mantenha a cabeça erguida.",
+423,18,"Você de novo?
+Não tem nada para fazer? <PART>
+---
+Veio na esperança de ganhar um presente?
+...Vou pensar no seu caso.",
+423,53,"A vida é feita de altos e baixos.
+Mantenha a cabeça erguida.",
+423,58,"Aceite tudo o que lhe oferecerem.
+É falta de educação recusar!",
+423,93,"Valhalla não parece ser um lugar
+muito agradável. <PART>
+---
+Quem será que foi a primeira pessoa
+a dizer o contrário?",
+423,98,"O que você faz aqui?
+Não tem o que fazer? <PART>
+---
+Tem, não tem?
+Então vá fazer logo!",
+423,133,"Quem foi a primeira pessoa a dizer
+que Valhalla era um lugar agradável? <PART>
+---
+Quem quer que tenha dito isso devia ser
+obrigado, na ponta da espada, a confessar a mentira!",
+423,138,"Se quiser visitar, tudo bem
+por mim. <PART>
+---
+Só não esqueça que, como anfitriã,
+tenho que entreter todo mundo. <PART>
+---
+Dá um trabalho danado!",
+423,173,"Sem ofensa, mas muita gente
+no seu grupo... <PART>
+---
+Hum, muita gente no seu grupo
+é bem... peculiar.",
+423,178,"Na minha vida passada, eu me achava a pessoa
+mais infeliz do mundo. <PART>
+---
+Hoje sei que não era. <PART>
+---
+Por causa do que fiz no passado, pude
+conhecer as pessoas que eu devia conhecer. <PART>
+---
+Acho que a gente descobre se foi feliz ou não
+nos últimos instantes de vida.",
+423,213,"Você é boa demais. <PART>
+---
+O que acontece nos céus não é
+problema seu. <PART>
+---
+Deixe que os responsáveis
+resolvam isso sozinhos!",
+423,218,"E você?
+Está insatisfeita com o seu destino?",
+423,301,Tome. Leve isto e anime-se!,
+423,306,Não diga nada e leve logo isto!,
+423,341,"Uau! Veja quem está aqui!
+Talvez a gente tenha nascido uma para a outra! <PART>
+---
+...Parece que você não está para piadas.
+Está passando por maus bocados? <PART>
+---
+A vida é feita de altos e baixos.
+Mantenha a cabeça erguida.",
+423,346,"Quanto tempo! Tinha uma coisa que eu
+queria lhe dar quando a visse de novo. <PART>
+---
+Está bem aqui... Hummm...
+Acho que perdi... Fica para a próxima!",
 423,381,,
 423,382,,
 423,383,,
@@ -24,9 +82,9 @@ resource,message_id,translated,notes
 423,4,,
 423,5,Sim,not displayed by the event script
 423,6,Não,not displayed by the event script
-423,386,,
-423,387,,
-423,388,,
-423,389,,
-423,390,,
-423,395,,
+423,386,Floresta dos Espíritos,
+423,387,Elixir <PART> Adquirido,
+423,388,Adquirido <PART> Elíxir Nobre,
+423,389,Adquirido <PART> Tintura da Deusa,
+423,390,Lwyn,
+423,395,Crescent,

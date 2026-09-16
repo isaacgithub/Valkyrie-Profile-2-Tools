@@ -1,38 +1,128 @@
 resource,message_id,translated,notes
-111,4,,
-111,3,,
+111,4,Vou usar com sabedoria.,
+111,3,Nunca vi móveis tão exóticos.,
 111,394,,
 111,395,,
 111,396,,
-111,2244,,
-111,2249,,
-111,2250,,
-111,2284,,
-111,2289,,
-111,2290,,
-111,2324,,
-111,2329,,
-111,2330,,
-111,2364,,
-111,2369,,
-111,2370,,
-111,2404,,
-111,2409,,
-111,2410,,
-111,2444,,
-111,2449,,
-111,2450,,
-111,2532,,
-111,2537,,
-111,2538,,
-111,2572,,
-111,2577,,
-111,2578,,
+111,2244,"É uma honra ter sido escolhida
+pela senhora Silmeria, <PART>
+---
+e ter recebido a chance
+de lutar ao seu lado.",
+111,2249,"Não se menospreze.
+São os outros que determinam o seu valor.",
+111,2250,"Esta cidade mudou bastante, mas
+ainda vejo traços do que ela já foi.",
+111,2284,"É uma honra ter recebido a chance
+de lutar ao seu lado.",
+111,2289,"No fim, cabe a você levar ou não
+a sério a opinião dos outros.",
+111,2290,"Muitos poços secaram, mas a cidade
+ainda guarda traços do passado. <PART>
+---
+Para mim, isso basta.",
+111,2324,"Não me arrependo de como morri
+na vida passada. <PART>
+---
+Mas há uma pessoa que jamais esquecerei... <PART>
+---
+Ele era um tolo, mas no fim,
+a tola maior fui eu. <PART>
+---
+Ainda assim, fico feliz que tenha
+terminado assim.",
+111,2329,"Os tempos mudaram, mas
+eu não. <PART>
+---
+Ainda só existe uma pessoa
+capaz de me completar.",
+111,2330,"Fui prestar homenagem à pessoa mais
+importante do meu passado. <PART>
+---
+O deserto é o lugar que escolhi
+para a nossa sepultura.",
+111,2364,"Nunca me arrependi de como morri
+na vida passada. <PART>
+---
+Mesmo na mesma situação, eu não
+tiraria a vida dele. <PART>
+---
+Talvez eu não seja guerreira de verdade... <PART>
+---
+",
+111,2369,"A maior felicidade é achar alguém
+que aceite você como você é. <PART>
+---
+Pelo menos é o que eu acho.",
+111,2370,"No passado, eu não prestava
+homenagem aos mortos. <PART>
+---
+Mas percebi que é bom saber que as pessoas
+se importam com você mesmo depois que você parte. <PART>
+---
+Espero que a pessoa que fui homenagear
+sinta o mesmo...",
+111,2404,"Avise-me se eu puder ajudar
+de alguma forma. <PART>
+---
+Mesmo que não seja no campo de batalha,
+há de haver algo que eu possa fazer.",
+111,2409,"Estou gostando de poder viver em
+mais de uma época. <PART>
+---
+É uma experiência preciosa.",
+111,2410,"Vou ficar nesta cidade até
+o fim. <PART>
+---
+Tenho muito carinho por Kalstad.
+Ela guarda muitas das minhas lembranças... <PART>
+---
+",
+111,2444,"Eu não seria de muita ajuda no
+campo de batalha... <PART>
+---
+Mas há de haver algo que eu
+possa fazer por você.",
+111,2449,"Algumas coisas mudaram, outras
+não. <PART>
+---
+Alguns lugares evoluíram, outros
+regrediram. <PART>
+---
+Essa é a essência dos humanos.
+Não somos deuses, afinal.",
+111,2450,"Sei por que os poços secaram. <PART>
+---
+O fluxo da árvore do mundo mudou
+de curso. <PART>
+---
+Esta cidade não vai durar muito. Devíamos erguer
+uma nova a meio dia de caminhada daqui.",
+111,2532,"Leve isto, por favor. É o meu
+jeito de agradecer.",
+111,2537,"Leve isto com você.
+É um dos melhores que já fiz!",
+111,2538,"Deve ter sido uma jornada longa até
+aqui. Não é muito, mas leve isto.",
+111,2572,"Princesa Alicia, quanto tempo. <PART>
+---
+Não sei dizer a honra que foi
+poder lutar ao seu lado.",
+111,2577,"Quanto tempo.
+Parece que você anda passando aperto. <PART>
+---
+Tenho algo para você.
+Volte a me visitar, está bem?",
+111,2578,"Alicia! Que alegria vê-la!
+Bem-vinda à minha terra, Kalstad. <PART>
+---
+Não há muito o que ver, mas fique
+o tempo que quiser.",
 111,1,Sair,not displayed by the event script
-111,2,,
+111,2,Verificar,
 111,2609,Kalstad,not displayed by the event script
-111,2801,,
-111,2802,,
-111,2806,,
-111,2811,,
-111,2812,,
+111,2801,Adquirido <PART> Arcano do Sábio,
+111,2802,Adquirido <PART> Kraadmalha,
+111,2806,Fraudir,
+111,2811,Circe,
+111,2812,Rasheeka,

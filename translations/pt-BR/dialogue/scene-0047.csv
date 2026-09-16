@@ -7,10 +7,23 @@ Para os guerreiros, ser escolhido é uma honra, e algum dia espero conhecê-la. 
 ---
 Mas isso significa realmente morrer, né? Acho que prefiro não pensar sobre isso.",
 47,3,A vida eterna nos céus é prometida àqueles escolhidos para se tornarem einherjar.,
-47,4,,
-47,5,,
-47,6,,
-47,7,,
+47,4,"É você mesma, Princesa Alicia!?
+Que surpresa encontrá-la aqui! <PART>
+---
+Fugi de Dipan, mas agora para onde eu vou?
+Vivo das esmolas desta capela. <PART>
+---
+A vida que eu levava dias atrás parece um sonho.
+Não sei como vou sobreviver.",
+47,5,"Os deuses que veneramos nos abandonaram,
+mas ainda assim junto as mãos em oração.",
+47,6,"Não imagino para quem minha mãe está rezando.
+Ela mesma disse que os deuses nos abandonaram. <PART>
+---
+Se eu fosse rezar, seria pelas pobres almas
+que ficaram em Dipan.",
+47,7,"Acho que Dipan fica nesta direção.
+Rezemos para que todos descansem em paz.",
 47,9,"<Teologia> <PART>
 Donzela Guerreira, Defensora dos Caídos... A valquíria é conhecida por muitos nomes. Por ordem de Odin, Rei dos Aesir, a valquíria escolhe almas corajosas e as conduz a Valhalla para prepará-las para a iminente guerra dos deuses. <PART>
 ---
@@ -24,22 +37,80 @@ Assim, Odin recriou a raça humana em Midgard, tornando-se, dessa forma, o pai d
 47,347,,
 47,348,,
 47,349,,
-47,2215,,
-47,2223,,
-47,2255,,
-47,2263,,
-47,2295,,
-47,2303,,
-47,2335,,
-47,2343,,
-47,2375,,
-47,2383,,
-47,2415,,
-47,2423,,
-47,2503,,
-47,2511,,
-47,2543,,
-47,2551,,
+47,2215,"Quais são seus planos? O que você quer fazer?
+Só você pode decidir isso, sabia?",
+47,2223,"Não tenho nada a dizer a você.
+Nunca mais vou deixar que me use. <PART>
+---
+Se quer o meu conselho,
+saia daqui. Agora!",
+47,2255,"Não posso usar meus contatos porque
+ninguém acredita em quem eu sou. <PART>
+---
+E mesmo que eu tente fazer algo sozinho,
+levaria anos até chegar a uma posição de poder. <PART>
+---
+Só você pode fazer isso.",
+47,2263,"Eu mandei você ir embora!
+Quer provar da minha espada!?",
+47,2295,"Esse tal de Odin é bem teimoso
+em fazer bagunça em Midgard. <PART>
+---
+Acho que eu era igual quando me meti
+a costurar aquele tratado de paz. <PART>
+---
+...Mas só durou vinte anos,
+graças aos deuses... <PART>
+---
+Fiquei furioso! Ele não passa de um ser maligno
+usando um macacão ridículo de pijama!",
+47,2303,"Você pegou as minhas fraquezas e as usou
+contra mim para me tornar seu escravo. <PART>
+---
+Já fiz o bastante por você.
+Não devo mais nada.",
+47,2335,"Se ao menos os humanos vivessem para sempre,
+daríamos uma luta bem melhor. <PART>
+---
+Conheço alguns que se juntaram ao submundo
+por desprezarem os deuses. Que confusão!",
+47,2343,"O que mais você quer de mim?
+Já me usou o bastante!",
+47,2375,"O quê? Está tudo certo agora? <PART>
+---
+Se conseguiu o que queria,
+fico feliz por você. <PART>
+---
+Se não conseguiu, sempre pode
+tentar na próxima vida.",
+47,2383,"Você acha que todos deveriam lhe servir.
+Detesto gente como você. <PART>
+---
+Não pense que todo mundo por aí
+vai beijar seus pés com alegria!",
+47,2415,"Faça o que quiser agora. Não se deixe
+arrastar para nada.",
+47,2423,"Não pense que, só porque você é um deus,
+todos devem lhe servir.",
+47,2503,"Ah, quase esqueci! <PART>
+---
+Você veio de tão longe. Não posso deixar
+você ir embora sem levar alguma coisa.",
+47,2511,"Vou lhe dar isto, se você
+sumir da minha frente!",
+47,2543,"O que houve aqui? Parece bem pior
+do que eu me lembro do meu tempo. <PART>
+---
+Enfim, Princesa Alicia, o que você
+pretende fazer agora? <PART>
+---
+Você vai ficar bem. Afinal, você é do meu irmão...
+filha... não consigo lembrar... <PART>
+---
+Enfim, vai ficar bem, faça o que fizer!
+...Ei, não me olhe assim!",
+47,2551,"Não preciso mais servir a você.
+Então, o que é que você quer?",
 47,1,Sair,not displayed by the event script
 47,8,Ler,
 47,11,<Teologia>,
@@ -50,5 +121,5 @@ Assim, Odin recriou a raça humana em Midgard, tornando-se, dessa forma, o pai d
 47,2755,Aventureira,not displayed by the event script
 47,2756,Habitante,not displayed by the event script
 47,2757,Garota,not displayed by the event script
-47,2779,,
-47,2787,,
+47,2779,Phyress,
+47,2787,Ehrde,

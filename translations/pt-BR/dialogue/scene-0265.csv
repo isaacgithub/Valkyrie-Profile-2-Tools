@@ -1,12 +1,47 @@
 resource,message_id,translated,notes
-265,66,,
-265,106,,
-265,146,,
-265,186,,
-265,226,,
-265,266,,
-265,354,,
-265,394,,
+265,66,"Os monstros continuam por aí como antes. <PART>
+---
+Pensei ter selado muitos dos
+mais perigosos...",
+265,106,"Deixe as questões menores comigo. <PART>
+---
+Você tem algo bem maior
+à sua espera.",
+265,146,"Você me assustou.
+Pensei que fosse um monstro. <PART>
+---
+Tenho cumprido meu dever de selar
+monstros, mas parece não ter fim... <PART>
+---
+Há um limite para o que uma
+pessoa sozinha consegue fazer.",
+265,186,"Você me assustou.
+Pensei que fosse um monstro. <PART>
+---
+Ah, perdão. Não quis dizer com isso
+que você se pareça com um monstro.",
+265,226,"Estou acostumada a perseguir monstros,
+mas não a ser perseguida. <PART>
+---
+É muita coisa para se preparar
+numa hora dessas.",
+265,266,"Sei que é importante dar o primeiro
+golpe nas batalhas. <PART>
+---
+No entanto, pareço ser sempre
+a emboscada... <PART>
+---
+E você?
+Como lida com essas coisas? <PART>
+---
+",
+265,354,"Tenho algo que pode ser útil.
+Leve, por favor.",
+265,394,"Os monstros continuam por aí como antes.
+Pensei ter selado muitos deles... <PART>
+---
+Seria de grande ajuda se meus amigos
+Dyn e Chrys estivessem aqui.",
 265,397,,
 265,398,,
 265,399,,
@@ -15,6 +50,6 @@ resource,message_id,translated,notes
 265,5,,
 265,6,Sim,not displayed by the event script
 265,7,Não,not displayed by the event script
-265,402,,
-265,403,,
-265,441,,
+265,402,Templo de Audoula no Lago,
+265,403,Adquirido <PART> Tomo de Alquimia,
+265,441,Seluvia,

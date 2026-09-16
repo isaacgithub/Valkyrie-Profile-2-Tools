@@ -30,8 +30,9 @@ from .vp2_scene_fingerprint import glyph_blocks, local_alphabet, render_tokens
 from .vp2_cutscene_subtitles import (
     FRAGMENT_MARKER, FileIso, OPENING_RESOURCE, PAGE_BREAK,
     PAGE_BREAK_SPELLING, RESOURCE_EXTRA_SLOTS, SPLIT_SUBTITLE_AUDIO,
-    area_banner_message_ids, area_banner_visible_text, canonical_page_breaks,
-    displayed_message_types, render_raw_tokens, wrap_translation,
+    apply_hard_breaks, area_banner_message_ids, area_banner_visible_text,
+    canonical_page_breaks, displayed_message_types, render_raw_tokens,
+    wrap_translation,
 )
 
 
@@ -78,8 +79,10 @@ def verify_chapter_title(args, resource):
 
 def verify_scene_sheet(args):
     """Read a scene sheet's translations back off the disc, run by run."""
-    rows = read_scene_rows(args.csv, args.resource,
-                           primary_lookup=getattr(args, "primary_lookup", None))
+    rows = read_scene_rows(
+        args.csv, args.resource,
+        primary_lookup=getattr(args, "primary_lookup", None),
+        reclaim_undrawn=getattr(args, "reclaim_undrawn", False))
     if not rows:
         if verify_chapter_title(args, int(args.resource)):
             print("verified chapter title in resource #%d: %s"
@@ -194,7 +197,8 @@ def verify_scene_sheet(args):
         if breaks != wanted_breaks:
             fused.append((row["audio_id"], message_id, wanted_breaks, breaks))
         expected = (expected_layout if expected_layout is not None
-                    else render_raw_tokens(row["translated"]))
+                    else render_raw_tokens(
+                        apply_hard_breaks(row["translated"])))
         compared_actual = actual
         if collapse(compared_actual) == collapse(expected):
             continue

@@ -12,22 +12,93 @@ Você não pode saltar sobre os que têm asas, então terá que se esgueirar por
 Claro, o melhor a fazer é pará-los onde estiverem...",
 1159,7,"Lutar não tem nada de errado<PART> ---- <PART>
 é que às vezes é melhor poupar suas energias.",
-1159,36,,
-1159,37,,
-1159,76,,
-1159,77,,
-1159,116,,
-1159,117,,
-1159,156,,
-1159,157,,
-1159,196,,
-1159,197,,
-1159,236,,
-1159,237,,
-1159,324,,
-1159,325,,
-1159,364,,
-1159,365,,
+1159,36,"Muita gente má anda soltando monstros
+por aí. O que eu faço? <PART>
+---
+Já sei! Vou ajudar atirando em toda
+pessoa má que eu vir! <PART>
+---
+O quê? Por que não?",
+1159,37,"Não acredito que tanta coisa mudou.
+Vou ter que me esforçar em dobro para acompanhar!",
+1159,76,"Gente má precisa morrer para o mundo
+ficar melhor! <PART>
+---
+Você é boa demais. Isso pode lhe
+trazer muita encrenca!",
+1159,77,"Já criei algumas, mas ainda não testei.
+Quer ser minha cobaia? <PART>
+---
+Não vai matar você. Prometo!
+...Pelo menos eu acho que não...",
+1159,116,"Há muito tempo, eu e o senhor Seluvia
+percorríamos o mundo selando monstros. <PART>
+---
+Ando viajando atrás dos selos,
+mas todos parecem rompidos. <PART>
+---
+Os selos do senhor Seluvia não podiam ter se gasto ainda.
+Alguém deve estar aprontando.",
+1159,117,"Fiz muitas invenções, mas não são
+para uso prático nem para venda. <PART>
+---
+Não são perfeitas, então fico bem receosa
+de entregá-las às pessoas.",
+1159,156,"Romper os nossos selos é como romper
+o nosso amor. <PART>
+---
+Vou matar quem fez isso!
+Não tem perdão. Nunca! <PART>
+---
+Você não pode me impedir. Ninguém pode!",
+1159,157,"Se eu der para as pessoas, vai dar
+um trabalho enorme... <PART>
+---
+Conheço os defeitos das minhas invenções,
+então sei do que me cuidar. <PART>
+---
+Do meu ponto de vista, ter que explicar
+tudo isso é desperdício de tempo.",
+1159,196,"A propósito, senhora Silmeria,
+já materializou o senhor Seluvia? <PART>
+---
+Não!? Por que não!? Faça isso agora!
+...Hã? Como? O quê? <PART>
+---
+Como assim!?
+...Tudo bem. Dou um jeito de fazer sozinha!",
+1159,197,"Não dá para achar a verdade
+nas experiências passadas. <PART>
+---
+Ela também não está em teorias,
+crenças ou lógica.",
+1159,236,"Não sei como, mas vou conseguir!
+É só esperar para ver!",
+1159,237,"A verdade não existe.
+...Talvez seja essa a verdade. <PART>
+---
+Ah, tanto faz.
+Cansei de pensar nisso.",
+1159,324,"Hummm... Ah, é!
+Queria lhe dar isto.",
+1159,325,"Já que veio me ver,
+vou lhe dar isto!",
+1159,364,"Ei, lembra de mim?
+Sou eu, Chrystie! <PART>
+---
+Estou me divertindo vagando por aí,
+viajando para onde eu quiser. <PART>
+---
+Não acredito que há monstros aqui.
+Devo ter selado milhões na minha vida passada. <PART>
+---
+Deve ter alguma pessoa bem má por aí,
+soltando monstros!",
+1159,365,"Senhora Silmeria? Alicia?
+...Dá no mesmo, eu acho. <PART>
+---
+Vejo que muita coisa aconteceu enquanto estive fora.
+A tecnologia realmente não para de avançar.",
 1159,382,,
 1159,383,,
 1159,384,,
@@ -36,9 +107,9 @@ Claro, o melhor a fazer é pará-los onde estiverem...",
 1159,3,Sim,not displayed by the event script
 1159,4,Não,not displayed by the event script
 1159,5,Planícies de Kythena,not displayed by the event script
-1159,387,,
-1159,388,,
-1159,389,,
+1159,387,Planícies de Kythena,
+1159,388,Adquirido <PART> Gema Prisma,
+1159,389,Adquirido <PART> Veste de Bryttain,
 1159,390,Aventureira,not displayed by the event script
-1159,413,,
-1159,414,,
+1159,413,Chrystie,
+1159,414,Sha-kon,

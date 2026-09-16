@@ -53,6 +53,7 @@ def verify_scene_in_memory(iso_path, row, reference_iso,
         reference_iso=reference_iso,
         en_names=None,
         primary_lookup=primary_lookup,
+        reclaim_undrawn='keep-undrawn' not in set((row.get('flags') or '').split()),
         chapter_title=row.get('chapter_title') or None,
         chapter_title_message=row.get('chapter_title_message') or None,
     ))
@@ -119,12 +120,32 @@ def install_shared_font_in_memory(iso, rows, *, dry_run=False,
         return
     original = iso.read_entry(shared_font.SHARED_FONT_ENTRY)
     rebuilt, info = shared_font.install_glyphs(
-        original, needed, shared_font.SHARED_EXTENSION_TOKENS)
+        original, needed, shared_font.SHARED_EXTENSION_TOKENS,
+        allow_growth=True)
     if not info.get("no_op"):
-        iso.write_entry(shared_font.SHARED_FONT_ENTRY, rebuilt)
+        _store_shared_font(iso, rebuilt, info)
     print("shared-font: " + shared_font.describe_install(info))
     if renderer:
         install_glyph_range_renderer(iso, needed)
+    if info.get("grown_sectors"):
+        info["patched"] = bytes(rebuilt)
+    return info
+
+
+def _store_shared_font(iso, rebuilt, info):
+    """Write entry 8, or leave a grown one for the build to relocate."""
+    from . import vp2_iso_buffer as iso_buffer
+
+    if not info.get("grown_sectors"):
+        iso.write_entry(shared_font.SHARED_FONT_ENTRY, rebuilt)
+        return
+    if isinstance(iso, iso_buffer.IsoBuffer):
+        raise ValueError(
+            "entry 8 grows by %d sector(s); relocating it needs a "
+            "file-backed image" % info["grown_sectors"])
+    if isinstance(iso, iso_buffer.IsoFile):
+        return
+    iso.write_entry(shared_font.SHARED_FONT_ENTRY, rebuilt)
 
 def install_glyph_range_renderer(iso, characters):
     """Rewrite the glyph routine when a letter draws from the second range."""
@@ -231,8 +252,10 @@ def patch_scene_resource_in_memory(iso, row, *, primary_lookup=None,
     """Read a scene row's sheet and patch the resource in *iso*."""
     sheet_path = row['sheet']
     from . import vp2_cutscene_subtitles as subtitles
+    flags = set((row.get('flags') or '').split())
     rows = subtitles.read_scene_rows(
-        sheet_path, int(row['resource']), primary_lookup=primary_lookup)
+        sheet_path, int(row['resource']), primary_lookup=primary_lookup,
+        reclaim_undrawn='keep-undrawn' not in flags)
     title = (row.get('chapter_title') or '').strip()
     if not rows and not title:
         print(f"warning: no translatable rows in {sheet_path}", file=sys.stderr)

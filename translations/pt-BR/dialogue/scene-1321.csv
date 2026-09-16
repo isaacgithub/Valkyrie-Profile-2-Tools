@@ -1,5 +1,5 @@
 resource,message_id,translated,notes
-1321,44,Você tá bem ei...,0
+1321,44,Você tá bem ei...,
 1321,38,Sinto dor...,
 1321,39,Reage! Isso não parece coisa de morto-vivo!,
 1321,43,Precisamos nos apressar. Lenneth está em perigo...,
@@ -10,7 +10,7 @@ Olha como a gente tá.",
 1321,41,"São espíritos de valquírias deslocados,
 presos pelo Rito Soberano, sem lugar para ir.",
 1321,5,Vão desaparecer eventualmente...,
-1321,6,Então só sobra a gente é?,10
+1321,6,Então só sobra a gente é?,
 1321,7,"Não. Se recuperarmos a alma de Lenneth,
 isso nos dará uma nova arma.",
 1321,8,O Lezard está determinado a se fundir com Lenneth...,
@@ -36,7 +36,7 @@ futuro que desejo...",
 Mesmo que eu perca minha personalidade e não consiga voltar!",
 1321,21,Seu corpo não aguenta. Não vai aguentar por muito tempo.,
 1321,22,Você também não! Está ferida.,
-1321,23,...Quando o corpo perece a alma se extingue.,27
+1321,23,...Quando o corpo perece a alma se extingue.,
 1321,24,Não importa!,
 1321,25,Como pode dizer isso de boca tão leve!?,
 1321,26,"Pensa bem no que tá dizendo! Em tudo que nós
@@ -61,7 +61,7 @@ dois passamos pra chegar até aqui!",
 1321,2763,,
 1321,2764,,
 1321,47,,
-1321,48,,not displayed by the event script
+1321,48,,
 1321,49,,
 1321,50,,
 1321,51,,

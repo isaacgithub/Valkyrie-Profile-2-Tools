@@ -12,33 +12,91 @@ resource,message_id,translated,notes
 1155,281,,
 1155,282,,
 1155,2773,Jessica <PART> entrou para o grupo.,
-1155,2788,,
-1155,2789,,
-1155,2791,,
-1155,2417,,
-1155,2420,,
-1155,2457,,
-1155,2460,,
-1155,2497,,
-1155,2500,,
-1155,2537,,
-1155,2540,,
-1155,2577,,
-1155,2580,,
-1155,2617,,
-1155,2620,,
+1155,2788,Aaron <PART> entrou para o grupo.,
+1155,2789,Dyn <PART> entrou para o grupo.,
+1155,2791,Zunde <PART> entrou para o grupo.,
+1155,2417,"Embora eu tenha renascido, meus pecados
+continuam comigo. <PART>
+---
+Enquanto eu viver, hei de
+expiá-los.",
+1155,2420,"Fui expulso do meu país. Não tenho lar.
+Não há ninguém para ver, nem para onde ir. <PART>
+---
+Apenas vagueio pelas terras em busca de um
+lugar para viver em paz.",
+1155,2457,"Renascer cem vezes ainda
+não apagaria os meus pecados.",
+1155,2460,"Eu nem me arrependeria se esta terra
+fosse o meu último repouso.",
+1155,2497,"Midgard jamais será destruída. <PART>
+---
+Que agricultor queimaria a plantação
+sem antes fazer a colheita?",
+1155,2500,"Mesmo tendo sido libertado,
+não há nada para eu fazer. <PART>
+---
+Talvez tivesse sido melhor
+continuar como einherjar.",
+1155,2537,"Dipan não passa de um aviso a todos nós. <PART>
+---
+É um aviso dos deuses, provocado pelos atos
+da senhora Silmeria e seus, Princesa Alicia.",
+1155,2540,"Mesmo tendo sido libertado,
+não há nada para eu fazer. <PART>
+---
+Talvez eu fosse mais feliz
+servindo você como einherjar.",
+1155,2577,"Odin está espalhando as sementes do caos
+em Midgard. <PART>
+---
+O manuscrito em minhas mãos
+é um exemplo dessas sementes. <PART>
+---
+Ele estava carregado da vontade
+e do poder do deus supremo. <PART>
+---
+Tentei unificar Midgard com esse poder
+para acabar com os dias de guerra nesta terra...",
+1155,2580,"Confiar fácil demais expõe a pessoa à traição.
+Ainda assim, confiar é próprio da natureza humana. <PART>
+---
+São só os desatinos de quem foi
+traído por um amigo querido. Perdoe-me.",
+1155,2617,"Usei esse poder para desafiar
+os deuses de Valhalla. <PART>
+---
+Levei comigo o líder de Rosetta, Ehlen, o Semideus,
+Crescent e a Princesa Guerreira Celes. <PART>
+---
+Muitos amigos lutaram ao meu lado,
+pois acreditavam na minha causa. <PART>
+---
+No entanto, tudo aquilo fazia parte
+do plano de Odin.",
+1155,2620,"Foi o que aprendi no passado:
+não se deve confiar em mulheres.",
 1155,2623,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-1155,2638,,
-1155,2639,,
-1155,2641,,
+1155,2638,É meu dever proteger.,
+1155,2639,Vou salvar Midgard do perigo!,
+1155,2641,Beleza! Chegou a minha hora de brilhar!,
 1155,2663,A alma de um guerreiro pesado emana da espada.,
 1155,2669,"A materialização é impossível
 sem a Silmeria...",
-1155,2705,,
-1155,2708,,
-1155,2745,,
-1155,2748,,
+1155,2705,"Leve isto com você.
+Espero que seja de alguma ajuda.",
+1155,2708,"Não tenho forças para ajudá-la.
+Isto é tudo o que tenho para dar. <PART>
+---
+",
+1155,2745,"Só me resta lutar contra monstros
+para salvar as pessoas ao meu redor. <PART>
+---
+Renascer não apaga
+os meus pecados do passado.",
+1155,2748,"Fui expulso do meu país. Não tenho lar.
+Vagueio em busca de uma terra pacífica para chamar de minha.",
 1155,1,Deserto de Sahma,not displayed by the event script
 1155,2,Saída,not displayed by the event script
 1155,3,,
@@ -52,11 +110,11 @@ sem a Silmeria...",
 1155,2666,Realizar a materialização?,not displayed by the event script
 1155,2667,Sim,
 1155,2668,Não,
-1155,2750,,
-1155,2751,,
-1155,2812,,
-1155,2827,,
-1155,2828,,
-1155,2830,,
-1155,2846,,
-1155,2849,,
+1155,2750,Deserto de Sahma,
+1155,2751,Adquirido <PART> Elixir Prime,
+1155,2812,Jessica,
+1155,2827,Aaron,
+1155,2828,Dyn,
+1155,2830,Zunde,
+1155,2846,Xehnon,
+1155,2849,Masato,

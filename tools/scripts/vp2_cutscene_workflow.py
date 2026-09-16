@@ -201,8 +201,8 @@ def cmd_recut(args):
         with open(args.from_sheet, newline="", encoding="utf-8-sig") as source:
             for row in csv.DictReader(source):
                 written = row.get("translated")
-                text = (written or "").replace(
-                    subtitles.FRAGMENT_MARKER, "")
+                text = subtitles.apply_hard_breaks(
+                    (written or "").replace(subtitles.FRAGMENT_MARKER, ""))
                 key = (row.get("message_id") or "").strip()
                 if text.strip() and key.isdigit():
                     translated_ids.add(int(key))
@@ -661,7 +661,9 @@ def cmd_preflight(args):
         "glyph_count": layout["glyph_count"],
     }
     needed = set("".join(
-        row["translated"].replace(subtitles.FRAGMENT_MARKER, "") for row in rows))
+        subtitles.apply_hard_breaks(
+            row["translated"].replace(subtitles.FRAGMENT_MARKER, ""))
+        for row in rows))
     existing = set(alphabet.values())
     missing = sorted(character for character in needed
                      if character != "\n" and character not in existing)

@@ -513,8 +513,17 @@ def main():
 
     primary_lookup = _load_dedupe_lookup(args.scenes_dir)
 
-    install_shared_font_in_memory(iso, rows, primary_lookup=primary_lookup,
-                                  renderer=True)
+    font_info = install_shared_font_in_memory(
+        iso, rows, primary_lookup=primary_lookup, renderer=True)
+    if font_info and font_info.get("grown_sectors"):
+        iso.commit()
+        iso.close()
+        summary = iso_space.relocate(str(partial), shared_font.SHARED_FONT_ENTRY,
+                                     font_info["patched"])
+        print(f"  relocated entry #{shared_font.SHARED_FONT_ENTRY}: "
+              f"{summary['old_sectors']} -> {summary['new_sectors']} sector(s), "
+              f"now at lba {summary['new_lba']}")
+        iso = iso_buffer.IsoFile(str(partial))
     if not iso.table:
         raise RuntimeError("IsoFile missing tri-Ace index")
 

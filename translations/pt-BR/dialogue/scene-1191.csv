@@ -1,9 +1,9 @@
 resource,message_id,translated,notes
 1191,392,Jessica <PART> entrou para o grupo.,
-1191,422,,
+1191,422,Aegis <PART> entrou para o grupo.,
 1191,258,"Se houver alguma maneira de lhe ser útil,
 será um prazer.",
-1191,288,,
+1191,288,Nunca perdi... na superfície.,
 1191,300,A alma de um feiticeiro emana do cajado.,
 1191,304,"A materialização é impossível
 sem a Silmeria...",
@@ -15,6 +15,6 @@ sem a Silmeria...",
 1191,301,Realizar a materialização?,not displayed by the event script
 1191,302,Sim,
 1191,303,Não,
-1191,305,,
-1191,432,,
-1191,462,,
+1191,305,Desfiladeiro de Sukavia,
+1191,432,Jessica,
+1191,462,Aegis,

@@ -1,5 +1,5 @@
 ﻿resource,scope,max_extent,kind,evidence
-10,container,4477,verified,highest extent this bank has been played with; its real limit is unknown.
+10,container,4500,verified,highest extent this bank has been played with; its real limit is unknown.
 641,container,66937,verified,highest extent this bank has been played with; its real limit is unknown.
 642,container,18909,verified,highest extent this bank has been played with; its real limit is unknown.
 643,container,1092,verified,highest extent this bank has been played with; its real limit is unknown.
@@ -17,17 +17,11 @@
 61,scene-content,525080,candidate,"Recorded by a build, not by a play-test. Resource #61 reached 525080 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 77,scene-content,1260380,candidate,"Recorded by a build, not by a play-test. Resource #77 reached 1260380 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 85,scene-content,1198244,candidate,"Recorded by a build, not by a play-test. Resource #85 reached 1198244 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-87,scene-content,1140792,candidate,"Recorded by a build, not by a play-test. Resource #87 reached 1140792 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 93,scene-content,1616448,candidate,"Recorded by a build, not by a play-test. Resource #93 reached 1616448 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 97,scene-content,1051972,candidate,"Recorded by a build, not by a play-test. Resource #97 reached 1051972 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 127,scene-content,1575612,candidate,"Recorded by a build, not by a play-test. Resource #127 reached 1575612 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 133,scene-content,1159712,candidate,"Recorded by a build, not by a play-test. Resource #133 reached 1159712 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-189,scene-content,1196264,candidate,"Recorded by a build, not by a play-test. Resource #189 reached 1196264 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-243,scene-content,1745040,candidate,"Recorded by a build, not by a play-test. Resource #243 reached 1745040 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 245,scene-content,1407236,candidate,"Recorded by a build, not by a play-test. Resource #245 reached 1407236 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-253,scene-content,1044620,candidate,"Recorded by a build, not by a play-test. Resource #253 reached 1044620 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-283,scene-content,1052968,candidate,"Recorded by a build, not by a play-test. Resource #283 reached 1052968 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
-599,scene-content,1187928,candidate,"Recorded by a build, not by a play-test. Resource #599 reached 1187928 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 605,scene-content,1321236,candidate,"Recorded by a build, not by a play-test. Resource #605 reached 1321236 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 1015,scene-content,1323984,candidate,"Recorded by a build, not by a play-test. Resource #1015 reached 1323984 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 1197,streamed-neighbours,0,verified,allowed to rewrite a neighbour; played and confirmed.
