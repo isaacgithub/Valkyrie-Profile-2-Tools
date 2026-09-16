@@ -302,14 +302,22 @@ def audit_scene_row_in_memory(reference_iso, row):
         strict=True,
     ))
 
-def preflight(reference_iso, rows, *, dry_run, verbose=False):
+def preflight(reference_iso, rows, *, dry_run, verbose=False,
+              store='', mark=''):
     """Audit every scene row against the reference ISO with --strict."""
+    from . import row_cache
+
     scene_rows = [r for r in rows if r['kind'] == 'scene']
     if not scene_rows:
         return
     print(f"== pre-flight: auditing {len(scene_rows)} row(s) against "
           f"{reference_iso} ==")
+    proven = 0
     for row in scene_rows:
+        name = row_cache.audit_key(mark, row) if store and mark else None
+        if name is not None and row_cache.remembered(store, name):
+            proven += 1
+            continue
         if dry_run:
             run([sys.executable, '-m', 'tools.scripts.vp2_cutscene_workflow',
                  'audit', str(reference_iso), '--resource', row['resource'],
@@ -331,7 +339,10 @@ def preflight(reference_iso, rows, *, dry_run, verbose=False):
             sys.exit(1)
         if verbose:
             print(audit_log.getvalue(), end='')
-    print(f"== pre-flight ok: {len(scene_rows)} row(s) ==")
+        if name is not None:
+            row_cache.remember(store, name)
+    print(f"== pre-flight ok: {len(scene_rows)} row(s) =="
+          + (f" ({proven} already proven)" if proven else ""))
 
 def _label_word(sheet):
     """The label word from a pack's chapter sheet, or ``''``."""

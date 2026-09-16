@@ -56,6 +56,28 @@ class CandidateExtentTests(unittest.TestCase):
         self.assertEqual("1000", rows[0]["max_extent"])
         self.assertEqual("verified", rows[0]["kind"])
 
+    def test_a_limit_row_is_never_overwritten(self):
+        """A limit says the game stops past here, so a build may not raise it."""
+        write(self.path, [{"resource": "53", "scope": "scene-content",
+                           "max_extent": "1000", "kind": "limit",
+                           "evidence": "measured cap"}])
+        self.assertFalse(container_text.record_candidate_extent(
+            53, "scene-content", 4096, path=self.path))
+        rows = read(self.path)
+        self.assertEqual("1000", rows[0]["max_extent"])
+        self.assertEqual("limit", rows[0]["kind"])
+        self.assertEqual("measured cap", rows[0]["evidence"])
+
+    def test_a_limit_row_is_defended_in_every_scope(self):
+        write(self.path, [{"resource": "652", "scope": "container",
+                           "max_extent": "11963", "kind": "limit",
+                           "evidence": "measured cap"}])
+        self.assertFalse(container_text.record_candidate_extent(
+            652, "container", 12500, path=self.path))
+        rows = read(self.path)
+        self.assertEqual("11963", rows[0]["max_extent"])
+        self.assertEqual("limit", rows[0]["kind"])
+
     def test_an_existing_candidate_is_raised_not_duplicated(self):
         write(self.path, [{"resource": "53", "scope": "scene-content",
                            "max_extent": "2000", "kind": "candidate",

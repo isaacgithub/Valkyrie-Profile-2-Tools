@@ -5,6 +5,7 @@ import sys, struct
 import os
 import hashlib
 from . import slz
+from . import slz_cache
 from .paths import CACHE_ROOT, DATA_DIR
 
 MIN_MATCH, MAX_MATCH, MAX_DIST, MAX_CHAIN = 3, 18, 4095, 4096
@@ -390,27 +391,9 @@ def _cache_key(src, mode, optimal, target_size):
     return h.hexdigest()
 
 
-def _cache_path(cache_dir, key):
-    # Shard by the first two hex chars so a few thousand entries do not land
-    # in one directory.  NTFS handles it; this just keeps `ls` cheap.
-    return os.path.join(cache_dir, key[:2], key + ".slz")
-
-
-def _read_cache(cache_dir, key):
-    try:
-        with open(_cache_path(cache_dir, key), "rb") as f:
-            return f.read()
-    except FileNotFoundError:
-        return None
-
-
-def _write_cache(cache_dir, key, blob):
-    path = _cache_path(cache_dir, key)
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    tmp = path + ".tmp"
-    with open(tmp, "wb") as f:
-        f.write(blob)
-    os.replace(tmp, path)
+_cache_path = slz_cache.path
+_read_cache = slz_cache.read
+_write_cache = slz_cache.write
 
 
 def _trace_cache_key(key):
@@ -428,14 +411,7 @@ def _trace_cache_key(key):
 
 
 def _resolve_cache_dir(explicit):
-    if explicit is not None:
-        return explicit
-    env = os.environ.get("VP2_SLZ_CACHE")
-    if env == "0":
-        return ""
-    if env:
-        return env
-    return _DEFAULT_CACHE_DIR
+    return slz_cache.resolve(explicit, _DEFAULT_CACHE_DIR, "VP2_SLZ_CACHE")
 
 
 def _compress_uncached(src, mode=1, optimal=True, target_size=None):
@@ -461,16 +437,11 @@ def compress(src, mode=1, optimal=True, target_size=None, *, cache_dir=None):
         return _compress_uncached(src, mode=mode, optimal=optimal,
                                   target_size=target_size)
     key = _cache_key(src, mode, optimal, target_size)
-    cached = (_read_cache(_TRACKED_CACHE_DIR, key)
-              if cache_dir is None else None)
-    if cached is None:
-        cached = _read_cache(active_dir, key)
-    if cached is not None:
-        _trace_cache_key(key)
-        return cached
-    blob = _compress_uncached(src, mode=mode, optimal=optimal,
-                              target_size=target_size)
-    _write_cache(active_dir, key, blob)
+    blob = slz_cache.cached(
+        active_dir, key,
+        lambda: _compress_uncached(src, mode=mode, optimal=optimal,
+                                   target_size=target_size),
+        seeds=(_TRACKED_CACHE_DIR,) if cache_dir is None else ())
     _trace_cache_key(key)
     return blob
 

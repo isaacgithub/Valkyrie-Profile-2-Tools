@@ -24,6 +24,7 @@ from collections.abc import Iterable
 from pathlib import Path
 
 from .paths import BUILD_DIR, PROJECT_ROOT, WORKSPACE_DIR, output_root
+from . import row_cache
 from .workspace_extract import generate_workspace
 from .translation_layout import rename_tree
 from . import chapter_label
@@ -62,6 +63,43 @@ PACK_FILE_ROWS = {
 }
 PROFILE_KINDS = ("scene", "container", "fontless", "image",
                  *PACK_FILE_ROWS)
+
+COMPILE_FORMAT = 1
+COMPILE_STAMP = "compiled.json"
+
+
+def _compile_stamp(records, pack_path, profile_path, menu_layout, only):
+    """What the compiled workspace was made from, cheaply."""
+    digest = hashlib.sha256()
+    digest.update(("compile-v%d\0" % COMPILE_FORMAT).encode("ascii"))
+    digest.update(os.fspath(profile_path).encode("utf-8"))
+    digest.update(b"\0")
+    digest.update(",".join(sorted(only or ())).encode("utf-8"))
+    row_cache.stamp_path(digest, os.fspath(profile_path))
+    row_cache.stamp_path(digest, os.fspath(menu_layout))
+    row_cache.stamp_path(digest, os.fspath(records.parent / "generation.json"))
+    row_cache.stamp_tree(digest, os.fspath(records))
+    row_cache.stamp_tree(digest, os.fspath(pack_path))
+    return digest.hexdigest()
+
+
+def _compiled_already(build_root, stamp):
+    """The previous compilation, when nothing it was made from has moved."""
+    try:
+        if (build_root / COMPILE_STAMP).read_text(encoding="utf-8").strip() \
+                != stamp:
+            return None
+        metadata = json.loads(
+            (build_root / "build.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    manifest = build_root / "manifest.csv"
+    sheets = build_root / "sheets"
+    if not manifest.is_file() or not sheets.is_dir():
+        return None
+    slots = build_root / PACK_SLOTS
+    return {**metadata, "root": build_root, "manifest": manifest,
+            "sheets": sheets, "slots": slots if slots.is_file() else None}
 
 
 def installed_locales() -> list[str]:
@@ -356,6 +394,12 @@ def compile_build_workspace(
             f"generate <USA.iso>` first")
 
     locale = _pack_locale(pack_path)
+    build_root = internal / "build" / locale
+    stamp = _compile_stamp(records, pack_path, profile_path, menu_layout, only)
+    reusable = _compiled_already(build_root, stamp)
+    if reusable is not None:
+        return reusable
+
     battle_target = _pack_battle_target(pack_path)
     translations = load_pack(pack_path, ignore_reference_columns=True)
     expanded = _expanded_targets(
@@ -367,7 +411,6 @@ def compile_build_workspace(
         key: value for key, value in expanded.items() if key[0] != "chapter"
     }
 
-    build_root = internal / "build" / locale
     build_root.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f".{locale}-", dir=build_root.parent))
     sheets = staging / "sheets"
@@ -527,6 +570,7 @@ def compile_build_workspace(
         (staging / "build.json").write_text(
             json.dumps(metadata, indent=2, sort_keys=True) + "\n",
             encoding="utf-8")
+        (staging / COMPILE_STAMP).write_text(stamp + "\n", encoding="utf-8")
         if build_root.exists():
             shutil.rmtree(build_root)
         rename_tree(staging, build_root)

@@ -158,7 +158,7 @@ class IsoFile:
     """File-backed twin of :class:`IsoBuffer`, for builds that must not"""
 
     __slots__ = ("path", "readonly", "_handle", "_table", "_total",
-                 "is_in_memory")
+                 "is_in_memory", "journal")
 
     def __init__(self, path, mode="r+b"):
         if mode not in ("r+b", "rb"):
@@ -168,6 +168,7 @@ class IsoFile:
         self._handle = open(self.path, mode)
         _name, self._total, self._table = triace.load_table(self._handle)
         self.is_in_memory = False
+        self.journal = None
 
     @classmethod
     def from_path(cls, path, mode="r+b"):
@@ -217,6 +218,8 @@ class IsoFile:
                 "entry %d: read %d of %d bytes from %s -- the image is "
                 "shorter than its index claims"
                 % (resource, len(data), want, self.path))
+        if self.journal is not None:
+            self.journal.read(resource, data)
         return data
 
     def write_entry(self, resource, new_bytes):
@@ -237,6 +240,8 @@ class IsoFile:
                 (resource, len(new_bytes), allocation))
         self._handle.seek(self._table[resource] * triace.SECTOR)
         self._handle.write(bytes(new_bytes))
+        if self.journal is not None:
+            self.journal.wrote(resource, new_bytes)
         return new_bytes
 
     def read_at(self, offset, size):

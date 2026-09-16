@@ -24,6 +24,7 @@ from . import fis_screen_layout
 from . import overlay_edits
 from . import anti_cheat
 from . import vp2_shared_font as shared_font
+from . import row_cache
 from .build_config import (
     FLAG_MAP, expand_flags, lint_manifest, load_manifest, report_lint,
     warn_unknown_flags,
@@ -351,6 +352,12 @@ def main():
                              'the cache directory. The pre-install '
                              'step itself is unchanged; only the cache '
                              'short-circuit is bypassed.')
+    parser.add_argument('--no-row-cache', action='store_true',
+                        help='Do not replay or record per-row results. Each '
+                             'row is patched from the image every time, '
+                             'which is what a run proving the writers '
+                             'themselves wants. VP2_ROW_CACHE=0 and '
+                             'VP2_ROW_CACHE_BYTES=0 do the same thing.')
     parser.add_argument('--preinstall-cache',
                         default=str(CACHE_ROOT / 'preinstall'),
                         help='Directory holding cached pre-installed ISOs. '
@@ -385,8 +392,6 @@ def main():
     working_iso = Path(args.working_iso).resolve()
 
     if output_iso.exists():
-        # Safe to replace: the build writes <output>.partial and renames
-        # only on success, so the existing ISO survives a failed run.
         print(f"replacing existing output: {output_iso}")
     if output_iso == working_iso:
         print(f"working ISO must differ from output ISO: {working_iso}",
@@ -400,9 +405,22 @@ def main():
     source_iso = Path(args.source_iso).resolve()
     reference_iso = Path(args.reference_iso or args.source_iso).resolve()
 
+    row_store = '' if args.no_row_cache else row_cache.resolve_store()
+    row_mark = (row_cache.fingerprint(reference_iso,
+                                      os.environ.get('VP2_GLYPH_POOL'))
+                if row_store else '')
+    row_hits = 0
+    if row_store:
+        retired, _held = row_cache.prune(row_store, limit=None,
+                                         mark=row_mark)
+        if retired:
+            print(f"row cache: dropped {retired} row(s) this build cannot use")
+
     if not args.no_preflight:
         preflight(reference_iso, rows, dry_run=args.dry_run,
-                  verbose=args.verbose)
+                  verbose=args.verbose,
+                  store=row_cache.AUDIT_STORE if row_store else '',
+                  mark=row_mark)
 
     started = time.time()
     working_iso.parent.mkdir(parents=True, exist_ok=True)
@@ -444,7 +462,6 @@ def main():
     working_iso.parent.mkdir(parents=True, exist_ok=True)
 
 
-    # The opt-in worker pool merges private IsoBuffer results in manifest order.
     use_parallel = (
         args.parallel
         and len(rows) > 1
@@ -454,8 +471,6 @@ def main():
     )
 
     if use_parallel:
-        # Each worker holds a private copy of the pre-installed image, so
-        # the cap that matters is free memory, not core count.
         fits = build_parallel.jobs_that_fit(source_iso.stat().st_size)
         jobs = max(1, min(args.jobs, build_parallel.DEFAULT_JOBS_CAP, fits))
         if jobs < min(args.jobs, build_parallel.DEFAULT_JOBS_CAP):
@@ -552,32 +567,52 @@ def main():
 
         if kind in ('container', 'fontless', 'worldmap', 'scene', 'image',
                     'chapter-label'):
-            row_log = io.StringIO()
-            try:
-                with contextlib.redirect_stdout(row_log):
-                    if kind == 'chapter-label':
-                        details = patch_chapter_label_in_memory(
-                            iso, row, reference=reference_reader)
-                    elif kind == 'image':
-                        details = patch_image_resource_in_memory(
-                            iso, row, primary_lookup=primary_lookup)
-                    elif kind == 'container':
-                        details = patch_container_resource_in_memory(
-                            iso, row, primary_lookup=primary_lookup)
-                    elif kind in ('fontless', 'worldmap'):
-                        details = patch_fontless_resource_in_memory(
-                            iso, row, primary_lookup=primary_lookup)
-                    else:  # scene
-                        details = patch_scene_resource_in_memory(
-                            iso, row, primary_lookup=primary_lookup,
-                            reference=reference_reader)
+            row_name = None
+            stored = None
+            journal = None
+            if row_store:
+                row_input = row_cache.inputs_digest(
+                    row, primary_lookup=primary_lookup)
+                if row_input is not None:
+                    row_name = row_cache.key(row_mark, row_input)
+                    stored = row_cache.load(row_store, row_name)
+                    if stored is not None and not stored.matches(iso):
+                        stored = None
+            if stored is not None:
+                details = stored.replay(iso)
                 written = details.get('written', 0)
-            except Exception as exc:
-                if row_log.getvalue():
-                    print(row_log.getvalue(), end='', file=sys.stderr)
-                _fail(f"{step} patch failed: {exc}")
-            if args.verbose and row_log.getvalue():
-                print(row_log.getvalue(), end='')
+                row_hits += 1
+            else:
+                row_log = io.StringIO()
+                journal = row_cache.Journal() if row_name else None
+                iso.journal = journal
+                try:
+                    with contextlib.redirect_stdout(row_log):
+                        if kind == 'chapter-label':
+                            details = patch_chapter_label_in_memory(
+                                iso, row, reference=reference_reader)
+                        elif kind == 'image':
+                            details = patch_image_resource_in_memory(
+                                iso, row, primary_lookup=primary_lookup)
+                        elif kind == 'container':
+                            details = patch_container_resource_in_memory(
+                                iso, row, primary_lookup=primary_lookup)
+                        elif kind in ('fontless', 'worldmap'):
+                            details = patch_fontless_resource_in_memory(
+                                iso, row, primary_lookup=primary_lookup)
+                        else:  # scene
+                            details = patch_scene_resource_in_memory(
+                                iso, row, primary_lookup=primary_lookup,
+                                reference=reference_reader)
+                    written = details.get('written', 0)
+                except Exception as exc:
+                    iso.journal = None
+                    if row_log.getvalue():
+                        print(row_log.getvalue(), end='', file=sys.stderr)
+                    _fail(f"{step} patch failed: {exc}")
+                iso.journal = None
+                if args.verbose and row_log.getvalue():
+                    print(row_log.getvalue(), end='')
 
             if kind == 'scene' and details.get('patched') is not None:
                 _check_scene_content_ceiling(
@@ -599,8 +634,9 @@ def main():
                       f"{summary['new_lba']} ({where})")
                 iso = iso_buffer.IsoFile(str(partial))
 
+            gated = stored.verified if stored is not None else False
             if (kind == 'scene' and wants_verify(row)
-                    and not args.no_verify):
+                    and not args.no_verify and not gated):
                 iso.commit()
                 iso.close()
                 verify_log = io.StringIO()
@@ -617,6 +653,10 @@ def main():
                 if args.verbose and verify_log.getvalue():
                     print(verify_log.getvalue(), end='')
                 iso = iso_buffer.IsoFile(str(partial))
+                gated = True
+            if stored is None and row_name and journal is not None:
+                row_cache.save(row_store, row_name, journal, details,
+                               verified=gated, mark=row_mark)
         else:
             iso.commit()
             iso.close()
@@ -659,6 +699,12 @@ def main():
     iso.close()
     os.replace(str(partial), str(output_iso))
     print(f"wrote output: {output_iso}")
+
+    if row_store:
+        dropped, held = row_cache.prune(row_store, mark=row_mark)
+        print(f"row cache: {row_hits}/{len(rows)} row(s) replayed; "
+              f"{held / 2**20:.0f} MB held"
+              + (f", {dropped} dropped" if dropped else ""))
 
     total = time.time() - started
     _report_candidate_extents()

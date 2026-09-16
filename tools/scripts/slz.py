@@ -1,10 +1,58 @@
 #!/usr/bin/env python3
 """tri-Ace SLZ decompressor (STORE / LZSS / LZSS+RLE / LZSS16)."""
+import collections
+import hashlib
+import os
 import struct, sys
 
 
+_MEMO = collections.OrderedDict()
+_MEMO_BYTES = 0
+try:
+    _MEMO_LIMIT = int(os.environ.get("VP2_SLZ_MEMO_BYTES", 256 << 20))
+except ValueError:
+    _MEMO_LIMIT = 256 << 20
+
+
+def memo_stats():
+    """How much the memo holds, for a caller that wants to report it."""
+    return {"entries": len(_MEMO), "bytes": _MEMO_BYTES, "limit": _MEMO_LIMIT}
+
+
+def forget():
+    """Drop every remembered payload."""
+    global _MEMO_BYTES
+    _MEMO.clear()
+    _MEMO_BYTES = 0
+
+
+def _remember(key, plain):
+    global _MEMO_BYTES
+    if len(plain) > _MEMO_LIMIT:
+        return
+    _MEMO[key] = plain
+    _MEMO_BYTES += len(plain)
+    while _MEMO_BYTES > _MEMO_LIMIT:
+        _key, evicted = _MEMO.popitem(last=False)
+        _MEMO_BYTES -= len(evicted)
+
+
 def decompress(data, mode=None, out_size=None):
-    """Decompress an SLZ blob. If `data` starts with a 'SLZ' header, mode and"""
+    """Decompress an SLZ blob, remembering what each blob expands to."""
+    if not _MEMO_LIMIT:
+        return _decompress(data, mode, out_size)
+    blob = bytes(data)
+    key = (hashlib.sha1(blob).digest(), mode, out_size)
+    plain = _MEMO.get(key)
+    if plain is not None:
+        _MEMO.move_to_end(key)
+        return plain
+    plain = _decompress(blob, mode, out_size)
+    _remember(key, plain)
+    return plain
+
+
+def _decompress(data, mode, out_size):
     sp = 0
     if len(data) >= 0x10 and data[0:3] == b"SLZ":
         mode = data[3]

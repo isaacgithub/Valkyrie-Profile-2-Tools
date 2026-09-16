@@ -24,6 +24,7 @@
 245,scene-content,1407236,candidate,"Recorded by a build, not by a play-test. Resource #245 reached 1407236 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 605,scene-content,1321236,candidate,"Recorded by a build, not by a play-test. Resource #605 reached 1321236 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
 1015,scene-content,1323984,candidate,"Recorded by a build, not by a play-test. Resource #1015 reached 1323984 with scope=scene-content. Play this screen, then change kind to verified if it holds or lower this row if it does not."
+1337,scene-content,16384,limit,measured cap: content past this point stops the game.
 1197,streamed-neighbours,0,verified,allowed to rewrite a neighbour; played and confirmed.
 1221,streamed-neighbours,0,verified,allowed to rewrite a neighbour; played and confirmed.
 1283,streamed-neighbours,0,verified,allowed to rewrite a neighbour; played and confirmed.

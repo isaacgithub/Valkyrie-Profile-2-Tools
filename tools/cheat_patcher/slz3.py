@@ -2,7 +2,11 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Deterministic encoder for tri-Ace SLZ mode 3 (16-bit LZSS)."""
 
+import os
 import struct
+
+from ..scripts import slz_cache
+from ..scripts.paths import CACHE_ROOT
 
 
 UNIT = 2
@@ -10,6 +14,9 @@ MIN_UNITS = 2
 MAX_UNITS = 17
 MAX_DISTANCE = 4095
 MAX_CHAIN = 4096
+
+_CACHE_NAMESPACE = "slz3-v1"
+_DEFAULT_CACHE_DIR = os.path.join(os.fspath(CACHE_ROOT), "overlay")
 
 
 def _match_table(source, max_chain=MAX_CHAIN):
@@ -102,9 +109,20 @@ def compress_body(source, max_chain=MAX_CHAIN):
     return bytes(output)
 
 
-def compress(source, next_offset=0, max_chain=MAX_CHAIN):
-    """Return one complete mode-3 SLZ stream."""
+def _compress_uncached(source, next_offset, max_chain):
     body = compress_body(source, max_chain=max_chain)
     return b"SLZ\x03" + struct.pack(
         "<III", len(body), len(source), next_offset
     ) + body
+
+
+def compress(source, next_offset=0, max_chain=MAX_CHAIN):
+    """Return one complete mode-3 SLZ stream."""
+    source = bytes(source)
+    store = slz_cache.resolve(None, _DEFAULT_CACHE_DIR, "VP2_OVERLAY_CACHE")
+    if not store:
+        return _compress_uncached(source, next_offset, max_chain)
+    key = slz_cache.name(_CACHE_NAMESPACE, source, next_offset, max_chain)
+    return slz_cache.cached(
+        store, key,
+        lambda: _compress_uncached(source, next_offset, max_chain))

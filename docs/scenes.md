@@ -352,21 +352,25 @@ Sukavia Gorge (1191):
 
 Rufus => 1197
 
-Dylan => 1223
+Mithra => 1219
 
-Lezard => 1239 and 1307
+Dylan => 1223 (and 1345 - Seraphic Gate)
 
-Leone => 1245
+Lezard => 1239 and 1307 (and 1341 - Seraphic Gate)
+
+Leone => 1245 (and 1345 - Seraphic Gate)
 
 Arngrim => 1245 and 1303
 
-Hrist => 1313
+Hrist => 1313 (and 1339 - Seraphic Gate)
 
 Brahms => 1313
 
-Lenneth => 1315
+Lenneth => 1315 (and 1339 - Seraphic Gate)
 
-Silmeria => 1317
+Silmeria => 1317 (and 1339 - Seraphic Gate)
+
+Freya => 1343 - Seraphic Gate
 
 ### Main Story Items
 

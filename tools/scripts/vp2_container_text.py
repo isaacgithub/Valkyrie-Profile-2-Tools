@@ -153,8 +153,6 @@ def codepage_record_is_local(blob, meta, offset):
 
 def render_codepage(blob, meta, offset, accent_tokens=None, alphabet=None):
     """Decode a container record, returning ``(text, byte length)``."""
-    # Imported here rather than at module scope, like the other uses in
-    # this file, so the two modules stay free to import each other.
     from . import vp2_cutscene_subtitles as subtitles
 
     start = meta["text_start"] + offset
@@ -490,7 +488,7 @@ def record_candidate_extent(resource, scope, extent, path=None, note=None):
         if (row.get("scope") or "").strip() != scope:
             continue
         seen = True
-        if (row.get("kind") or "").strip() == "verified":
+        if (row.get("kind") or "").strip() in ("verified", "limit"):
             return False
         if int(row.get("max_extent") or 0) >= extent:
             return False
@@ -571,6 +569,14 @@ def check_scene_content_extent(resource, content_end, pristine_allocation,
               % (resource, content_end, content_end - allowed, allowed),
               file=sys.stderr)
         return
+    if measured == "limit":
+        raise SceneContentCeilingExceeded(
+            "resource #%d: its indexed content ends at %d and %d is a "
+            "measured ceiling -- content past it has been seen to fail in "
+            "game. Give back %d byte(s) of translation. Do not raise this "
+            "row off a build; its evidence in data/record-limits.csv says "
+            "what placed it."
+            % (resource, content_end, allowed, content_end - allowed))
     if measured:
         source = "the furthest extent verified to run in game"
     else:
