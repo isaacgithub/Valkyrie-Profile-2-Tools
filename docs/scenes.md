@@ -372,6 +372,8 @@ Silmeria => 1317 (and 1339 - Seraphic Gate)
 
 Freya => 1343 - Seraphic Gate
 
+Valkyrie => 1347 - Seraphic Gate
+
 ### Main Story Items
 
 Antique Pendant => 1223
