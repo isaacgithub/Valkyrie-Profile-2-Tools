@@ -512,10 +512,12 @@ def record_candidate_extent(resource, scope, extent, path=None, note=None):
 
 
 def _candidate_note(resource, scope, extent):
-    return ("Recorded by a build, not by a play-test. Resource #%d reached "
-            "%d with scope=%s. Play this screen, then change kind to "
-            "verified if it holds or lower this row if it does not."
-            % (resource, extent, scope))
+    return ("What is under test: whether resource #%d runs with scope=%s "
+            "content ending at %d. Recorded by a build, not by a play-test, "
+            "and the table had nothing further. Nobody has seen this screen "
+            "at this extent: play it, then change kind to verified if it "
+            "holds or lower this row if it does not."
+            % (resource, scope, extent))
 
 
 def check_streamed_neighbours(resource, reclaimed, exceptions=None,
