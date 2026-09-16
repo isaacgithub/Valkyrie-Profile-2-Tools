@@ -267,9 +267,72 @@ class ChapterProfileSelectionTests(unittest.TestCase):
         self.assertEqual(1, compiled["outside_profile"])
 
 
-class PackFileRowTests(unittest.TestCase):
-    """The chapter label and misc labels build only when the profile asks."""
+class PartialProfileTests(unittest.TestCase):
+    PACK = Path(__file__).resolve().parents[1] / "translations" / "pt-BR"
 
+    def entries(self):
+        from tools.scripts import public_build
+        return public_build.profile_entries(self.PACK)
+
+    def test_a_row_is_named_by_its_kind_and_resource(self):
+        ids = {entry["id"] for entry in self.entries()}
+        self.assertIn("scene-1195", ids)
+        self.assertIn("chapter-label-60", ids)
+
+    def test_one_resource_under_two_kinds_stays_two_rows(self):
+        ids = {entry["id"] for entry in self.entries()}
+        self.assertIn("container-31", ids)
+        self.assertIn("fontless-31", ids)
+
+    def test_every_row_has_its_own_id(self):
+        entries = self.entries()
+        self.assertEqual(len(entries), len({e["id"] for e in entries}))
+
+    def test_the_one_misc_row_reads_as_misc(self):
+        labels = {entry["id"]: entry["label"] for entry in self.entries()}
+        misc = [key for key in labels if key.startswith("misc-")]
+        self.assertEqual(1, len(misc))
+        self.assertEqual("misc", labels[misc[0]])
+
+    def test_a_selection_reaches_the_manifest_and_nothing_else_does(self):
+        import csv
+        from tools.scripts import public_build
+        from tools.scripts.paths import WORKSPACE_DIR
+
+        if not public_build.workspace_is_ready(WORKSPACE_DIR):
+            self.skipTest("no generated workspace to compile against")
+        wanted = {"scene-49", "fontless-31", "chapter-label-60"}
+        compiled = public_build.compile_build_workspace(
+            WORKSPACE_DIR, self.PACK, only=wanted)
+        with Path(compiled["manifest"]).open(
+                encoding="utf-8-sig", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertEqual(
+            wanted, {"%s-%s" % (row["kind"], row["resource"]) for row in rows})
+
+    def test_an_id_that_names_nothing_is_refused(self):
+        from tools.scripts import public_build
+        from tools.scripts.paths import WORKSPACE_DIR
+
+        if not public_build.workspace_is_ready(WORKSPACE_DIR):
+            self.skipTest("no generated workspace to compile against")
+        with self.assertRaises(public_build.PackError) as caught:
+            public_build.compile_build_workspace(
+                WORKSPACE_DIR, self.PACK, only={"scene-49", "scene-999999"})
+        self.assertIn("scene-999999", str(caught.exception))
+
+    def test_selecting_nothing_is_refused_rather_than_built_empty(self):
+        from tools.scripts import public_build
+        from tools.scripts.paths import WORKSPACE_DIR
+
+        if not public_build.workspace_is_ready(WORKSPACE_DIR):
+            self.skipTest("no generated workspace to compile against")
+        with self.assertRaises(public_build.PackError):
+            public_build.compile_build_workspace(
+                WORKSPACE_DIR, self.PACK, only=set())
+
+
+class PackFileRowTests(unittest.TestCase):
     CARRIERS = ("60", "1196")
 
     def compile(self, extra_rows):

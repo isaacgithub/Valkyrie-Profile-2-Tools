@@ -20,6 +20,7 @@ import tempfile
 import threading
 import time
 import tomllib
+from collections.abc import Iterable
 from pathlib import Path
 
 from .paths import BUILD_DIR, PROJECT_ROOT, WORKSPACE_DIR, output_root
@@ -256,6 +257,50 @@ def check_pack_profile(pack: str | os.PathLike[str]) -> int:
     return len(rows)
 
 
+def entry_id(row: dict[str, str]) -> str:
+    kind = (row.get("kind") or "").strip()
+    return f"{kind}-{int((row.get('resource') or '').strip(), 0)}"
+
+
+def entry_label(row: dict[str, str]) -> str:
+    return "misc" if (row.get("kind") or "").strip() == "misc" \
+        else entry_id(row)
+
+
+def profile_entries(
+    pack: str | os.PathLike[str],
+    *,
+    profile: str | os.PathLike[str] | None = None,
+) -> list[dict[str, str]]:
+    pack_path = resolve_pack(pack)
+    path = (Path(profile).expanduser().resolve() if profile is not None
+            else pack_path / PACK_PROFILE)
+    rows = _checked_profile(path)
+    entries = [{"id": entry_id(row), "label": entry_label(row),
+                "kind": (row.get("kind") or "").strip(),
+                "resource": str(int((row.get("resource") or "").strip(), 0))}
+               for row in rows]
+    entries.sort(key=lambda entry: (entry["kind"], int(entry["resource"])))
+    return entries
+
+
+def _select_profile_rows(
+    rows: list[dict[str, str]],
+    only: Iterable[str] | None,
+    profile_path: Path,
+) -> list[dict[str, str]]:
+    if only is None:
+        return rows
+    wanted = {str(item).strip() for item in only if str(item).strip()}
+    known = {entry_id(row) for row in rows}
+    unknown = sorted(wanted - known)
+    if unknown:
+        raise PackError(
+            f"{profile_path}: no profile row is called "
+            f"{', '.join(unknown[:6])}")
+    return [row for row in rows if entry_id(row) in wanted]
+
+
 def _input_sheet(records: Path, row: dict[str, str]) -> Path:
     name = Path(row["sheet"]).name
     folder = "containers" if name.startswith("container-") else "scenes"
@@ -296,8 +341,8 @@ def compile_build_workspace(
     *,
     profile: str | os.PathLike[str] | None = None,
     menu_layout: str | os.PathLike[str] = MENU_LAYOUT,
+    only: Iterable[str] | None = None,
 ) -> dict[str, object]:
-    """Join one pack to extracted records and emit patcher-ready sheets."""
     workspace_path = Path(workspace).expanduser().resolve()
     pack_path = resolve_pack(pack)
     profile_path = (Path(profile).expanduser().resolve() if profile is not None
@@ -330,7 +375,8 @@ def compile_build_workspace(
     matched: set[tuple[str, str, str, str]] = set()
     matched_chapters: set[tuple[str, str, str, str]] = set()
     try:
-        profile_rows = _checked_profile(profile_path)
+        profile_rows = _select_profile_rows(
+            _checked_profile(profile_path), only, profile_path)
         text_rows = [row for row in profile_rows
                      if row["kind"] not in ("image", *PACK_FILE_ROWS)]
         listed = {kind: [row for row in profile_rows if row["kind"] == kind]
@@ -646,10 +692,8 @@ def build_iso(
     no_verify: bool = False,
     images: list[str | os.PathLike[str]] | None = None,
     strict_extents: bool = False,
+    only: Iterable[str] | None = None,
 ) -> Path:
-    """Compile the pack and run the patcher in a clean subprocess.
-
-    Reads the workspace out of the disc first when it is not there yet."""
     source = Path(source_iso).expanduser().resolve()
     if not source.is_file():
         raise PackError(f"USA image does not exist: {source}")
@@ -658,7 +702,8 @@ def build_iso(
               flush=True)
         generate_workspace(list(images) if images else [source], workspace)
         print("workspace: prepared", flush=True)
-    compiled = compile_build_workspace(workspace, resolve_pack(pack))
+    compiled = compile_build_workspace(workspace, resolve_pack(pack),
+                                       only=only)
     glyph_pool = ensure_glyph_pool(source, workspace)
     locale = str(compiled["locale"])
     destination = (Path(output).expanduser().resolve() if output else

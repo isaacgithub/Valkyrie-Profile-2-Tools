@@ -254,6 +254,192 @@ def _window():
     return root
 
 
+class PackagedReleaseChoiceTests(unittest.TestCase):
+    def test_a_packaged_run_does_not_offer_to_narrow_a_build(self):
+        previous = getattr(sys, "frozen", None)
+        sys.frozen = True
+        try:
+            self.assertFalse(launcher.picks_resources())
+        finally:
+            if previous is None:
+                del sys.frozen
+            else:
+                sys.frozen = previous
+
+    def test_a_source_checkout_does(self):
+        previous = getattr(sys, "frozen", None)
+        if hasattr(sys, "frozen"):
+            del sys.frozen
+        try:
+            self.assertTrue(launcher.picks_resources())
+        finally:
+            if previous is not None:
+                sys.frozen = previous
+
+
+class PackagedReleaseTests(unittest.TestCase):
+    def frozen(self, frozen):
+        previous = getattr(sys, "frozen", None)
+        if frozen:
+            sys.frozen = True
+        elif hasattr(sys, "frozen"):
+            del sys.frozen
+
+        def restore():
+            if previous is None:
+                if hasattr(sys, "frozen"):
+                    del sys.frozen
+            else:
+                sys.frozen = previous
+
+        self.addCleanup(restore)
+
+    def app(self):
+        root = _window()
+        self.addCleanup(root.destroy)
+        return launcher.App(root)
+
+    def test_a_source_checkout_offers_it(self):
+        self.frozen(False)
+        app = self.app()
+        self.assertTrue(app.picks_resources)
+        self.assertTrue(hasattr(app, "only_btn"))
+
+    def test_a_packaged_release_does_not(self):
+        self.frozen(True)
+        app = self.app()
+        self.assertFalse(app.picks_resources)
+        self.assertFalse(hasattr(app, "only_btn"))
+
+    def test_a_packaged_release_still_builds_the_whole_profile(self):
+        self.frozen(True)
+        self.assertIsNone(self.app().only)
+
+
+class ResourcePickerTests(unittest.TestCase):
+    ENTRIES = [
+        {"id": "scene-49", "label": "scene-49",
+         "kind": "scene", "resource": "49"},
+        {"id": "scene-73", "label": "scene-73",
+         "kind": "scene", "resource": "73"},
+        {"id": "container-31", "label": "container-31",
+         "kind": "container", "resource": "31"},
+        {"id": "fontless-31", "label": "fontless-31",
+         "kind": "fontless", "resource": "31"},
+        {"id": "misc-1781", "label": "misc",
+         "kind": "misc", "resource": "1781"},
+    ]
+
+    def picker(self, selected=None):
+        root = _window()
+        self.addCleanup(root.destroy)
+        launcher.apply_dark_theme(root, 1.0)
+        made = {}
+        original = launcher.ResourcePicker.__init__
+
+        def capture(picker, parent, entries, chosen, scale=1.0):
+            made["picker"] = picker
+            original(picker, parent, entries, chosen, scale)
+
+        self.addCleanup(setattr, launcher.ResourcePicker, "__init__", original)
+        launcher.ResourcePicker.__init__ = capture
+        root.after(10, lambda: self.run_case(made["picker"]))
+        launcher.ResourcePicker(root, self.ENTRIES, selected, 1.0)
+        return made["picker"]
+
+    def run_case(self, picker):        # overridden per test
+        picker.window.destroy()
+
+    def test_clearing_leaves_what_the_filter_hides_alone(self):
+        seen = {}
+
+        def case(picker):
+            picker.filter_var.set("scene-")
+            picker.window.update_idletasks()
+            picker._choose_none()
+            seen["after"] = set(picker._chosen)
+            picker.window.destroy()
+
+        self.run_case = case
+        self.picker(selected=None)
+        self.assertEqual({"container-31", "fontless-31", "misc-1781"},
+                         seen["after"])
+
+    def test_selecting_adds_the_shown_rows_to_what_is_already_chosen(self):
+        seen = {}
+
+        def case(picker):
+            picker._choose_none()
+            picker.filter_var.set("scene-49")
+            picker.window.update_idletasks()
+            picker._choose_all()
+            picker.filter_var.set("misc")
+            picker.window.update_idletasks()
+            picker._choose_all()
+            seen["after"] = set(picker._chosen)
+            picker.window.destroy()
+
+        self.run_case = case
+        self.picker(selected=None)
+        self.assertEqual({"scene-49", "misc-1781"}, seen["after"])
+
+    def test_the_buttons_say_which_rows_they_act_on(self):
+        seen = {}
+
+        def case(picker):
+            seen["plain"] = (picker.all_var.get(), picker.none_var.get())
+            picker.filter_var.set("scene-")
+            picker.window.update_idletasks()
+            seen["filtered"] = (picker.all_var.get(), picker.none_var.get())
+            picker.window.destroy()
+
+        self.run_case = case
+        self.picker(selected=None)
+        self.assertEqual(("Select all", "Clear all"), seen["plain"])
+        self.assertEqual(("Select shown", "Clear shown"), seen["filtered"])
+
+    def test_one_click_toggles_a_row_both_ways(self):
+        seen = {}
+
+        class Click:
+            def __init__(self, y):
+                self.y = y
+
+        def case(picker):
+            picker.window.deiconify()
+            picker.window.update()
+            picker._choose_none()
+            box = picker.list.bbox(0)
+            picker._toggle_clicked(Click(box[1] + 1))
+            seen["on"] = set(picker._chosen)
+            picker._toggle_clicked(Click(box[1] + 1))
+            seen["off"] = set(picker._chosen)
+            seen["below"] = picker._toggle_clicked(Click(10_000))
+            seen["after_below"] = set(picker._chosen)
+            picker.window.destroy()
+
+        self.run_case = case
+        self.picker(selected=None)
+        self.assertEqual({self.ENTRIES[0]["id"]}, seen["on"])
+        self.assertEqual(set(), seen["off"])
+        self.assertEqual(set(), seen["after_below"])
+
+    def test_closing_the_window_is_not_an_answer(self):
+        picker = self.picker(selected={"scene-49"})
+        self.assertIs(launcher.NOTHING_PICKED, picker.result)
+
+    def test_choosing_everything_reads_as_every_row(self):
+        seen = {}
+
+        def case(picker):
+            picker._choose_all()
+            picker._accept()
+
+        self.run_case = case
+        picker = self.picker(selected={"scene-49"})
+        self.assertIsNone(picker.result)
+
+
 class WindowTests(unittest.TestCase):
 
     def setUp(self):
@@ -318,11 +504,12 @@ class WindowTests(unittest.TestCase):
     def test_the_controls_a_job_reads_are_all_locked(self):
         locked = {str(widget) for widget, _idle in self.app.locked}
         for name, widget in (("language", self.app.language_combo),
+                             ("resources", self.app.only_btn),
                              ("build", self.app.build_btn),
                              ("verify", self.app.verify_chk)):
             with self.subTest(control=name):
                 self.assertIn(str(widget), locked)
-        self.assertEqual(9, len(self.app.locked))
+        self.assertEqual(10, len(self.app.locked))
 
     def test_verification_is_off_until_asked_for(self):
         """The slow read-back pass is opt-in, so a build finishes sooner."""

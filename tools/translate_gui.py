@@ -19,15 +19,17 @@ import traceback
 from pathlib import Path
 from typing import NamedTuple
 
-from tools.scripts.public_build import build_iso, terminate_active_builds
+from tools.scripts.public_build import (
+    build_iso, profile_entries, terminate_active_builds,
+)
 from tools.scripts.paths import PROJECT_ROOT, WORKSPACE_DIR
 from tools.scripts.translation_pack import is_language_pack
 from tools.app_meta import VERSION as __version__
 
 try:
     from tkinter import (
-        BooleanVar, Canvas, DISABLED, END, NORMAL, PhotoImage, StringVar,
-        Text, Tk, filedialog, messagebox,
+        BooleanVar, Canvas, DISABLED, END, Listbox, NORMAL, PhotoImage,
+        StringVar, Text, Tk, Toplevel, filedialog, messagebox,
     )
     from tkinter import font as tkfont
     from tkinter import ttk
@@ -35,10 +37,11 @@ except ImportError as exc:  # pragma: no cover - depends on the Python build
     TK_IMPORT_ERROR = exc
     BooleanVar = Canvas = PhotoImage = StringVar = Text = Tk = None
     filedialog = messagebox = tkfont = ttk = None
-    DISABLED = END = NORMAL = None
+    DISABLED = END = NORMAL = Listbox = Toplevel = None
 else:
     TK_IMPORT_ERROR = None
 
+NOTHING_PICKED = object()
 
 APP_NAME = "Valkyrie Profile 2 Translation Builder"
 SHORT_NAME = "VP2 Translation Builder"
@@ -80,6 +83,10 @@ def bundle_root() -> Path:
 def asset_path(name: str) -> Path | None:
     path = bundle_root() / name
     return path if path.is_file() else None
+
+
+def picks_resources() -> bool:
+    return not getattr(sys, "frozen", False)
 
 
 def real_exe_dir() -> Path:
@@ -158,9 +165,6 @@ class _QueueStream:
 
 
 class TaskRunner:
-    """Run disc work off the Tk thread and stream its output back."""
-
-    #: Lines handled per callback before the window is given back.
     BATCH = 200
 
     def __init__(self, root, on_line, on_done):
@@ -396,6 +400,162 @@ def use_dark_titlebar(root):
         pass
 
 
+class ResourcePicker:
+    def __init__(self, parent, entries, selected, scale=1.0):
+        self.entries = entries
+        self.result = NOTHING_PICKED
+        self._chosen = set(selected) if selected is not None else {
+            entry["id"] for entry in entries}
+        self._shown = list(entries)
+        self.window = Toplevel(parent)
+        self.window.title("Resources to build")
+        self.window.configure(background=DARK["bg"])
+        self.window.transient(parent)
+        self.window.resizable(True, True)
+        px = lambda value: max(1, int(round(value * scale)))
+        self.window.minsize(px(380), px(420))
+
+        frame = ttk.Frame(self.window, style="Card.TFrame",
+                          padding=(px(14), px(12)))
+        frame.pack(fill="both", expand=True, padx=px(12), pady=px(12))
+        frame.columnconfigure(0, weight=1)
+        frame.rowconfigure(2, weight=1)
+
+        self.filter_var = StringVar()
+        self.filter_var.trace_add("write", lambda *_: self._refresh())
+        search = ttk.Entry(frame, textvariable=self.filter_var)
+        search.grid(row=0, column=0, columnspan=2, sticky="ew")
+        ttk.Label(frame, text="Type to filter · click a row to toggle it · "
+                              "unlisted rows keep the source disc's text",
+                  style="CardMuted.TLabel").grid(
+            row=1, column=0, columnspan=2, sticky="w", pady=(px(5), px(8)))
+
+        self.list = Listbox(
+            frame, selectmode="extended", activestyle="none",
+            background=DARK["surface_hi"], foreground=DARK["text"],
+            selectbackground=DARK["accent_dim"],
+            selectforeground=DARK["text"],
+            highlightthickness=0, borderwidth=0, exportselection=False)
+        self.list.grid(row=2, column=0, sticky="nsew")
+        scroll = ttk.Scrollbar(frame, orient="vertical",
+                               command=self.list.yview)
+        self.list.configure(yscrollcommand=scroll.set)
+        scroll.grid(row=2, column=1, sticky="ns")
+        self.list.bind("<space>", self._toggle_selection)
+        self.list.bind("<Return>", self._toggle_selection)
+        self.list.bind("<ButtonRelease-1>", self._toggle_clicked)
+
+        self.count_var = StringVar()
+        ttk.Label(frame, textvariable=self.count_var,
+                  style="Card.TLabel").grid(
+            row=3, column=0, columnspan=2, sticky="w", pady=(px(8), 0))
+
+        buttons = ttk.Frame(frame, style="Card.TFrame")
+        buttons.grid(row=4, column=0, columnspan=2, sticky="ew",
+                     pady=(px(10), 0))
+        self.all_var = StringVar()
+        self.none_var = StringVar()
+        ttk.Button(buttons, textvariable=self.all_var, width=11,
+                   command=self._choose_all).pack(side="left", padx=(0, px(6)))
+        ttk.Button(buttons, textvariable=self.none_var, width=11,
+                   command=self._choose_none).pack(side="left", padx=(0, px(6)))
+        ttk.Button(buttons, text="Cancel",
+                   command=self.window.destroy).pack(side="right")
+        ttk.Button(buttons, text="Use these", style="Accent.TButton",
+                   command=self._accept).pack(side="right", padx=(0, px(6)))
+
+        self._refresh()
+        self.window.bind("<Escape>", lambda _event: self.window.destroy())
+        self._centre(px(420), px(540))
+        search.focus_set()
+        self.window.grab_set()
+        parent.wait_window(self.window)
+
+    def _centre(self, width, height):
+        """Open in the middle of the screen rather than the corner Tk picks."""
+        self.window.update_idletasks()
+        width = max(width, self.window.winfo_reqwidth())
+        height = max(height, self.window.winfo_reqheight())
+        left = (self.window.winfo_screenwidth() - width) // 2
+        top = (self.window.winfo_screenheight() - height) // 2
+        self.window.geometry(f"{width}x{height}+{max(left, 0)}+{max(top, 0)}")
+
+    def _matches(self, entry, needle):
+        if not needle:
+            return True
+        return (needle in entry["label"]
+                or needle in entry["id"]
+                or needle.lstrip("0") == entry["resource"]
+                or needle in "%s-%04d" % (entry["kind"],
+                                          int(entry["resource"])))
+
+    def _refresh(self, keep_view=False):
+        needle = self.filter_var.get().strip().lower()
+        before = self.list.yview()[0] if keep_view else None
+        selection = self.list.curselection() if keep_view else ()
+        self._shown = [entry for entry in self.entries
+                       if self._matches(entry, needle)]
+        self.list.delete(0, END)
+        for entry in self._shown:
+            mark = "x" if entry["id"] in self._chosen else " "
+            self.list.insert(END, f" [{mark}]  {entry['label']}")
+        if keep_view:
+            self.list.yview_moveto(before)
+            for index in selection:
+                if index < self.list.size():
+                    self.list.selection_set(index)
+        total = len(self.entries)
+        self.count_var.set(
+            f"{len(self._chosen)} of {total} selected"
+            + (f" · {len(self._shown)} shown" if needle else ""))
+        scope = "shown" if needle else "all"
+        self.all_var.set(f"Select {scope}")
+        self.none_var.set(f"Clear {scope}")
+
+    def _toggle(self, indexes):
+        for index in indexes:
+            if 0 <= index < len(self._shown):
+                entry = self._shown[index]
+                if entry["id"] in self._chosen:
+                    self._chosen.discard(entry["id"])
+                else:
+                    self._chosen.add(entry["id"])
+        self._refresh(keep_view=True)
+
+    def _toggle_selection(self, _event=None):
+        self._toggle(self.list.curselection() or ())
+        return "break"
+
+    def _toggle_clicked(self, event):
+        index = self.list.nearest(event.y)
+        if index < 0 or index >= len(self._shown):
+            return None
+        box = self.list.bbox(index)
+        if box is None or not (box[1] <= event.y <= box[1] + box[3]):
+            return None      # below the last row, not on it
+        self._toggle((index,))
+        return None
+
+    def _choose_all(self):
+        self._chosen |= {entry["id"] for entry in self._shown}
+        self._refresh()
+
+    def _choose_none(self):
+        self._chosen -= {entry["id"] for entry in self._shown}
+        self._refresh()
+
+    def _accept(self):
+        if not self._chosen:
+            messagebox.showinfo(
+                "Nothing selected",
+                "Choose at least one resource, or cancel to build them all.",
+                parent=self.window)
+            return
+        self.result = (None if len(self._chosen) == len(self.entries)
+                       else set(self._chosen))
+        self.window.destroy()
+
+
 class App:
     def __init__(self, root, parent=None, on_busy_change=None):
         self.root = root
@@ -410,6 +570,9 @@ class App:
         self.jp_var = StringVar()
         self.pack_var = StringVar(value=self.packs[0].label)
         self.output_var = StringVar(value=str(real_exe_dir()))
+        self.picks_resources = picks_resources()
+        self.only = None
+        self.only_var = StringVar(value="All resources")
         self.verify_var = BooleanVar(value=False)
         self.log_shown = BooleanVar(value=False)
         ready, note = workspace_summary()
@@ -549,8 +712,18 @@ class App:
         self.language_combo = self._lockable(ttk.Combobox(
             card, textvariable=self.pack_var,
             values=[pack.label for pack in self.packs], state="readonly"))
-        self.language_combo.grid(
-            row=1, column=1, columnspan=2, sticky="ew")
+        if self.picks_resources:
+            self.language_combo.grid(row=1, column=1, sticky="ew",
+                                     padx=(0, 10))
+            self.language_combo.bind(
+                "<<ComboboxSelected>>", lambda _event: self._reset_only())
+            self.only_btn = self._lockable(ttk.Button(
+                card, textvariable=self.only_var,
+                command=self._pick_resources))
+            self.only_btn.grid(row=1, column=2, sticky="e")
+        else:
+            self.language_combo.grid(row=1, column=1, columnspan=2,
+                                     sticky="ew")
         ttk.Label(card, text="Output", style="Card.TLabel").grid(
             row=2, column=0, sticky="w", padx=(0, 10), pady=(10, 0))
         self._lockable(ttk.Entry(card, textvariable=self.output_var)).grid(
@@ -648,6 +821,31 @@ class App:
         if path:
             self.output_var.set(path)
 
+    def _reset_only(self):
+        self.only = None
+        self._show_only()
+
+    def _show_only(self):
+        total = getattr(self, "_only_total", 0)
+        self.only_var.set("All resources" if self.only is None
+                          else f"{len(self.only)} of {total}")
+
+    def _pick_resources(self):
+        pack = self.pack_by_label.get(self.pack_var.get())
+        if pack is None:
+            return
+        try:
+            entries = profile_entries(pack.path)
+        except Exception as exc:
+            messagebox.showerror("Resources", str(exc))
+            return
+        self._only_total = len(entries)
+        picker = ResourcePicker(self.host, entries, self.only, self.scale)
+        if picker.result is NOTHING_PICKED:
+            return
+        self.only = picker.result
+        self._show_only()
+
     def _validated_usa(self):
         raw = self.usa_var.get().strip()
         if not raw:
@@ -707,9 +905,18 @@ class App:
             self.status_var.set("Reading your disc for the first time…")
         self.detail_var.set(pack.label)
         self._append_log(f"\n=== build: {usa.name} -> {output.name} ===\n")
+        if self.only is not None:
+            self._append_log(
+                f"resources: {len(self.only)} of "
+                f"{getattr(self, '_only_total', len(self.only))} "
+                f"({', '.join(sorted(self.only)[:8])}"
+                f"{', …' if len(self.only) > 8 else ''})\n"
+                "this disc is for testing those rows: everything else keeps "
+                "the source disc's text\n")
         self.runner.start("build", build_iso, usa, pack.path,
                           workspace=DEFAULT_WORKSPACE, output=output,
-                          no_verify=not self.verify_var.get(), images=images)
+                          no_verify=not self.verify_var.get(), images=images,
+                          only=self.only)
 
     def _lockable(self, widget):
         """Register a control that a running job takes away."""
