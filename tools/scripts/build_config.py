@@ -29,6 +29,10 @@ FLAG_MAP = {
     'misc': {},
 }
 
+IN_PROCESS_FLAGS = {
+    'scene': frozenset({'keep-undrawn'}),
+}
+
 def expand_flags(row, kind):
     """Convert the manifest's flags column into subprocess args."""
     raw = (row.get('flags') or '').split()
@@ -37,7 +41,7 @@ def expand_flags(row, kind):
 def warn_unknown_flags(row, kind):
     """Surface flags that don't map to the tool, so the manifest stays honest."""
     raw = set((row.get('flags') or '').split())
-    known = set(FLAG_MAP[kind].keys())
+    known = set(FLAG_MAP[kind].keys()) | IN_PROCESS_FLAGS.get(kind, frozenset())
     extra = raw - known
     if extra:
         print(f"warning: unknown flags for {kind} {row.get('resource')}: "

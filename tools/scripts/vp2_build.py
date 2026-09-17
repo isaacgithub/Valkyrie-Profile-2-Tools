@@ -19,6 +19,7 @@ from . import vp2_iso_space as iso_space
 from . import vp2_container_text as container_text
 from . import vp2_map_names as map_names
 from . import vp2_battle_target as battle_target
+from . import vp2_battle_names as battle_names
 from . import fis_images
 from . import fis_screen_layout
 from . import overlay_edits
@@ -111,7 +112,7 @@ def text_resources(rows):
             if row['kind'] not in NON_TEXT_KINDS}
 
 
-def _battle_target_misc(rows):
+def _battle_misc(rows):
     """The merged ``misc`` sheets the rows name, key to value."""
     values = {}
     for row in rows:
@@ -126,20 +127,26 @@ def _battle_target_misc(rows):
 
 def battle_target_label(rows):
     """The Target label a ``misc`` row names, or ``None``."""
-    label = _battle_target_misc(rows).get(battle_target.KEY)
+    label = _battle_misc(rows).get(battle_target.KEY)
     return battle_target.validate_label(label) if label else None
 
 
 def battle_target_x(rows):
     """The Target label's horizontal offset a ``misc`` row names, or ``None``."""
     return battle_target.parse_x(
-        _battle_target_misc(rows).get(battle_target.X_KEY))
+        _battle_misc(rows).get(battle_target.X_KEY))
+
+
+def battle_name_translations(rows):
+    """The compact battle-HUD names requested by ``misc.csv``."""
+    return battle_names.translations(_battle_misc(rows))
 
 
 def battle_overlay_edits(rows):
     """Every edit this build makes to the battle overlay's code and data."""
     edits = list(battle_target.edits(battle_target_label(rows),
                                      battle_target_x(rows)))
+    edits += battle_names.edits(_battle_misc(rows))
     folders = []
     for row in rows:
         folder = (row.get('sheet') or '').strip()
@@ -181,6 +188,9 @@ def apply_battle_overlay_edits(iso, rows):
     if x:
         how = "centred" if given is None else "set by the pack"
         print(f"battle target: label moved {x:+g} horizontally ({how})")
+    names = battle_name_translations(rows)
+    if names:
+        print(f"battle names: {len(names)} character name(s) translated")
     print(f"battle overlay: {len(edits) + len(checks)} edit(s), "
           f"{result.changed} byte(s) changed, {result.room} byte(s) of room "
           f"left")

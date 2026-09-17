@@ -571,12 +571,27 @@ def undrawn_mark(english):
     return None
 
 
-def reclaim_undrawn_rows(rows, mark=None):
-    from . import einherjar_roster
+def shared_mark(rows, hidden):
+    counts = {}
+    for row in rows:
+        if row.get("message_id") in hidden:
+            continue
+        for character in (row.get("translated") or ""):
+            if character.isascii() and character.isalpha():
+                lowered = character.lower()
+                counts[lowered] = counts.get(lowered, 0) + 1
+    if not counts:
+        return None
+    return min(counts, key=lambda letter: (-counts[letter], letter))
 
-    hidden = einherjar_roster.hidden_message_ids(rows)
+
+def reclaim_undrawn_rows(rows, mark=None):
+    from . import undrawn_records
+
+    hidden = undrawn_records.hidden_message_ids(rows)
     if not hidden:
         return rows, 0
+    chosen_for_scene = mark or shared_mark(rows, hidden)
     reclaimed = 0
     for row in rows:
         if row.get("message_id") not in hidden:
@@ -586,7 +601,7 @@ def reclaim_undrawn_rows(rows, mark=None):
         english = row.get("original_en") or ""
         if not english.strip():
             continue
-        chosen = mark or undrawn_mark(english)
+        chosen = chosen_for_scene or undrawn_mark(english)
         if chosen is None:
             continue
         held = undrawn_placeholder(english, chosen)

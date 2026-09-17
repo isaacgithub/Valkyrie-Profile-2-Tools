@@ -30,6 +30,7 @@ from .translation_layout import rename_tree
 from . import chapter_label
 from . import overlay_edits
 from . import vp2_battle_target
+from . import vp2_battle_names
 from .translation_pack import (
     PACK_CHAPTERS,
     PACK_MISC,
@@ -194,7 +195,7 @@ def _pack_locale(pack: Path) -> str:
     return value.strip()
 
 
-def _pack_battle_target(pack: Path) -> str | None:
+def _validated_misc(pack: Path) -> dict[str, dict[str, str]]:
     misc = load_misc(pack)
     offset = misc.get(vp2_battle_target.X_KEY)
     if offset is not None:
@@ -203,14 +204,22 @@ def _pack_battle_target(pack: Path) -> str | None:
         except ValueError as exc:
             raise PackError(f"{pack / PACK_MISC}: {exc}") from exc
     row = misc.get("battle_target")
-    if row is None:
-        return None
-    value = row["translated"]
+    if row is not None:
+        try:
+            vp2_battle_target.encode_label(row["translated"])
+        except ValueError as exc:
+            raise PackError(f"{pack / PACK_MISC}: {exc}") from exc
     try:
-        vp2_battle_target.encode_label(value)
+        vp2_battle_names.translations(
+            {key: value["translated"] for key, value in misc.items()})
     except ValueError as exc:
         raise PackError(f"{pack / PACK_MISC}: {exc}") from exc
-    return value
+    return misc
+
+
+def _pack_battle_target(pack: Path) -> str | None:
+    row = _validated_misc(pack).get("battle_target")
+    return row["translated"] if row is not None else None
 
 
 def _record_key(row: dict[str, str]) -> tuple[str, str, str, str]:
@@ -400,7 +409,9 @@ def compile_build_workspace(
     if reusable is not None:
         return reusable
 
-    battle_target = _pack_battle_target(pack_path)
+    misc = _validated_misc(pack_path)
+    target_row = misc.get("battle_target")
+    battle_target = target_row["translated"] if target_row is not None else None
     translations = load_pack(pack_path, ignore_reference_columns=True)
     expanded = _expanded_targets(
         translations, _menu_units(os.fspath(menu_layout)))
@@ -515,7 +526,7 @@ def compile_build_workspace(
              if key[1] == str(chapter_label.CARRIERS[0])
              and key[2] == str(chapter_label.FIRST_MESSAGE)), None)
         wanted = {"chapter-label": label_key is not None,
-                  "misc": battle_target is not None}
+                  "misc": bool(misc)}
         for kind, (name, _resources) in PACK_FILE_ROWS.items():
             if not (wanted[kind] and listed[kind]):
                 continue

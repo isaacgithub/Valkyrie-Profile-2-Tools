@@ -15,7 +15,7 @@ import uuid
 from collections import defaultdict
 from pathlib import Path
 
-from . import einherjar_roster
+from . import undrawn_records
 from .translation_pack import (
     PackError,
     _csv_files,
@@ -288,7 +288,7 @@ def write_reference_tree(
             resource = int(match.group(1))
             dialogue_rows += _copy_reference_rows(
                 source, staging / "dialogue" / f"scene-{resource:04d}.csv",
-                SCENE_REFERENCE_FIELDS, einherjar_roster.hidden_message_ids)
+                SCENE_REFERENCE_FIELDS, undrawn_records.hidden_message_ids)
 
         for resource in sorted(int(item) for item in DIALOGUE_CONTAINERS):
             source = (original_dir / "containers"

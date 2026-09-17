@@ -38,7 +38,8 @@ PACK_SLOTS = "shared-font-slots.csv"
 PACK_MISC = "misc.csv"
 PACK_CHAPTERS = "chapter.csv"
 MISC_FIELDS = ("key", "translated", "notes")
-MISC_KEY_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+MISC_KEY_RE = re.compile(
+    r"^(?:[a-z][a-z0-9_]*|battle_name_[0-9A-F]{2})$")
 
 
 class PackError(ValueError):

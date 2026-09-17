@@ -132,6 +132,19 @@ class PackProfileTests(unittest.TestCase):
                 encoding="utf-8")
             self.assertEqual("Alvo", _pack_battle_target(pack))
 
+    def test_invalid_battle_name_is_refused_while_compiling_the_pack(self):
+        import tempfile
+        from tools.scripts.public_build import _validated_misc
+        from tools.scripts.translation_pack import PackError
+        with tempfile.TemporaryDirectory() as folder:
+            pack = Path(folder)
+            (pack / "misc.csv").write_text(
+                "key,translated,notes\n"
+                "battle_name_0A,VALQUÍRIA,VALKYRIE\n",
+                encoding="utf-8")
+            with self.assertRaisesRegex(PackError, "A-Z or hyphen"):
+                _validated_misc(pack)
+
 
 class UnlistedFolderTests(unittest.TestCase):
     """A `_` folder under translations/ is a starting point, not a language."""
@@ -335,7 +348,7 @@ class PartialProfileTests(unittest.TestCase):
 class PackFileRowTests(unittest.TestCase):
     CARRIERS = ("60", "1196")
 
-    def compile(self, extra_rows):
+    def compile(self, extra_rows, misc_rows=None):
         import csv
         import json
         import tempfile
@@ -375,9 +388,11 @@ class PackFileRowTests(unittest.TestCase):
                       ["resource", "message_id", "translated", "notes"],
                       [{"resource": "60", "message_id": "51",
                         "translated": "KAPITEL", "notes": ""}])
-            write_csv(pack / "misc.csv", ["key", "translated", "notes"],
-                      [{"key": "battle_target", "translated": "Sikta",
-                        "notes": ""}])
+            write_csv(
+                pack / "misc.csv", ["key", "translated", "notes"],
+                misc_rows if misc_rows is not None else
+                [{"key": "battle_target", "translated": "Sikta",
+                  "notes": ""}])
             menu_layout = root / "menu-layout.csv"
             write_csv(menu_layout, ["menu", "unit", "resource",
                                     "message_id", "message_index"], [])
@@ -410,6 +425,16 @@ class PackFileRowTests(unittest.TestCase):
             [(row["kind"], row["resource"]) for row in manifest])
         self.assertEqual("Sikta", compiled["battle_target"])
         self.assertEqual(0, compiled["outside_profile"])
+
+    def test_a_battle_name_alone_carries_misc_into_the_manifest(self):
+        rows = [{"kind": "misc", "resource": "1781",
+                 "sheet": "misc.csv", "flags": "", "verify": ""}]
+        compiled, manifest = self.compile(
+            rows, [{"key": "battle_name_0A", "translated": "VALQUIRIA",
+                    "notes": "VALKYRIE"}])
+        self.assertEqual([("scene", "43"), ("misc", "1781")],
+                         [(row["kind"], row["resource"]) for row in manifest])
+        self.assertIsNone(compiled["battle_target"])
 
     def test_a_row_naming_the_wrong_resource_or_file_is_refused(self):
         from tools.scripts.translation_pack import PackError

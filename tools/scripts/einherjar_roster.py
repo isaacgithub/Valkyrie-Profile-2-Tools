@@ -39,14 +39,14 @@ def load_rosters(path=None):
     return {key: frozenset(value) for key, value in rosters.items()}
 
 
-def _join_block(rows):
+def join_block(rows):
     return [(row, found.group(1)) for row, found in
             ((row, JOIN_LINE.match(_text(row.get("original_en"))))
              for row in rows)
             if found]
 
 
-def _story_run(names):
+def story_run(names):
     return {index for index, name in enumerate(names)
             if name in STORY_CAST and (
                 (index > 0 and names[index - 1] in STORY_CAST)
@@ -54,8 +54,8 @@ def _story_run(names):
 
 
 def site_einherjar(rows):
-    names = [name for _, name in _join_block(rows)]
-    story = _story_run(names)
+    names = [name for _, name in join_block(rows)]
+    story = story_run(names)
     return [name for index, name in enumerate(names) if index not in story]
 
 
@@ -91,9 +91,9 @@ def _materialization_run(rows):
 
 def suppressed_rows(rows, rosters=None):
     table = load_rosters() if rosters is None else rosters
-    joins = _join_block(rows)
+    joins = join_block(rows)
     names = [name for _, name in joins]
-    story = _story_run(names)
+    story = story_run(names)
     story_rows = {id(joins[index][0]) for index in story}
     offered = {name for index, name in enumerate(names) if index not in story}
     known = offered.union(*table.values())
@@ -179,9 +179,9 @@ def weapon_block(rows, roster, weapon_type, fallback):
         return {}
     readings = run[:len(WEAPON_TYPES)]
     drawn_reading = soul_reading(rows, weapon_type)
-    joins = _join_block(rows)
+    joins = join_block(rows)
     names = [name for _, name in joins]
-    story_ids = {joins[index][0]["message_id"] for index in _story_run(names)}
+    story_ids = {joins[index][0]["message_id"] for index in story_run(names)}
     accepting = acceptance_block(rows)
     block = {}
     for row in rows:

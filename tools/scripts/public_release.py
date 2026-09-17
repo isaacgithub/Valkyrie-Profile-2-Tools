@@ -78,7 +78,7 @@ def self_check(stream=None) -> int:
     notes.append(f"structural tables : {len(tables)}")
     for required in ("menu-layout.csv", "record-limits.csv",
                      "authored-marks.csv", "authored-glyphs.csv",
-                     "einherjar-rosters.csv"):
+                     "einherjar-rosters.csv", "story-events.csv"):
         if required not in tables:
             problems.append(f"missing structural table: {required}")
     packs = _packs(PROJECT_ROOT)

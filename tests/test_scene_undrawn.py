@@ -47,9 +47,24 @@ class ReclaimTests(unittest.TestCase):
         rows = self.rows()
         _rows, reclaimed = scene_text.reclaim_undrawn_rows(rows)
         self.assertEqual(1, reclaimed)
-        self.assertIn("e", rows[0]["translated"])
+        self.assertEqual(" c ", rows[0]["translated"])   # from "escrito"
         self.assertEqual("", rows[1]["translated"])
         self.assertEqual("escrito", rows[2]["translated"])
+
+    def test_the_mark_comes_from_what_the_scene_writes(self):
+        """One mark for every placeholder, taken from the scene's own text."""
+        rows = self.rows()
+        rows[2]["translated"] = "aaa bbb"
+        self.assertEqual("a", scene_text.shared_mark(rows, {"1"}))
+        scene_text.reclaim_undrawn_rows(rows)
+        self.assertEqual(" a ", rows[0]["translated"])
+
+    def test_a_scene_with_nothing_written_reads_each_record(self):
+        rows = self.rows()
+        rows[2]["translated"] = ""
+        self.assertIsNone(scene_text.shared_mark(rows, {"1"}))
+        scene_text.reclaim_undrawn_rows(rows)
+        self.assertEqual(" e ", rows[0]["translated"])   # from "ERROR!!(v190)"
 
 
 if __name__ == "__main__":

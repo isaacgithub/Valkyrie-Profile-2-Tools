@@ -383,3 +383,13 @@ Ghoul Powder => 1233
 Dragon Orb => 1313
 
 Water Mirror => 1313
+
+### Cutscenes with duped lines
+
+1283 message ids 1609 to 1623 are never used, the correct scene for these lines is 1337
+
+1299 message ids 1 and 2 are never used, the correct scene for these lines is 1337
+
+1307 message ids 1527 to 1530 are never used, the correct scene for these lines is 1337
+
+1337 messsage ids 1351 to 1367 are never used, the correct scene for these lines is 1323.
