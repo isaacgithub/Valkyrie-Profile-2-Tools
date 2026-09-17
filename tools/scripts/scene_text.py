@@ -588,7 +588,7 @@ def shared_mark(rows, hidden):
 def reclaim_undrawn_rows(rows, mark=None):
     from . import undrawn_records
 
-    hidden = undrawn_records.hidden_message_ids(rows)
+    hidden = undrawn_records.reclaimable_message_ids(rows)
     if not hidden:
         return rows, 0
     chosen_for_scene = mark or shared_mark(rows, hidden)

@@ -7,6 +7,7 @@ from . import einherjar_roster
 from .paths import DATA_DIR
 
 STORY_EVENTS_PATH = DATA_DIR / "story-events.csv"
+DUPLICATE_LINES_PATH = DATA_DIR / "duplicate-lines.csv"
 
 ITEM_LINE = re.compile(r"^Acquired <PART> (.+)$")
 
@@ -37,6 +38,35 @@ def load_story_events(path=None):
                    for resource, names in by_resource.items()}
             for role, by_resource in table.items()}
 
+
+def duplicate_runs(path=None):
+    source = path or DUPLICATE_LINES_PATH
+    runs = []
+    try:
+        with open(source, encoding="utf-8-sig", newline="") as handle:
+            for row in csv.DictReader(handle):
+                resource = (row.get("resource") or "").strip()
+                drawn_in = (row.get("drawn_in") or "").strip()
+                try:
+                    first = int((row.get("first_id") or "").strip())
+                    last = int((row.get("last_id") or "").strip())
+                except ValueError:
+                    continue
+                if resource and first <= last:
+                    runs.append((resource,
+                                 frozenset(str(number) for number
+                                           in range(first, last + 1)),
+                                 drawn_in))
+    except (OSError, csv.Error, UnicodeDecodeError):
+        return []
+    return runs
+
+def load_duplicate_lines(path=None):
+    """Return ``{resource: frozenset(message_id)}`` for the unused copies."""
+    table = {}
+    for resource, ids, _drawn_in in duplicate_runs(path):
+        table.setdefault(resource, set()).update(ids)
+    return {resource: frozenset(ids) for resource, ids in table.items()}
 
 def _known(table, role):
     return frozenset().union(*table[role].values()) if table[role] else frozenset()
@@ -74,7 +104,7 @@ def story_view(rows, table=None):
     return view
 
 
-def _own_hidden(rows, table=None):
+def _template_hidden(rows, table=None):
     hidden = {message_id for message_id, (_, _, drawn)
               in story_view(rows, table).items() if not drawn}
     hidden.update(row["message_id"] for row in rows
@@ -82,18 +112,32 @@ def _own_hidden(rows, table=None):
     return hidden
 
 
-def hidden_message_ids(rows, table=None, story_table=None):
+def _duplicate_hidden(rows, duplicates=None):
+    unused = (load_duplicate_lines() if duplicates is None
+              else duplicates).get(_resource(rows), frozenset())
+    return {row["message_id"] for row in rows
+            if row.get("message_id") in unused}
+
+
+def hidden_message_ids(rows, table=None, story_table=None,
+                       duplicates=None):
     """Every record in ``rows`` this scene never draws, from both models."""
     hidden = einherjar_roster.hidden_message_ids(rows, table)
-    hidden.update(_own_hidden(rows, story_table))
+    hidden.update(_template_hidden(rows, story_table))
+    hidden.update(_duplicate_hidden(rows, duplicates))
     return hidden
 
+
+
+def reclaimable_message_ids(rows, table=None, story_table=None):
+    return einherjar_roster.hidden_message_ids(rows, table) | _template_hidden(
+        rows, story_table)
 
 def suppressed_rows(rows, rosters=None, story_table=None):
     """The rows a build must not fill from another sheet's translation."""
     claimed = list(einherjar_roster.suppressed_rows(rows, rosters))
     seen = {id(row) for row in claimed}
-    hidden = _own_hidden(rows, story_table)
+    hidden = _template_hidden(rows, story_table)
     claimed.extend(row for row in rows
                    if row.get("message_id") in hidden and id(row) not in seen)
     return claimed
